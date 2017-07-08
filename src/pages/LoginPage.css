@@ -1,0 +1,47 @@
+.LoginPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoginPage .logo {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}
+
+.LoginPage form {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #cccccc;
+}
+
+.LoginPage form fieldset {
+    aling-self: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 0px;
+}
+
+.LoginPage form input {
+    padding: 10px;
+    margin: 10px;
+    width: 220px;
+}
+
+.LoginPage form a {
+    align-self: right;
+}
+
+.LoginPage form button {
+    background: #0069AD;
+    border: 0px;
+    border-radius: 4;
+    width: 100px;
+    height: 40px;
+    color: white;
+}
