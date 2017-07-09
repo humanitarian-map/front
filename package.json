@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "immutable": "^3.8.1",
     "leaflet": "^1.1.0",
     "mdi": "^1.9.33",
     "react": "^15.6.1",
@@ -17,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "yarn build && firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

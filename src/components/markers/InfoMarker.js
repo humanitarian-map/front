@@ -6,7 +6,7 @@ import iconSvg from "./InfoMarker.svg";
 
 export default function InfoMarker(props) {
     var icon = L.icon({
-        iconUrl: 'images/info.svg',
+        iconUrl: iconSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],

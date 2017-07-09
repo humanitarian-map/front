@@ -6,7 +6,7 @@ import iconSvg from "./PeopleMarker.svg";
 
 export default function PeopleMarker(props) {
     var icon = L.icon({
-        iconUrl: 'images/people.svg',
+        iconUrl: iconSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],

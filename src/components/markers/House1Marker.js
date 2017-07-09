@@ -6,7 +6,7 @@ import iconSvg from "./House1Marker.svg";
 
 export default function House1Marker(props) {
     var icon = L.icon({
-        iconUrl: 'images/house.svg',
+        iconUrl: iconSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],

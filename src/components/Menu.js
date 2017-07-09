@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import './Menu.css';
 
@@ -17,8 +18,8 @@ export default class Menu extends Component {
                 <img className="logo" alt="logo" src="http://www.makeachildcry.com/mobile/assets/img/logos/logo-mdm-ar.svg" />
             </div>
             <Link className="user" to="/profile">
-              <img className="avatar" alt="avatar" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAArVAAAAJDU1ZDYxYTc2LWFjMzUtNGQ0Zi1iZjUxLTNlMzZlMTQ2MWY3Nw.jpg" />
-              <div className="name">Ali Ahmed</div>
+              <img className="avatar" alt="avatar" src={this.props.user.avatar} />
+              <div className="name">{this.props.user.fullname}</div>
             </Link>
             <div className="actions">
                 <a className="members mdi mdi-account-multiple mdi-36px"></a>
@@ -48,4 +49,8 @@ export default class Menu extends Component {
           </div>
         );
     }
+}
+
+Menu.propTypes = {
+    user: PropTypes.object.isRequired
 }
