@@ -39,8 +39,10 @@ export default class MainMap extends React.Component {
     }
 
     click(event) {
-        if (this.props.drawing === "point") {
+        if (this.props.drawing.get('type') === "point") {
             this.props.onAddMarker(event.latlng.lat, event.latlng.lng);
+        } else if (this.props.drawing.get('type') === "arrow") {
+            this.props.onAddArrowPoint(event.latlng.lat, event.latlng.lng);
         }
     }
 
@@ -60,8 +62,10 @@ export default class MainMap extends React.Component {
             <span className="lat">lat: {Math.round(this.state.cursor[0]*100)/100}</span>
             <span className="lng">lng: {Math.round(this.state.cursor[1]*100)/100}</span>
           </div>
-          {this.props.drawing === "point" &&
+          {this.props.drawing.get('type') === "point" &&
               <Marker position={this.state.cursor}></Marker>}
+          {this.props.drawing.get('type') === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
+              <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.state.cursor}}></ArrowMarker>}
         </Map>
       );
     }
@@ -77,6 +81,10 @@ MainMap.propTypes = {
                 ImmutablePropTypes.mapContains({
                 })
             ),
-    drawing: PropTypes.string,
+    drawing: ImmutablePropTypes.mapContains({
+                type: PropTypes.string,
+                data: PropTypes.object,
+            }),
     onAddMarker: PropTypes.func.isRequired,
+    onAddArrowPoint: PropTypes.func.isRequired,
 }

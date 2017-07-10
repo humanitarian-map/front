@@ -13,7 +13,8 @@ class MapPageImpl extends Component {
                      zoom={this.props.map.get('zoom')}
                      points={this.props.map.get('points')}
                      drawing={this.props.map.get('drawing')}
-                     onAddMarker={this.props.onAddMarker} />
+                     onAddMarker={this.props.onAddMarker}
+                     onAddArrowPoint={this.props.onAddArrowPoint} />
           </div>
           <div className="menu-container">
             <Menu />
@@ -31,6 +32,9 @@ const MapPage = connect(
     (dispatch) => ({
         onAddMarker: (lat, lng) => {
             dispatch({type: "ADD_MARKER", "payload": {position: [lat, lng]}});
+        },
+        onAddArrowPoint: (lat, lng) => {
+            dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});
         }
     })
 )(MapPageImpl);
