@@ -22,16 +22,35 @@ function drawPoint(point) {
   }
 }
 
-export default function MainMap(props) {
-    return (
-      <Map center={props.center} zoom={props.zoom} className="MainMap">
-        <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {props.points.map(drawPoint)}
-      </Map>
-    );
+export default class MainMap extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            drawing: null,
+            cursor: [0, 0]
+        };
+        this.getPosition = this.getPosition.bind(this);
+    }
+
+    getPosition(event) {
+        this.setState({cursor: [event.latlng.lat, event.latlng.lng]});
+    }
+
+    render() {
+      return (
+        <Map center={this.props.center} zoom={this.props.zoom} className="MainMap" onMouseMove={this.getPosition}>
+          <TileLayer
+            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {this.props.points.map(drawPoint)}
+          <div className="cursor-box">
+            <span className="lat">lat: {Math.round(this.state.cursor[0]*100)/100}</span>
+            <span className="lng">lng: {Math.round(this.state.cursor[1]*100)/100}</span>
+          </div>
+        </Map>
+      );
+    }
 }
 
 MainMap.propTypes = {
