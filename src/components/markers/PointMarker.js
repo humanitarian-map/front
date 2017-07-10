@@ -45,9 +45,11 @@ export default function PointMarker(props) {
     return (
         <Marker position={props.point.position} icon={icons[props.point.icon]}>
           <Popup>
-            <h1>{props.point.name}</h1>
-            {props.point.description &&
-              <p>{props.point.description}</p>}
+            <div>
+              <h1>{props.point.name}</h1>
+              {props.point.description &&
+                <p>{props.point.description}</p>}
+            </div>
           </Popup>
         </Marker>
     )

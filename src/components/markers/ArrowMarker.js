@@ -13,10 +13,13 @@ export default function ArrowMarker(props) {
     return (
         <LayerGroup>
             <Polyline positions={[props.point.origin, props.point.dest]}>
-              {props.children &&
-                <Popup>
-                  {props.children}
-                </Popup>}
+              <Popup>
+                <div>
+                  <h1>{props.point.name}</h1>
+                  {props.point.description &&
+                    <p>{props.point.description}</p>}
+                </div>
+              </Popup>}
             </Polyline>
             <Polyline positions={[props.point.dest, arrow_point1.toArray()]}></Polyline>
             <Polyline positions={[props.point.dest, arrow_point2.toArray()]}></Polyline>
