@@ -1,23 +1,24 @@
 import React from 'react';
-import { Map, TileLayer} from 'react-leaflet';
+import { Map, TileLayer, Marker} from 'react-leaflet';
 import {PropTypes} from "prop-types";
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import "./MainMap.css";
 import ArrowMarker from "./markers/ArrowMarker";
 import PointMarker from "./markers/PointMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 
 function drawPoint(point) {
-  if (point.type === "point") {
+  if (point.get('type') === "point") {
     return (
-      <PointMarker point={point} key={point.id}></PointMarker>
+      <PointMarker point={point.toJS()} key={point.get('id')}></PointMarker>
     )
-  } else if (point.type === "arrow") {
+  } else if (point.get('type') === "arrow") {
     return (
-      <ArrowMarker point={point} key={point.id}></ArrowMarker>
+      <ArrowMarker point={point.toJS()} key={point.get('id')}></ArrowMarker>
     );
-  } else if (point.type === "polygon") {
+  } else if (point.get('type') === "polygon") {
     return (
-      <PolygonMarker point={point} key={point.id}></PolygonMarker>
+      <PolygonMarker point={point.toJS()} key={point.get('id')}></PolygonMarker>
     );
   }
 }
@@ -26,19 +27,30 @@ export default class MainMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            drawing: null,
             cursor: [0, 0]
         };
         this.getPosition = this.getPosition.bind(this);
+        this.click = this.click.bind(this);
+        this.keyup = this.keyup.bind(this);
     }
 
     getPosition(event) {
         this.setState({cursor: [event.latlng.lat, event.latlng.lng]});
     }
 
+    click(event) {
+        if (this.props.drawing === "point") {
+            this.props.onAddMarker(event.latlng.lat, event.latlng.lng);
+        }
+    }
+
+    keyup(event) {
+        console.log(event);
+    }
+
     render() {
       return (
-        <Map center={this.props.center} zoom={this.props.zoom} className="MainMap" onMouseMove={this.getPosition}>
+        <Map center={this.props.center.toJS()} zoom={this.props.zoom} className="MainMap" onMouseMove={this.getPosition} onClick={this.click} onKeyup={this.keyup}>
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -48,13 +60,23 @@ export default class MainMap extends React.Component {
             <span className="lat">lat: {Math.round(this.state.cursor[0]*100)/100}</span>
             <span className="lng">lng: {Math.round(this.state.cursor[1]*100)/100}</span>
           </div>
+          {this.props.drawing === "point" &&
+              <Marker position={this.state.cursor}></Marker>}
         </Map>
       );
     }
 }
 
 MainMap.propTypes = {
-    center: PropTypes.array.isRequired,
+    center: ImmutablePropTypes.contains(
+                0: PropTypes.number.isRequired,
+                1: PropTypes.number.isRequired,
+            ),
     zoom: PropTypes.number.isRequired,
-    points: PropTypes.array.isRequired,
+    points: ImmutablePropTypes.listOf(
+                ImmutablePropTypes.mapContains({
+                })
+            ),
+    drawing: PropTypes.string,
+    onAddMarker: PropTypes.func.isRequired,
 }

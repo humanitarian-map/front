@@ -18,8 +18,8 @@ export default class Menu extends Component {
                 <img className="logo" alt="logo" src="http://www.makeachildcry.com/mobile/assets/img/logos/logo-mdm-ar.svg" />
             </div>
             <Link className="user" to="/profile">
-              <img className="avatar" alt="avatar" src={this.props.user.avatar} />
-              <div className="name">{this.props.user.fullname}</div>
+              <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />
+              <div className="name">{this.props.user.get('fullname')}</div>
             </Link>
             <div className="actions">
                 <a className="members mdi mdi-account-multiple mdi-36px"></a>

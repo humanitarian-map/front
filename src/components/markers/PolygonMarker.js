@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayerGroup, Polyline, Polygon, Popup } from 'react-leaflet';
+import { Polygon, Popup } from 'react-leaflet';
 import {PropTypes} from "prop-types";
 
 export default function PolygonMarker(props) {

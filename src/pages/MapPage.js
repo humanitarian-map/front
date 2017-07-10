@@ -9,7 +9,11 @@ class MapPageImpl extends Component {
       return (
         <div className="MapPage">
           <div className="map-container">
-            <MainMap center={this.props.map.center} zoom={this.props.map.zoom} points={this.props.map.points} />
+            <MainMap center={this.props.map.get('center')}
+                     zoom={this.props.map.get('zoom')}
+                     points={this.props.map.get('points')}
+                     drawing={this.props.map.get('drawing')}
+                     onAddMarker={this.props.onAddMarker} />
           </div>
           <div className="menu-container">
             <Menu user={this.props.user} />
@@ -20,8 +24,14 @@ class MapPageImpl extends Component {
 }
 
 const MapPage = connect(
-    (state) => ({map: state.map, user: state.user}),
+    (state) => ({
+        map: state.get('map'),
+        user: state.get('user')
+    }),
     (dispatch) => ({
+        onAddMarker: (lat, lng) => {
+            dispatch({type: "ADD_MARKER", "payload": {position: [lat, lng]}});
+        }
     })
 )(MapPageImpl);
 

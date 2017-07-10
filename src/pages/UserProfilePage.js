@@ -15,7 +15,7 @@ class UserProfilePageImpl extends Component {
 }
 
 const UserProfilePage = connect(
-    (state) => ({user: state.user}),
+    (state) => ({user: state.get('user')}),
     (dispatch) => ({
     })
 )(UserProfilePageImpl);

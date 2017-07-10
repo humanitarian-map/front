@@ -1,7 +1,10 @@
-export const initialState = {
+import {fromJS} from "immutable";
+
+export const initialState = fromJS({
     "map": {
         "center": [28.505, 37.09],
         "zoom": 7,
+        "drawing": "point",
         "points": [
             {"id": 1, "name": "Future placement", "type": "point", "icon": "cross", "position": [28.505, 37.09]},
             {"id": 2, "name": "Camp mosul", "type": "point", "icon": "house1", "position": [29.605, 37.59]},
@@ -18,8 +21,13 @@ export const initialState = {
         "fullname": "Ali Ahmed",
         "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAArVAAAAJDU1ZDYxYTc2LWFjMzUtNGQ0Zi1iZjUxLTNlMzZlMTQ2MWY3Nw.jpg",
     }
-}
+})
 
 export function reducer(state, action) {
+    if (action.type === "ADD_MARKER") {
+        let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
+        return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: action.payload.position, icon: "cross"})))
+                    .setIn(['map', 'drawing'], null);
+    }
     return state;
 }

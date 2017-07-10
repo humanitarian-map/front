@@ -8,6 +8,7 @@
     "mdi": "^1.9.33",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-immutable-proptypes": "^2.1.0",
     "react-leaflet": "^1.4.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
