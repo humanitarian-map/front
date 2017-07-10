@@ -3,12 +3,13 @@ export const initialState = {
         "center": [28.505, 37.09],
         "zoom": 7,
         "points": [
-            {"id": 1, "type": "cross", "position": [28.505, 37.09]},
-            {"id": 2, "type": "house1", "position": [29.605, 37.59]},
-            {"id": 3, "type": "house2", "position": [29.505, 39.09]},
-            {"id": 4, "type": "info", "position": [27.005, 38.09]},
-            {"id": 5, "type": "people", "position": [27.505, 37.89]},
-            {"id": 6, "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]}
+            {"id": 1, "type": "point", "icon": "cross", "position": [28.505, 37.09]},
+            {"id": 2, "type": "point", "icon": "house1", "position": [29.605, 37.59]},
+            {"id": 3, "type": "point", "icon": "house2", "position": [29.505, 39.09]},
+            {"id": 4, "type": "point", "icon": "info", "position": [27.005, 38.09]},
+            {"id": 5, "type": "point", "icon": "people", "position": [27.505, 37.89]},
+            {"id": 6, "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]},
+            {"id": 7, "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
         ]
     },
     "user": {

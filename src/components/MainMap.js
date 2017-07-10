@@ -3,47 +3,21 @@ import { Map, TileLayer} from 'react-leaflet';
 import {PropTypes} from "prop-types";
 import "./MainMap.css";
 import ArrowMarker from "./markers/ArrowMarker";
-import InfoMarker from "./markers/InfoMarker";
-import CrossMarker from "./markers/CrossMarker";
-import PeopleMarker from "./markers/PeopleMarker";
-import House1Marker from "./markers/House1Marker";
-import House2Marker from "./markers/House2Marker";
+import PointMarker from "./markers/PointMarker";
+import PolygonMarker from "./markers/PolygonMarker";
 
 function drawPoint(point) {
-  if (point.type === "cross") {
+  if (point.type === "point") {
     return (
-      <CrossMarker position={point.position} key={point.id}>
-      </CrossMarker>
-    )
-  } else if (point.type === "house1") {
-    return (
-      <House1Marker position={point.position} key={point.id}>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-      </House1Marker>
-    );
-  } else if (point.type === "house2") {
-    return (
-      <House2Marker position={point.position} key={point.id}>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-      </House2Marker>
-    );
-  } else if (point.type === "info") {
-    return (
-      <InfoMarker position={point.position} key={point.id}>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-      </InfoMarker>
-    );
-  } else if (point.type === "people") {
-    return (
-      <PeopleMarker position={point.position} key={point.id}>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-      </PeopleMarker>
+      <PointMarker point={point} key={point.id}></PointMarker>
     )
   } else if (point.type === "arrow") {
     return (
-      <ArrowMarker origin={point.origin} dest={point.dest} key={point.id}>
-        <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-      </ArrowMarker>
+      <ArrowMarker point={point} key={point.id}></ArrowMarker>
+    );
+  } else if (point.type === "polygon") {
+    return (
+      <PolygonMarker point={point} key={point.id}></PolygonMarker>
     );
   }
 }
