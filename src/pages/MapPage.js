@@ -16,7 +16,7 @@ class MapPageImpl extends Component {
                      onAddMarker={this.props.onAddMarker} />
           </div>
           <div className="menu-container">
-            <Menu user={this.props.user} />
+            <Menu />
           </div>
         </div>
       );

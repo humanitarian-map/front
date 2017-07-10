@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import './Menu.css';
 
-export default class Menu extends Component {
+class MenuImpl extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,26 +23,10 @@ export default class Menu extends Component {
               <div className="name">{this.props.user.get('fullname')}</div>
             </Link>
             <div className="actions">
-                <a className="members mdi mdi-account-multiple mdi-36px"></a>
-                <a className="chat mdi mdi-wechat mdi-36px"></a>
-                <a className="document mdi mdi-file-document mdi-36px"></a>
-                <a className="folder mdi mdi-folder-open mdi-36px"></a>
-                <a className="marker mdi mdi-map-marker mdi-36px"></a>
-                <div className="add-marker mdi mdi-map-marker-plus mdi-36px"
-                   onMouseEnter={() => this.setState({displayMarkers: true})}
-                   onMouseLeave={() => this.setState({displayMarkers: false})}>
-                    {this.state.displayMarkers &&
-                      <div className="markers-box">
-                        <div className="marker-icon mdi mdi-close mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-account-multiple mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-information-outline mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-account mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-arrow-down mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-arrow-up mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-home mdi-36px"></div>
-                        <div className="marker-icon mdi mdi-home-outline mdi-36px"></div>
-                      </div>}
-                </div>
+                <a className="marker mdi mdi-map-marker mdi-36px"
+                   onClick={() => this.props.selectTool('point')}></a>
+                <div className="marker-icon mdi mdi-arrow-up mdi-36px"
+                     onClick={() => this.props.selectTool('arrow')}></div>
             </div>
             <div className="end">
                 <a className="map mdi mdi-map mdi-36px"></a>
@@ -51,6 +36,19 @@ export default class Menu extends Component {
     }
 }
 
-Menu.propTypes = {
+MenuImpl.propTypes = {
     user: PropTypes.object.isRequired
 }
+
+const Menu = connect(
+    (state) => ({
+        user: state.get('user')
+    }),
+    (dispatch) => ({
+        selectTool: (tool) => {
+            dispatch({type: "SELECT_TOOL", "payload": tool});
+        }
+    })
+)(MenuImpl);
+
+export default Menu;

@@ -8,7 +8,7 @@ class UserProfilePageImpl extends Component {
       return (
         <div className="UserProfilePage">
           User Profile
-          <Menu user={this.props.user}/>
+          <Menu/>
         </div>
       );
   }
