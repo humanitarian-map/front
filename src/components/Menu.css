@@ -2,21 +2,24 @@
     position: fixed;
     flex-direction: column;
     left: 0;
-    width: 80px;
+    width: 60px;
     display: flex;
-    background: #eeeeee;
+    background: #29353D;
+    color: #859cad;
     z-index: 60000;
     height: 100%;
+    border-right: 1px solid #859cad;
 }
 
-.Menu .logo {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
+.Menu .project-info-icon {
+    padding: 6px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
 
 .Menu .user {
-    padding: 10px;
+    padding: 5px;
     font-size: .7rem;
 }
 
@@ -77,14 +80,10 @@
 }
 
 .Menu .actions {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
 }
 
 .Menu .end {
     flex-grow: 0;
-    padding: 10px;
 }
 
 .Menu .markers-box {

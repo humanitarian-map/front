@@ -15,22 +15,12 @@ class MenuImpl extends Component {
     render() {
         return (
           <div className="Menu">
-            <div className="logo-container">
-                <img className="logo" alt="logo" src="http://www.makeachildcry.com/mobile/assets/img/logos/logo-mdm-ar.svg" />
-            </div>
-            <Link className="user" to="/profile">
-              <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />
-              <div className="name">{this.props.user.get('fullname')}</div>
-            </Link>
-            <div className="actions">
-                <div className="marker mdi mdi-map-marker mdi-36px"
-                   onClick={() => this.props.selectTool('point')}></div>
-                <div className="marker mdi mdi-arrow-up mdi-36px"
-                     onClick={() => this.props.selectTool('arrow')}></div>
-                <div className="marker mdi mdi-vector-square mdi-36px"
-                     onClick={() => this.props.selectTool('polygon')}></div>
-            </div>
+            <div className="project-info-icon mdi mdi-information-outline mdi-48px"
+               onClick={() => this.props.selectTool('point')}></div>
             <div className="end">
+                <Link className="user" to="/profile">
+                  <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />
+                </Link>
                 <div className="map mdi mdi-map mdi-36px"></div>
             </div>
           </div>
