@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Polyline} from 'react-leaflet';
+import { Map, TileLayer, Polyline} from 'react-leaflet';
 import {PropTypes} from "prop-types";
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import "./MainMap.css";
@@ -54,6 +54,8 @@ export default class MainMap extends React.Component {
     click(event) {
         if (this.props.drawing.get('type') === "point") {
             this.props.onAddMarker(this.props.cursor.get(0), this.props.cursor.get(1));
+        } else if (this.props.drawing.get('type') === "cross") {
+            this.props.onAddCross(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "arrow") {
             this.props.onAddArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "polygon") {
@@ -79,7 +81,7 @@ export default class MainMap extends React.Component {
              zoom={this.props.zoom}
              className="MainMap"
              onMouseMove={this.getPosition}>
-          {this.props.drawing.get('type') &&
+          {drawingType && !drawingPosition &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
           <TileLayer
@@ -91,6 +93,10 @@ export default class MainMap extends React.Component {
               <PointMarker point={{position: drawingPosition.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
               <PointMarker point={{position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
+          {drawingType === "cross" && drawingPosition &&
+              <CrossMarker point={{position: drawingPosition.toJS()}}></CrossMarker>}
+          {drawingType === "cross" && !drawingPosition &&
+              <CrossMarker point={{position: this.props.cursor.toJS()}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}
           {drawingType === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
@@ -119,6 +125,7 @@ MainMap.propTypes = {
                 data: PropTypes.object,
             }),
     onAddMarker: PropTypes.func.isRequired,
+    onAddCross: PropTypes.func.isRequired,
     onAddArrowPoint: PropTypes.func.isRequired,
     onAddPolygonPoint: PropTypes.func.isRequired,
     onCancelDrawing: PropTypes.func.isRequired,

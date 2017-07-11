@@ -35,6 +35,7 @@ class MapPageImpl extends Component {
                        drawing={this.props.map.get('drawing')}
                        onCursorMove={this.props.onCursorMove}
                        onAddMarker={this.props.onAddMarker}
+                       onAddCross={this.props.onAddCross}
                        onAddArrowPoint={this.props.onAddArrowPoint}
                        onAddPolygonPoint={this.props.onAddPolygonPoint}
                        onCancelDrawing={this.props.onCancelDrawing}
@@ -55,6 +56,9 @@ const MapPage = connect(
     (dispatch) => ({
         onAddMarker: (lat, lng) => {
             dispatch({type: "ADD_MARKER", "payload": {position: [lat, lng]}});
+        },
+        onAddCross: (lat, lng) => {
+            dispatch({type: "ADD_CROSS", "payload": {position: [lat, lng]}});
         },
         onAddArrowPoint: (lat, lng) => {
             dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});

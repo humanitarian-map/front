@@ -2,62 +2,31 @@ import React from 'react';
 import { Marker, Popup} from 'react-leaflet';
 import * as L from "leaflet";
 import {PropTypes} from "prop-types";
-import warningSvg from "./WarningIcon.svg";
-import campSvg from "./CampIcon.svg";
-import checkpointSvg from "./CheckpointIcon.svg";
-import hospitalSvg from "./HospitalIcon.svg";
-import idpsSvg from "./IDPsIcon.svg";
-import mobileClinicSvg from "./MobileClinicIcon.svg";
-import otherSvg from "./OtherIcon.svg";
+import "./PointMarker.css";
+
+function createIcon(markerId, iconName) {
+    return L.divIcon({
+        className: "marker-icon " + markerId + "-icon mdi mdi-" + iconName + " mdi-24px",
+        iconSize: [40, 40],
+        html: "<div class='arrow'></div>",
+        iconAnchor: [20, 44],
+        popupAnchor: [0, -40],
+    })
+}
 
 const icons = {
-    "warning": L.icon({
-        iconUrl: warningSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "camp": L.icon({
-        iconUrl: campSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "checkpoint": L.icon({
-        iconUrl: checkpointSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "hospital": L.icon({
-        iconUrl: hospitalSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "idps": L.icon({
-        iconUrl: idpsSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "mobile-clinic": L.icon({
-        iconUrl: mobileClinicSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "other": L.icon({
-        iconUrl: otherSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
+    "warning": createIcon("warning", "fire"),
+    "camp": createIcon("camp", "tent"),
+    "checkpoint": createIcon("checkpoint", "marker-check"),
+    "hospital": createIcon("hospital", "hospital"),
+    "idps": createIcon("idps", "walk"),
+    "mobile-clinic": createIcon("mobile-clinic", "truck"),
+    "other": createIcon("other", "map-marker"),
 }
 
 export default function PointMarker(props) {
     return (
-        <Marker position={props.point.position} icon={icons[props.point.icon || "other"]}>
+        <Marker className="PointMarker" position={props.point.position} icon={icons[props.point.icon || "other"]}>
           <Popup>
             <div>
               <h1>{props.point.name}</h1>

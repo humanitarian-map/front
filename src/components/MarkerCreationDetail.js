@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
-import {Link} from "react-router-dom";
 import './MarkerCreationDetail.css';
 
-import warningSvg from "./markers/WarningIcon.svg";
-import campSvg from "./markers/CampIcon.svg";
-import checkpointSvg from "./markers/CheckpointIcon.svg";
-import hospitalSvg from "./markers/HospitalIcon.svg";
-import idpsSvg from "./markers/IDPsIcon.svg";
-import mobileClinicSvg from "./markers/MobileClinicIcon.svg";
-import otherSvg from "./markers/OtherIcon.svg";
-
 function MarkerIcon(props) {
+    let typesToIcon = {
+        "warning": "fire",
+        "camp": "tent",
+        "checkpoint": "marker-check",
+        "hospital": "hospital",
+        "idps": "walk",
+        "mobile-clinic": "truck",
+        "other": "map-marker",
+    }
     return (
-        <div className={"marker-icon " + (props.active? "active" : "")} onClick={props.onClick}>
-          <img src={props.icon} />
+        <div className={"MarkerIcon " + (props.active? "active" : "")} onClick={props.onClick}>
+          <div className={"marker-icon " + props.type + "-icon mdi mdi-" + typesToIcon[props.type || "other"] + " mdi-24px"}  />
           <span>{props.name}</span>
         </div>
     )
@@ -32,13 +32,13 @@ function MarkerCreationDetailImpl(props) {
           <input placeholder="Write a tittle" />
           <h2 className="mdi mdi-bookmark mdi-16px">Category</h2>
           <div className="markers">
-            <MarkerIcon active={activeMarker === "camp"} onClick={() => props.onSelectIcon("camp")} icon={campSvg} name="Camp" />
-            <MarkerIcon active={activeMarker === "hospital"} onClick={() => props.onSelectIcon("hospital")} icon={hospitalSvg} name="Hospital" />
-            <MarkerIcon active={activeMarker === "warning"} onClick={() => props.onSelectIcon("warning")} icon={warningSvg} name="Warning" />
-            <MarkerIcon active={activeMarker === "idps"} onClick={() => props.onSelectIcon("idps")} icon={idpsSvg} name="IDPs" />
-            <MarkerIcon active={activeMarker === "checkpoint"} onClick={() => props.onSelectIcon("checkpoint")} icon={checkpointSvg} name="Check point" />
-            <MarkerIcon active={activeMarker === "mobile-clinic"} onClick={() => props.onSelectIcon("mobile-clinic")} icon={mobileClinicSvg} name="Mobile clinic"/>
-            <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} icon={otherSvg} name="Other" />
+            <MarkerIcon active={activeMarker === "camp"} onClick={() => props.onSelectIcon("camp")} type="camp" name="Camp" />
+            <MarkerIcon active={activeMarker === "hospital"} onClick={() => props.onSelectIcon("hospital")} type="hospital" name="Hospital" />
+            <MarkerIcon active={activeMarker === "warning"} onClick={() => props.onSelectIcon("warning")} type="warning" name="Warning" />
+            <MarkerIcon active={activeMarker === "idps"} onClick={() => props.onSelectIcon("idps")} type="idps" name="IDPs" />
+            <MarkerIcon active={activeMarker === "checkpoint"} onClick={() => props.onSelectIcon("checkpoint")} type="checkpoint" name="Check point" />
+            <MarkerIcon active={activeMarker === "mobile-clinic"} onClick={() => props.onSelectIcon("mobile-clinic")} type="mobile-clinic" name="Mobile clinic"/>
+            <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} type="other" name="Other" />
           </div>
           <h2 className="mdi mdi-comment mdi-16px">Comment</h2>
           <textarea placeholder="Write a comment">

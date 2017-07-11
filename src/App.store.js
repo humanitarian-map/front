@@ -30,6 +30,8 @@ export const initialState = fromJS({
 export function reducer(state, action) {
     if (action.type === "ADD_MARKER") {
         return state.setIn(['map', 'drawing', "position"], fromJS(action.payload.position));
+    } else if (action.type === "ADD_CROSS") {
+        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload.position));
     } else if (action.type === "SELECT_TOOL") {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}));
     } else if (action.type === "ADD_ARROW_POINT") {

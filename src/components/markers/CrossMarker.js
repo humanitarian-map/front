@@ -1,6 +1,5 @@
 import React from 'react';
 import { LayerGroup, Polyline, Popup } from 'react-leaflet';
-import * as Victor from "victor";
 import {PropTypes} from "prop-types";
 
 export default function CrossMarker(props) {

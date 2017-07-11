@@ -15,3 +15,15 @@
 .MainMap .drawing-polygon {
     cursor: crosshair;
 }
+
+.MainMap .drawing-arrow {
+    cursor: crosshair;
+}
+
+.MainMap .drawing-point {
+    cursor: none;
+}
+
+.MainMap .drawing-cross {
+    cursor: none;
+}
