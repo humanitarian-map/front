@@ -59,8 +59,8 @@ export default class MainMap extends React.Component {
           />
           {this.props.points.map(drawPoint)}
           <div className="cursor-box">
-            <span className="lat">lat: {Math.round(this.state.cursor[0]*100)/100}</span>
-            <span className="lng">lng: {Math.round(this.state.cursor[1]*100)/100}</span>
+            <span className="lat">lat: {this.state.cursor[0].toFixed(2)}</span>
+            <span className="lng">lng: {this.state.cursor[1].toFixed(2)}</span>
           </div>
           {this.props.drawing.get('type') === "point" &&
               <Marker position={this.state.cursor}></Marker>}
