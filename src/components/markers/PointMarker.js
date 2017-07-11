@@ -32,7 +32,7 @@ export default function PointMarker(props) {
             icon={icons[props.point.icon || "other"]}
             onMouseOver={(e) => e.target.openPopup()}
             onMouseOut={(e) => e.target.closePopup()}
-            onClick={(e) => props.onClickMarker(props.point)}>
+            onClick={(e) => props.onClickMarker && props.onClickMarker(props.point)}>
           <Popup>
             <span className="title">{props.point.name}</span>
           </Popup>

@@ -54,7 +54,7 @@ class MarkerCreationDetailImpl extends React.Component {
               <h2 className="mdi mdi-comment mdi-16px">Comment</h2>
               <textarea placeholder="Write a comment" onChange={(event) => this.setState({description: event.target.value})}>
               </textarea>
-              <h2 className="mdi mdi-map-marker mdi-16px">Coordinates</h2>
+              <h2 className="mdi mdi-map mdi-16px">Coordinates</h2>
               <div className="coordinates-inputs">
                   <div>
                     <span>Lat:</span>

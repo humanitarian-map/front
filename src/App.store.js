@@ -33,7 +33,8 @@ export function reducer(state, action) {
     } else if (action.type === "ADD_CROSS") {
         return state.setIn(['map', 'drawing', "position"], fromJS(action.payload));
     } else if (action.type === "SELECT_TOOL") {
-        return state.setIn(['map', 'drawing'], fromJS({type: action.payload}));
+        return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
+                    .setIn(["map", "viewing"], null);
     } else if (action.type === "ADD_ARROW_POINT") {
         if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
             let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
@@ -72,7 +73,8 @@ export function reducer(state, action) {
         return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: position, icon: icon, name: name, description: description})))
                     .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === "VISUALIZE_MARKER") {
-        return state.setIn(["map", "viewing"], fromJS(action.payload));
+        return state.setIn(["map", "viewing"], fromJS(action.payload))
+                    .setIn(["map", "drawing"], fromJS({type: null}));
     } else if (action.type === "DELETE_MARKER") {
         return state.updateIn(["map", "points"], (points) => points.filter((p) => p.get('id') !== action.payload))
                     .setIn(["map", "viewing"], null);
