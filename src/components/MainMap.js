@@ -11,7 +11,7 @@ import PolygonMarker from "./markers/PolygonMarker";
 function Point(props) {
   if (props.point.get('type') === "point") {
     return (
-      <PointMarker point={props.point.toJS()}></PointMarker>
+      <PointMarker point={props.point.toJS()} onClickMarker={props.onClickMarker}></PointMarker>
     )
   } else if (props.point.get('type') === "arrow") {
     return (
@@ -88,7 +88,7 @@ export default class MainMap extends React.Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          {this.props.points.map((point) => <Point point={point} key={point.get('id')}></Point>)}
+          {this.props.points.map((point) => <Point onClickMarker={this.props.onClickMarker} point={point} key={point.get('id')}></Point>)}
           {drawingType === "point" && drawingPosition &&
               <PointMarker point={{position: drawingPosition.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
@@ -131,4 +131,5 @@ MainMap.propTypes = {
     onCancelDrawing: PropTypes.func.isRequired,
     onConfirmPolygonDrawing: PropTypes.func.isRequired,
     onCursorMove: PropTypes.func.isRequired,
+    onClickMarker: PropTypes.func.isRequired,
 }

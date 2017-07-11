@@ -71,6 +71,8 @@ export function reducer(state, action) {
         let description = action.payload.description;
         return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: position, icon: icon, name: name, description: description})))
                     .setIn(['map', 'drawing'], fromJS({type: null}));
+    } else if (action.type === "VISUALIZE_MARKER") {
+        return state.setIn(["map", "viewing"], fromJS(action.payload));
     }
     return state;
 }

@@ -5,6 +5,7 @@ import Menu from "../components/Menu";
 import ToolsMenu from "../components/ToolsMenu";
 import ProjectDetail from "../components/ProjectDetail";
 import MarkerCreationDetail from "../components/MarkerCreationDetail";
+import MarkerDetail from "../components/MarkerDetail";
 import './MapPage.css';
 
 class MapPageImpl extends Component {
@@ -23,6 +24,10 @@ class MapPageImpl extends Component {
              <div className="point-detail-container">
                <MarkerCreationDetail />
              </div>}
+          {this.props.map.get("viewing") &&
+             <div className="point-detail-container">
+               <MarkerDetail />
+             </div>}
           <div className="map-and-tools-menu-container">
             <div className="tools-menu-container">
               <ToolsMenu />
@@ -34,6 +39,7 @@ class MapPageImpl extends Component {
                        points={this.props.map.get('points')}
                        drawing={this.props.map.get('drawing')}
                        onCursorMove={this.props.onCursorMove}
+                       onClickMarker={this.props.onClickMarker}
                        onAddMarker={this.props.onAddMarker}
                        onAddCross={this.props.onAddCross}
                        onAddArrowPoint={this.props.onAddArrowPoint}
@@ -74,6 +80,9 @@ const MapPage = connect(
         },
         onCursorMove: (lat, lng) => {
             dispatch({type: "CURSOR_MOVE", "payload": [lat, lng]});
+        },
+        onClickMarker: (point) => {
+            dispatch({type: "VISUALIZE_MARKER", "payload": point});
         }
     })
 )(MapPageImpl);
