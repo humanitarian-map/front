@@ -39,6 +39,15 @@
     color: #65B3F0;
 }
 
+.MarkerCreationDetail .coordinates-inputs input {
+    width: 130px;
+    margin: 5px;
+}
+.MarkerCreationDetail .coordinates-inputs span {
+    display: inline-block;
+    width: 35px;
+}
+
 .MarkerCreationDetail .content {
     flex-grow: 1;
 }

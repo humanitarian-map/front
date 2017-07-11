@@ -59,6 +59,8 @@ export function reducer(state, action) {
         return state.setIn(['map', 'cursor'], fromJS(action.payload));
     } else if (action.type === "TOGGLE_DISPLAY_DETAIL") {
         return state.update("displayProjectDetail", (v) => !v);
+    } else if (action.type === "SELECT_MARKER_ICON") {
+        return state.setIn(["map", "drawing", "icon"], action.payload);
     }
     return state;
 }

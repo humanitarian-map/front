@@ -72,13 +72,14 @@ export default class MainMap extends React.Component {
     render() {
       let drawingType = this.props.drawing.get('type');
       let drawingPosition = this.props.drawing.get('position');
+      let drawingIcon = this.props.drawing.get('icon');
 
       return (
         <Map center={this.props.center.toJS()}
              zoom={this.props.zoom}
              className="MainMap"
              onMouseMove={this.getPosition}>
-          {this.props.drawing &&
+          {this.props.drawing.get('type') &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
           <TileLayer
@@ -87,9 +88,9 @@ export default class MainMap extends React.Component {
           />
           {this.props.points.map((point) => <Point point={point} key={point.get('id')}></Point>)}
           {drawingType === "point" && drawingPosition &&
-              <Marker position={drawingPosition.toJS()}></Marker>}
+              <PointMarker point={{position: drawingPosition.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
-              <Marker position={this.props.cursor.toJS()}></Marker>}
+              <PointMarker point={{position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}
           {drawingType === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
