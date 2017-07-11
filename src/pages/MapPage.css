@@ -7,11 +7,30 @@
 
 .MapPage .menu-container {
   width: 80px;
+  flex-grow: 0;
+}
+
+.MapPage .project-detail-container {
+  width: 300px;
+  flex-grow: 0;
+}
+
+.MapPage .map-and-tools-menu-container {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  width: 100%;
+}
+
+.MapPage .tools-menu-container {
+  flex-grow: 1;
+  height: 80px;
+  width: 100%;
 }
 
 .MapPage .map-container {
   flex-grow: 1;
+  height: 100%;
   width: 100%;
 }
 

@@ -1,74 +1,74 @@
-.Menu {
-    position: fixed;
-    flex-direction: column;
+.ToolsMenu {
+    flex-direction: row;
     left: 0;
-    width: 80px;
+    width: 100%;
+    height: 80px;
     display: flex;
     background: #eeeeee;
     z-index: 60000;
     height: 100%;
 }
 
-.Menu .logo {
+.ToolsMenu .logo {
     width: 60px;
     height: 60px;
     margin: 10px;
 }
 
-.Menu .user {
+.ToolsMenu .user {
     padding: 10px;
     font-size: .7rem;
 }
 
-.Menu .user .avatar {
+.ToolsMenu .user .avatar {
     width: 50px;
     height: 50px;
     border-radius: 10px;
 }
 
-.Menu .members {
+.ToolsMenu .members {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .chat {
+.ToolsMenu .chat {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .document {
+.ToolsMenu .document {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .folder {
+.ToolsMenu .folder {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .marker {
+.ToolsMenu .marker {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .map {
+.ToolsMenu .map {
     align-self: center;
     width: 48px;
     height: 48px;
     padding: 10px;
 }
 
-.Menu .add-marker {
+.ToolsMenu .add-marker {
     position: relative;
     align-self: center;
     width: 48px;
@@ -76,18 +76,18 @@
     padding: 10px;
 }
 
-.Menu .actions {
+.ToolsMenu .actions {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
 }
 
-.Menu .end {
+.ToolsMenu .end {
     flex-grow: 0;
     padding: 10px;
 }
 
-.Menu .markers-box {
+.ToolsMenu .markers-box {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -103,7 +103,7 @@
     box-shadow: 3px 3px 3px #888888;
 }
 
-.Menu .markers-box .marker-icon {
+.ToolsMenu .markers-box .marker-icon {
     align-self: center;
     padding: 14px;
     width: 50px;
