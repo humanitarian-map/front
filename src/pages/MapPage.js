@@ -14,7 +14,10 @@ class MapPageImpl extends Component {
                      points={this.props.map.get('points')}
                      drawing={this.props.map.get('drawing')}
                      onAddMarker={this.props.onAddMarker}
-                     onAddArrowPoint={this.props.onAddArrowPoint} />
+                     onAddArrowPoint={this.props.onAddArrowPoint}
+                     onAddPolygonPoint={this.props.onAddPolygonPoint}
+                     onCancelDrawing={this.props.onCancelDrawing}
+                     onConfirmPolygonDrawing={this.props.onConfirmPolygonDrawing} />
           </div>
           <div className="menu-container">
             <Menu />
@@ -35,6 +38,15 @@ const MapPage = connect(
         },
         onAddArrowPoint: (lat, lng) => {
             dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});
+        },
+        onAddPolygonPoint: (lat, lng) => {
+            dispatch({type: "ADD_POLYGON_POINT", "payload": [lat, lng]});
+        },
+        onCancelDrawing: () => {
+            dispatch({type: "CANCEL_DRAWING", "payload": null});
+        },
+        onConfirmPolygonDrawing: () => {
+            dispatch({type: "CONFIRM_POLYGON_DRAWING", "payload": null});
         }
     })
 )(MapPageImpl);

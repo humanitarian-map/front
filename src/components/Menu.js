@@ -23,13 +23,15 @@ class MenuImpl extends Component {
               <div className="name">{this.props.user.get('fullname')}</div>
             </Link>
             <div className="actions">
-                <a className="marker mdi mdi-map-marker mdi-36px"
-                   onClick={() => this.props.selectTool('point')}></a>
-                <div className="marker-icon mdi mdi-arrow-up mdi-36px"
+                <div className="marker mdi mdi-map-marker mdi-36px"
+                   onClick={() => this.props.selectTool('point')}></div>
+                <div className="marker mdi mdi-arrow-up mdi-36px"
                      onClick={() => this.props.selectTool('arrow')}></div>
+                <div className="marker mdi mdi-vector-square mdi-36px"
+                     onClick={() => this.props.selectTool('polygon')}></div>
             </div>
             <div className="end">
-                <a className="map mdi mdi-map mdi-36px"></a>
+                <div className="map mdi mdi-map mdi-36px"></div>
             </div>
           </div>
         );
