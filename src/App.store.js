@@ -29,9 +29,9 @@ export const initialState = fromJS({
 
 export function reducer(state, action) {
     if (action.type === "ADD_MARKER") {
-        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload.position));
+        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload));
     } else if (action.type === "ADD_CROSS") {
-        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload.position));
+        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload));
     } else if (action.type === "SELECT_TOOL") {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}));
     } else if (action.type === "ADD_ARROW_POINT") {
@@ -63,6 +63,14 @@ export function reducer(state, action) {
         return state.update("displayProjectDetail", (v) => !v);
     } else if (action.type === "SELECT_MARKER_ICON") {
         return state.setIn(["map", "drawing", "icon"], action.payload);
+    } else if (action.type === "SAVE_MARKER") {
+        let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
+        let position = action.payload.position;
+        let icon = action.payload.icon;
+        let name = action.payload.name;
+        let description = action.payload.description;
+        return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: position, icon: icon, name: name, description: description})))
+                    .setIn(['map', 'drawing'], fromJS({type: null}));
     }
     return state;
 }

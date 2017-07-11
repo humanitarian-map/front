@@ -16,11 +16,7 @@ export default function ArrowMarker(props) {
                       onMouseOver={(e) => e.target.openPopup()}
                       onMouseOut={(e) => e.target.closePopup()}>
               <Popup>
-                <div>
-                  <span className="title">{props.point.name}</span>
-                  {props.point.description &&
-                    <p>{props.point.description}</p>}
-                </div>
+                <span className="title">{props.point.name}</span>
               </Popup>}
             </Polyline>
             <Polyline positions={[props.point.dest, arrow_point1.toArray()]}></Polyline>

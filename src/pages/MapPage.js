@@ -55,10 +55,10 @@ const MapPage = connect(
     }),
     (dispatch) => ({
         onAddMarker: (lat, lng) => {
-            dispatch({type: "ADD_MARKER", "payload": {position: [lat, lng]}});
+            dispatch({type: "ADD_MARKER", "payload": [lat, lng]});
         },
         onAddCross: (lat, lng) => {
-            dispatch({type: "ADD_CROSS", "payload": {position: [lat, lng]}});
+            dispatch({type: "ADD_CROSS", "payload": [lat, lng]});
         },
         onAddArrowPoint: (lat, lng) => {
             dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});
