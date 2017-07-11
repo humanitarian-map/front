@@ -22,12 +22,16 @@ class ToolsMenuImpl extends Component {
         let active = this.props.drawing.get('type');
         return (
           <div className="ToolsMenu">
-            <div className={"marker mdi mdi-map-marker mdi-36px " + (active === 'point' ? 'active' : '')}
+            <div className={"marker mdi mdi-map-marker mdi-24px " + (active === 'point' ? 'active' : '')}
                onClick={() => this.props.selectTool('point')}></div>
-            <div className={"marker mdi mdi-arrow-top-right mdi-36px " + (active === 'arrow' ? 'active' : '')}
+            <div className={"marker mdi mdi-arrow-top-right mdi-24px " + (active === 'arrow' ? 'active' : '')}
                  onClick={() => this.props.selectTool('arrow')}></div>
-            <div className={"marker mdi mdi-square-outline mdi-36px " + (active === 'polygon' ? 'active' : '')}
+            <div className={"marker mdi mdi-square-outline mdi-24px " + (active === 'polygon' ? 'active' : '')}
                  onClick={() => this.props.selectTool('polygon')}></div>
+            <div className={"marker mdi mdi-close mdi-24px " + (active === 'cross' ? 'active' : '')}
+                 onClick={() => this.props.selectTool('cross')}></div>
+            <div className={"marker mdi mdi-cursor-move mdi-24px " + (active === 'move' ? 'active' : '')}
+                 onClick={() => this.props.selectTool('move')}></div>
             <CursorBox lat={this.props.cursor.get(0)} lng={this.props.cursor.get(1)}></CursorBox>
           </div>
         );

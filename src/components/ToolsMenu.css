@@ -12,10 +12,10 @@
 
 .ToolsMenu .marker {
     align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
+    padding: 15px;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .ToolsMenu .marker.active {

@@ -15,8 +15,8 @@ class MenuImpl extends Component {
     render() {
         return (
           <div className="Menu">
-            <div className="project-info-icon mdi mdi-information-outline mdi-48px"
-               onClick={() => this.props.selectTool('point')}></div>
+            <div className={"project-info-icon mdi mdi-information-outline mdi-48px " + (this.props.openDetail ? "active" : "")}
+               onClick={() => this.props.toggleDisplayDetail()}></div>
             <div className="empty"></div>
             <div className="end">
                 <Link className="user" to="/profile">
@@ -35,12 +35,16 @@ MenuImpl.propTypes = {
 
 const Menu = connect(
     (state) => ({
-        user: state.get('user')
+        user: state.get('user'),
+        openDetail: state.get('displayProjectDetail')
     }),
     (dispatch) => ({
         selectTool: (tool) => {
             dispatch({type: "SELECT_TOOL", "payload": tool});
-        }
+        },
+        toggleDisplayDetail: () => {
+            dispatch({type: "TOGGLE_DISPLAY_DETAIL", "payload": null});
+        },
     })
 )(MenuImpl);
 

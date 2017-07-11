@@ -13,9 +13,10 @@ class MapPageImpl extends Component {
           <div className="menu-container">
             <Menu />
           </div>
-          <div className="project-detail-container">
-            <ProjectDetail />
-          </div>
+          {this.props.displayProjectDetail &&
+            <div className="project-detail-container">
+              <ProjectDetail />
+            </div>}
           <div className="map-and-tools-menu-container">
             <div className="tools-menu-container">
               <ToolsMenu />
@@ -42,7 +43,8 @@ class MapPageImpl extends Component {
 const MapPage = connect(
     (state) => ({
         map: state.get('map'),
-        user: state.get('user')
+        user: state.get('user'),
+        displayProjectDetail: state.get('displayProjectDetail')
     }),
     (dispatch) => ({
         onAddMarker: (lat, lng) => {

@@ -18,6 +18,7 @@ export const initialState = fromJS({
             {"id": 7, "name": "Dangerous area", "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
         ]
     },
+    "displayProjectDetail": true,
     "user": {
         "id": 1,
         "username": "ali.ahmed",
@@ -58,6 +59,8 @@ export function reducer(state, action) {
         }
     } else if (action.type === "CURSOR_MOVE") {
         return state.setIn(['map', 'cursor'], fromJS(action.payload));
+    } else if (action.type === "TOGGLE_DISPLAY_DETAIL") {
+        return state.update("displayProjectDetail", (v) => !v);
     }
     return state;
 }

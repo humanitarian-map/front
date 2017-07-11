@@ -65,20 +65,26 @@ export default class MainMap extends React.Component {
     }
 
     render() {
+      let drawingType = this.props.drawing.get('type');
+
       return (
-        <Map center={this.props.center.toJS()} zoom={this.props.zoom} className="MainMap" onMouseMove={this.getPosition}>
+        <Map center={this.props.center.toJS()}
+             zoom={this.props.zoom}
+             className="MainMap"
+             onMouseMove={this.getPosition}>
           {this.props.drawing &&
-            <div className="cover" onDoubleClick={this.dblclick} onClick={this.click}></div>}
+            <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
+                 onClick={this.click}></div>}
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {this.props.points.map((point) => <Point point={point} key={point.get('id')}></Point>)}
-          {this.props.drawing.get('type') === "point" &&
+          {drawingType === "point" &&
               <Marker position={this.props.cursor.toJS()}></Marker>}
-          {this.props.drawing.get('type') === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
+          {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}
-          {this.props.drawing.get('type') === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
+          {drawingType === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <Polyline positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
         </Map>
       );
