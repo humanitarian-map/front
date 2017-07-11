@@ -15,7 +15,7 @@ class MenuImpl extends Component {
     render() {
         return (
           <div className="Menu">
-            <div className={"project-info-icon mdi mdi-information-outline mdi-48px " + (this.props.openDetail ? "active" : "")}
+            <div className={"project-info-icon mdi mdi-information-outline mdi-36px " + (this.props.openDetail ? "active" : "")}
                onClick={() => this.props.toggleDisplayDetail()}></div>
             <div className="empty"></div>
             <div className="end">

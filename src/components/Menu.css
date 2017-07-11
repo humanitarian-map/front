@@ -12,7 +12,7 @@
 }
 
 .Menu .project-info-icon {
-    padding: 6px;
+    padding: 10px;
     display: flex;
     flex-grow: 0;
     flex-direction: column;

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="6.3499999mm"
+   height="6.3499999mm"
+   viewBox="0 0 6.3500001 6.35"
+   version="1.1"
+   id="svg24601"
+   inkscape:version="0.92.1 r"
+   sodipodi:docname="mobile-clinic.svg">
+  <defs
+     id="defs24595" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6310547"
+     inkscape:cx="-189.25594"
+     inkscape:cy="-177.13207"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g45835"
+     showgrid="false"
+     inkscape:window-width="2554"
+     inkscape:window-height="1387"
+     inkscape:window-x="0"
+     inkscape:window-y="50"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata24598">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-86.559915,-122.14191)">
+    <g
+       style="display:inline"
+       id="g45829"
+       transform="translate(-91.081485,61.273005)">
+      <g
+         style="display:inline"
+         id="g45835"
+         transform="translate(12.276822,-48.805842)">
+        <rect
+           style="opacity:1;vector-effect:none;fill:#59bcd9;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.52916666, 0.52916666;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect45831"
+           width="6.3499999"
+           height="6.3499999"
+           x="165.36458"
+           y="109.67474" />
+        <g
+           id="use45833"
+           style="fill:#ffffff;stroke:#000000"
+           transform="matrix(0.12204898,0,0,0.12204898,165.6104,109.92057)">
+          <title
+             id="title43677">Local Shipping</title>
+          <path
+             inkscape:connector-curvature="0"
+             id="path43679"
+             style="stroke:none"
+             d="M 40,16 H 34 V 8 H 6 C 3.79,8 2,9.79 2,12 v 22 h 4 c 0,3.31 2.69,6 6,6 3.31,0 6,-2.69 6,-6 h 12 c 0,3.31 2.69,6 6,6 3.31,0 6,-2.69 6,-6 h 4 V 24 Z M 12,37 c -1.66,0 -3,-1.34 -3,-3 0,-1.66 1.34,-3 3,-3 1.66,0 3,1.34 3,3 0,1.66 -1.34,3 -3,3 z m 27,-18 3.93,5 H 34 v -5 z m -3,18 c -1.66,0 -3,-1.34 -3,-3 0,-1.66 1.34,-3 3,-3 1.66,0 3,1.34 3,3 0,1.66 -1.34,3 -3,3 z" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

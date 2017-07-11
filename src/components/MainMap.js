@@ -5,6 +5,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import "./MainMap.css";
 import ArrowMarker from "./markers/ArrowMarker";
 import PointMarker from "./markers/PointMarker";
+import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 
 function Point(props) {
@@ -15,6 +16,10 @@ function Point(props) {
   } else if (props.point.get('type') === "arrow") {
     return (
       <ArrowMarker point={props.point.toJS()}></ArrowMarker>
+    );
+  } else if (props.point.get('type') === "cross") {
+    return (
+      <CrossMarker point={props.point.toJS()}></CrossMarker>
     );
   } else if (props.point.get('type') === "polygon") {
     return (
@@ -66,6 +71,7 @@ export default class MainMap extends React.Component {
 
     render() {
       let drawingType = this.props.drawing.get('type');
+      let drawingPosition = this.props.drawing.get('position');
 
       return (
         <Map center={this.props.center.toJS()}
@@ -80,7 +86,9 @@ export default class MainMap extends React.Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {this.props.points.map((point) => <Point point={point} key={point.get('id')}></Point>)}
-          {drawingType === "point" &&
+          {drawingType === "point" && drawingPosition &&
+              <Marker position={drawingPosition.toJS()}></Marker>}
+          {drawingType === "point" && !drawingPosition &&
               <Marker position={this.props.cursor.toJS()}></Marker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}

@@ -4,6 +4,7 @@ import MainMap from "../components/MainMap";
 import Menu from "../components/Menu";
 import ToolsMenu from "../components/ToolsMenu";
 import ProjectDetail from "../components/ProjectDetail";
+import MarkerCreationDetail from "../components/MarkerCreationDetail";
 import './MapPage.css';
 
 class MapPageImpl extends Component {
@@ -17,6 +18,11 @@ class MapPageImpl extends Component {
             <div className="project-detail-container">
               <ProjectDetail />
             </div>}
+          {this.props.map.getIn(["drawing", "type"]) === "point" &&
+           this.props.map.getIn(["drawing", "position"]) &&
+             <div className="point-detail-container">
+               <MarkerCreationDetail />
+             </div>}
           <div className="map-and-tools-menu-container">
             <div className="tools-menu-container">
               <ToolsMenu />

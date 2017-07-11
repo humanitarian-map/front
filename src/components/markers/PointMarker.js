@@ -2,39 +2,53 @@ import React from 'react';
 import { Marker, Popup} from 'react-leaflet';
 import * as L from "leaflet";
 import {PropTypes} from "prop-types";
-import infoSvg from "./InfoIcon.svg";
-import peopleSvg from "./PeopleIcon.svg";
-import crossSvg from "./CrossIcon.svg";
-import house1Svg from "./House1Icon.svg";
-import house2Svg from "./House2Icon.svg";
+import warningSvg from "./WarningIcon.svg";
+import campSvg from "./CampIcon.svg";
+import checkpointSvg from "./CheckpointIcon.svg";
+import hospitalSvg from "./HospitalIcon.svg";
+import idpsSvg from "./IDPsIcon.svg";
+import mobileClinicSvg from "./MobileClinicIcon.svg";
+import otherSvg from "./OtherIcon.svg";
 
 const icons = {
-    "info": L.icon({
-        iconUrl: infoSvg,
+    "warning": L.icon({
+        iconUrl: warningSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
     }),
-    "people": L.icon({
-        iconUrl: peopleSvg,
+    "camp": L.icon({
+        iconUrl: campSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
     }),
-    "cross": L.icon({
-        iconUrl: crossSvg,
+    "checkpoint": L.icon({
+        iconUrl: checkpointSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
     }),
-    "house1": L.icon({
-        iconUrl: house1Svg,
+    "hospital": L.icon({
+        iconUrl: hospitalSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
     }),
-    "house2": L.icon({
-        iconUrl: house2Svg,
+    "idps": L.icon({
+        iconUrl: idpsSvg,
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+        popupAnchor: [0, -24],
+    }),
+    "mobile-clinic": L.icon({
+        iconUrl: mobileClinicSvg,
+        iconSize: [48, 48],
+        iconAnchor: [24, 24],
+        popupAnchor: [0, -24],
+    }),
+    "other": L.icon({
+        iconUrl: otherSvg,
         iconSize: [48, 48],
         iconAnchor: [24, 24],
         popupAnchor: [0, -24],
@@ -43,7 +57,7 @@ const icons = {
 
 export default function PointMarker(props) {
     return (
-        <Marker position={props.point.position} icon={icons[props.point.icon]}>
+        <Marker position={props.point.position} icon={icons[props.point.icon || "other"]}>
           <Popup>
             <div>
               <h1>{props.point.name}</h1>
