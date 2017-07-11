@@ -17,6 +17,7 @@ class MenuImpl extends Component {
           <div className="Menu">
             <div className="project-info-icon mdi mdi-information-outline mdi-48px"
                onClick={() => this.props.selectTool('point')}></div>
+            <div className="empty"></div>
             <div className="end">
                 <Link className="user" to="/profile">
                   <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />

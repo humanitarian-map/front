@@ -14,8 +14,21 @@
 .Menu .project-info-icon {
     padding: 6px;
     display: flex;
-    flex-grow: 1;
+    flex-grow: 0;
     flex-direction: column;
+}
+
+.Menu .project-info-icon.active {
+    background: #38556A;
+    color: #ffffff;
+}
+
+.Menu .empty {
+    flex-grow: 1;
+}
+
+.Menu .end {
+    flex-grow: 0;
 }
 
 .Menu .user {
@@ -29,41 +42,6 @@
     border-radius: 10px;
 }
 
-.Menu .members {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.Menu .chat {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.Menu .document {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.Menu .folder {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.Menu .marker {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
 .Menu .map {
     align-self: center;
     width: 48px;
@@ -71,40 +49,3 @@
     padding: 10px;
 }
 
-.Menu .add-marker {
-    position: relative;
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.Menu .actions {
-}
-
-.Menu .end {
-    flex-grow: 0;
-}
-
-.Menu .markers-box {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    position: absolute;
-    right: 60px;
-    top: -190px;
-    width: 150px;
-    height: 320px;
-    background: #eeeeee;
-    padding: 0;
-    border-radius: 10px;
-    border: 1px solid #aaaaaa;
-    box-shadow: 3px 3px 3px #888888;
-}
-
-.Menu .markers-box .marker-icon {
-    align-self: center;
-    padding: 14px;
-    width: 50px;
-    height: 50px;
-}
