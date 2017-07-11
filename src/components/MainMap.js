@@ -26,25 +26,9 @@ Point.propTypes = {
     point: ImmutablePropTypes.mapContains({}).isRequired
 }
 
-function CursorBox(props) {
-    return (
-      <div className="cursor-box">
-        <span className="lat">lat: {props.lat.toFixed(2)}</span>
-        <span className="lng">lng: {props.lng.toFixed(2)}</span>
-      </div>);
-}
-
-CursorBox.propTypes = {
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-}
-
 export default class MainMap extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cursor: [0, 0]
-        };
         this.getPosition = this.getPosition.bind(this);
         this.click = this.click.bind(this);
         this.keyup = this.keyup.bind(this);
@@ -59,16 +43,16 @@ export default class MainMap extends React.Component {
     }
 
     getPosition(event) {
-        this.setState({cursor: [event.latlng.lat, event.latlng.lng]});
+        this.props.onCursorMove(event.latlng.lat, event.latlng.lng);
     }
 
     click(event) {
         if (this.props.drawing.get('type') === "point") {
-            this.props.onAddMarker(this.state.cursor[0], this.state.cursor[1]);
+            this.props.onAddMarker(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "arrow") {
-            this.props.onAddArrowPoint(this.state.cursor[0], this.state.cursor[1]);
+            this.props.onAddArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "polygon") {
-            this.props.onAddPolygonPoint(this.state.cursor[0], this.state.cursor[1]);
+            this.props.onAddPolygonPoint(this.props.cursor.get(0), this.props.cursor.get(1));
         }
     }
 
@@ -90,13 +74,12 @@ export default class MainMap extends React.Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {this.props.points.map((point) => <Point point={point} key={point.get('id')}></Point>)}
-          <CursorBox lat={this.state.cursor[0]} lng={this.state.cursor[1]}></CursorBox>
           {this.props.drawing.get('type') === "point" &&
-              <Marker position={this.state.cursor}></Marker>}
+              <Marker position={this.props.cursor.toJS()}></Marker>}
           {this.props.drawing.get('type') === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
-              <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.state.cursor}}></ArrowMarker>}
+              <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}
           {this.props.drawing.get('type') === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
-              <Polyline positions={this.props.drawing.get('points').toJS().concat([this.state.cursor])}></Polyline>}
+              <Polyline positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
         </Map>
       );
     }
@@ -104,6 +87,10 @@ export default class MainMap extends React.Component {
 
 MainMap.propTypes = {
     center: ImmutablePropTypes.contains(
+                0: PropTypes.number.isRequired,
+                1: PropTypes.number.isRequired,
+            ),
+    cursor: ImmutablePropTypes.contains(
                 0: PropTypes.number.isRequired,
                 1: PropTypes.number.isRequired,
             ),
@@ -121,4 +108,5 @@ MainMap.propTypes = {
     onAddPolygonPoint: PropTypes.func.isRequired,
     onCancelDrawing: PropTypes.func.isRequired,
     onConfirmPolygonDrawing: PropTypes.func.isRequired,
+    onCursorMove: PropTypes.func.isRequired,
 }

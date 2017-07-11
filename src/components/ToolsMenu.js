@@ -4,10 +4,22 @@ import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import './ToolsMenu.css';
 
+function CursorBox(props) {
+    return (
+      <div className="cursor-box">
+        <span className="lat">{props.lat.toFixed(4)}</span>,
+        <span className="lng">{props.lng.toFixed(4)}</span>
+      </div>);
+}
+
+CursorBox.propTypes = {
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+}
+
 class ToolsMenuImpl extends Component {
     render() {
         let active = this.props.drawing.get('type');
-        console.log(active);
         return (
           <div className="ToolsMenu">
             <div className={"marker mdi mdi-map-marker mdi-36px " + (active === 'point' ? 'active' : '')}
@@ -16,6 +28,7 @@ class ToolsMenuImpl extends Component {
                  onClick={() => this.props.selectTool('arrow')}></div>
             <div className={"marker mdi mdi-square-outline mdi-36px " + (active === 'polygon' ? 'active' : '')}
                  onClick={() => this.props.selectTool('polygon')}></div>
+            <CursorBox lat={this.props.cursor.get(0)} lng={this.props.cursor.get(1)}></CursorBox>
           </div>
         );
     }
@@ -27,7 +40,8 @@ ToolsMenuImpl.propTypes = {
 
 const ToolsMenu = connect(
     (state) => ({
-        drawing: state.getIn(['map', 'drawing'])
+        drawing: state.getIn(['map', 'drawing']),
+        cursor: state.getIn(['map', 'cursor'])
     }),
     (dispatch) => ({
         selectTool: (tool) => {

@@ -3,6 +3,7 @@ import {fromJS} from "immutable";
 export const initialState = fromJS({
     "map": {
         "center": [28.505, 37.09],
+        "cursor": [0, 0],
         "zoom": 7,
         "drawing": {
             type: null
@@ -55,6 +56,8 @@ export function reducer(state, action) {
             return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "polygon", positions: positions.toJS()})))
                         .setIn(['map', 'drawing'], fromJS({type: null}));
         }
+    } else if (action.type === "CURSOR_MOVE") {
+        return state.setIn(['map', 'cursor'], fromJS(action.payload));
     }
     return state;
 }

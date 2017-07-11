@@ -11,24 +11,3 @@
     width: 100%;
     height: 100%;
 }
-
-.MainMap .cursor-box {
-    display: flex;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 140px;
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #cccccc;
-    z-index: 10000;
-}
-
-.MainMap .cursor-box span {
-    width: 70px;
-}
-
-.MainMap .cursor-box span.lat {
-    border-right: 1px solid #cccccc;
-}

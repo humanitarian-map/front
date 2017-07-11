@@ -22,9 +22,11 @@ class MapPageImpl extends Component {
             </div>
             <div className="map-container">
               <MainMap center={this.props.map.get('center')}
+                       cursor={this.props.map.get('cursor')}
                        zoom={this.props.map.get('zoom')}
                        points={this.props.map.get('points')}
                        drawing={this.props.map.get('drawing')}
+                       onCursorMove={this.props.onCursorMove}
                        onAddMarker={this.props.onAddMarker}
                        onAddArrowPoint={this.props.onAddArrowPoint}
                        onAddPolygonPoint={this.props.onAddPolygonPoint}
@@ -57,6 +59,9 @@ const MapPage = connect(
         },
         onConfirmPolygonDrawing: () => {
             dispatch({type: "CONFIRM_POLYGON_DRAWING", "payload": null});
+        },
+        onCursorMove: (lat, lng) => {
+            dispatch({type: "CURSOR_MOVE", "payload": [lat, lng]});
         }
     })
 )(MapPageImpl);
