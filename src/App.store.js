@@ -73,6 +73,9 @@ export function reducer(state, action) {
                     .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === "VISUALIZE_MARKER") {
         return state.setIn(["map", "viewing"], fromJS(action.payload));
+    } else if (action.type === "DELETE_MARKER") {
+        return state.updateIn(["map", "points"], (points) => points.filter((p) => p.get('id') !== action.payload))
+                    .setIn(["map", "viewing"], null);
     }
     return state;
 }

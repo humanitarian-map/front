@@ -52,7 +52,7 @@ class MarkerDetailImpl extends React.Component {
               </div>
             </div>
             <div className="buttons">
-              <button className="delete">Delete</button>
+              <button className="delete" onClick={() => props.onDeleteMarker(props.marker.id)}>Delete</button>
             </div>
           </div>
         );
@@ -68,6 +68,9 @@ const MarkerDetail = connect(
         marker: state.getIn(['map', 'viewing']).toJS(),
     }),
     (dispatch) => ({
+        onDeleteMarker: (id) => {
+            dispatch({type: "DELETE_MARKER", payload: id});
+        }
     })
 )(MarkerDetailImpl);
 
