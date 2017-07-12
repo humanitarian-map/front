@@ -9,11 +9,12 @@ import PointMarker from "./markers/PointMarker";
 import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 import {DEFAULT_COLOR} from "../utils/colors";
+import * as _ from "lodash";
 
 function Point(props) {
   if (props.point.get('type') === "point") {
     return (
-      <PointMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem}></PointMarker>
+      <PointMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem} onMoveMarker={props.onMoveMarker}></PointMarker>
     )
   } else if (props.point.get('type') === "arrow") {
     return (
@@ -80,6 +81,8 @@ class MainMapImpl extends React.Component {
             this.props.onCancelDrawing();
         } else if (event.keyCode === 13 && this.props.drawing.get('type') === "polygon") {
             this.props.onConfirmPolygonDrawing();
+        } else if (event.keyCode === 46 && this.props.selectedId) {
+            this.props.onDeleteItem(this.props.project.get('slug'), this.props.selectedId);
         }
     }
 
@@ -109,7 +112,14 @@ class MainMapImpl extends React.Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          {this.props.project.get('mapitems').map((point) => <Point selected={point.get('id') === this.props.selectedId} onClickItem={this.props.onClickItem} point={point} key={point.get('id')}></Point>)}
+          {this.props.project.get('mapitems').map((point) => (
+              <Point selected={point.get('id') === this.props.selectedId}
+                     onClickItem={this.props.onClickItem}
+                     onMoveMarker={(point, latlng) => this.props.onMoveMarker(this.props.projectSlug, point, latlng)}
+                     point={point}
+                     key={point.get('id')}>
+              </Point>
+          ))}
           {drawingType === "point" && drawingPosition &&
               <PointMarker point={{data: {position: drawingPosition.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
@@ -185,6 +195,13 @@ const MainMap = connect(
         },
         onClickItem: (point) => {
             dispatch({type: "VISUALIZE_MARKER", "payload": point});
+        },
+        onDeleteItem: (projectSlug, pointId) => {
+            dispatch({type: "DELETE_POINT", "payload": {projectSlug, pointId}});
+        },
+        onMoveMarker: (projectSlug, point, newLatLng) => {
+            let updatedPoint = _.extend({}, point, {position: newLatLng})
+            dispatch({type: "UPDATE_POINT", "payload": {projectSlug, pointId: point.id, point: updatedPoint}});
         },
     })
 )(MainMapImpl);
