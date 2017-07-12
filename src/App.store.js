@@ -9,13 +9,13 @@ export const initialState = fromJS({
             type: null
         },
         "points": [
-            {"id": 1, "name": "Future placement", "type": "cross", "position": [28.505, 37.09]},
-            {"id": 2, "name": "Camp mosul", "type": "point", "icon": "camp", "position": [29.605, 37.59]},
-            {"id": 3, "name": "Camp damasco", "type": "point", "icon": "camp", "position": [29.505, 39.09]},
-            {"id": 4, "name": "Bombed", "type": "point", "icon": "warning", "position": [27.005, 38.09]},
-            {"id": 5, "name": "Refugees X", "type": "point", "icon": "idps", "position": [27.505, 37.89]},
-            {"id": 6, "name": "Expected movement", "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]},
-            {"id": 7, "name": "Dangerous area", "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
+            {"id": 1, "description": "xxx", "name": "Future placement", "type": "cross", "position": [28.505, 37.09]},
+            {"id": 2, "description": "xxx", "name": "Camp mosul", "type": "point", "icon": "camp", "position": [29.605, 37.59]},
+            {"id": 3, "description": "xxx", "name": "Camp damasco", "type": "point", "icon": "camp", "position": [29.505, 39.09]},
+            {"id": 4, "description": "xxx", "name": "Bombed", "type": "point", "icon": "warning", "position": [27.005, 38.09]},
+            {"id": 5, "description": "xxx", "name": "Refugees X", "type": "point", "icon": "idps", "position": [27.505, 37.89]},
+            {"id": 6, "description": "xxx", "name": "Expected movement", "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]},
+            {"id": 7, "description": "xxx", "name": "Dangerous area", "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
         ]
     },
     "displayProjectDetail": true,
@@ -78,6 +78,10 @@ export function reducer(state, action) {
     } else if (action.type === "DELETE_MARKER") {
         return state.updateIn(["map", "points"], (points) => points.filter((p) => p.get('id') !== action.payload))
                     .setIn(["map", "viewing"], null);
+    } else if (action.type === "SET_PROJECTS_LIST") {
+        return state.set("projects-list", fromJS(action.payload));
+    } else if (action.type === "SET_CURRENT_PROJECT") {
+        return state.set("current-project", fromJS(action.payload));
     }
     return state;
 }
