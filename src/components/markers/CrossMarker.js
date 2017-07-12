@@ -2,21 +2,23 @@ import React from 'react';
 import { LayerGroup, Polyline, Popup, Polygon } from 'react-leaflet';
 import {PropTypes} from "prop-types";
 import {DEFAULT_COLOR} from "../../utils/colors";
+import {DEFAULT_CROSS_SIZE} from "../../utils/sizes";
 
 export default function CrossMarker(props) {
+    let size = props.point.data.size || DEFAULT_CROSS_SIZE;
     let line1 = [[
-        props.point.data.position[0] - 0.1,
-        props.point.data.position[1] - 0.1,
+        props.point.data.position[0] - size,
+        props.point.data.position[1] - size,
     ], [
-        props.point.data.position[0] + 0.1,
-        props.point.data.position[1] + 0.1,
+        props.point.data.position[0] + size,
+        props.point.data.position[1] + size,
     ]];
     let line2 = [[
-        props.point.data.position[0] - 0.1,
-        props.point.data.position[1] + 0.1,
+        props.point.data.position[0] - size,
+        props.point.data.position[1] + size,
     ], [
-        props.point.data.position[0] + 0.1,
-        props.point.data.position[1] - 0.1,
+        props.point.data.position[0] + size,
+        props.point.data.position[1] - size,
     ]];
     return (
         <LayerGroup>

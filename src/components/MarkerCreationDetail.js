@@ -44,6 +44,7 @@ class MarkerCreationDetailImpl extends React.Component {
             data = {
                 position: this.props.drawing.get('position').toJS(),
                 color: this.props.drawing.get('color'),
+                size: this.props.drawing.get('size'),
             }
         } else if (this.props.drawing.get('type') === "polygon") {
             data = {
@@ -83,7 +84,7 @@ class MarkerCreationDetailImpl extends React.Component {
             </h2>
             <div className="content">
               <div className="block">
-                <input placeholder="Write a title" onChange={(event) => this.setState({name: event.target.value})}/>
+                <input placeholder="Write a title" type="text" onChange={(event) => this.setState({name: event.target.value})}/>
               </div>
               {type === "point" &&
                 <div className="block">
@@ -112,6 +113,14 @@ class MarkerCreationDetailImpl extends React.Component {
                   </div>
                 </div>}
 
+              {(type === "cross") &&
+                <div className="block">
+                  <h3 className="title mdi mdi-comment mdi-16px">Color</h3>
+                  <input type="number" placeholder="Size"
+                         value={props.drawing.getIn(['size']) || 0.1}
+                         onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
+                </div>}
+
               <div className="block">
                 <h3 className="title mdi mdi-comment mdi-16px">Comment</h3>
                 <textarea placeholder="Write a comment" onChange={(event) => this.setState({description: event.target.value})}>
@@ -124,12 +133,14 @@ class MarkerCreationDetailImpl extends React.Component {
                     <div>
                       <span>Lat:</span>
                       <input placeholder="Lat"
+                             type="number"
                              value={props.drawing.getIn(['position', 0])}
                              onChange={(e) => props.onChangeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1]))} />
                     </div>
                     <div>
                       <span>Lng:</span>
                       <input placeholder="Lng"
+                             type="number"
                              value={props.drawing.getIn(['position', 1])}
                              onChange={(e) => props.onChangeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
@@ -139,18 +150,22 @@ class MarkerCreationDetailImpl extends React.Component {
                     <span>Origin:</span>
                     <div>
                       <input placeholder="Lat"
+                             type="number"
                              value={props.drawing.getIn(['points', 0, 0])}
                              onChange={(e) => props.onChangeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1]))} />
                       <input placeholder="Lng"
+                             type="number"
                              value={props.drawing.getIn(['points', 0, 1])}
                              onChange={(e) => props.onChangeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
                     <span>Destination:</span>
                     <div>
                       <input placeholder="Lat"
+                             type="number"
                              value={props.drawing.getIn(['points', 1, 0])}
                              onChange={(e) => props.onChangeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1]))} />
                       <input placeholder="Lng"
+                             type="number"
                              value={props.drawing.getIn(['points', 1, 1])}
                              onChange={(e) => props.onChangeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
@@ -160,9 +175,11 @@ class MarkerCreationDetailImpl extends React.Component {
                     {props.drawing.get('points').map((point, idx) => (
                       <div key={idx}>
                         <input placeholder="Lat"
+                               type="number"
                                value={point.get(0)}
                                onChange={(e) => props.onChangePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1))} />
                         <input placeholder="Lng"
+                               type="number"
                                value={point.get(1)}
                                onChange={(e) => props.onChangePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value)))} />
                       </div>))}
@@ -204,6 +221,9 @@ const MarkerCreationDetail = connect(
         },
         onChangePolygonPoint: (idx, lat, lng) => {
             dispatch({type: "CHANGE_POLYGON_POINT", "payload": {idx:idx, position: [lat, lng]}});
+        },
+        onChangeCrossSize: (size) => {
+            dispatch({type: "CHANGE_CROSS_SIZE", "payload": size});
         },
         onCancelDrawing: () => {
             dispatch({type: "CANCEL_DRAWING", "payload": null});

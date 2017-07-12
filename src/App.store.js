@@ -20,7 +20,6 @@ export const initialState = fromJS({
 
 export function reducer(state, action) {
     if (action.type === "ADD_MARKER") {
-        console.log(action.payload);
         return state.setIn(['map', 'drawing', "position"], fromJS(action.payload))
                     .setIn(['map', 'drawing', "ready-to-edit"], true);
     } else if (action.type === "ADD_CROSS") {
@@ -71,6 +70,8 @@ export function reducer(state, action) {
         return state.setIn(['map', 'drawing', "points", 1], fromJS(action.payload));
     } else if (action.type === "CHANGE_POLYGON_POINT") {
         return state.setIn(['map', 'drawing', "points", action.payload.idx], fromJS(action.payload.position));
+    } else if (action.type === "CHANGE_CROSS_SIZE") {
+        return state.setIn(['map', 'drawing', "size"], action.payload);
     }
     return state;
 }

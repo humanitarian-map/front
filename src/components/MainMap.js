@@ -9,6 +9,7 @@ import PointMarker from "./markers/PointMarker";
 import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 import {DEFAULT_COLOR} from "../utils/colors";
+import {DEFAULT_CROSS_SIZE} from "../utils/sizes";
 import * as _ from "lodash";
 
 function Point(props) {
@@ -125,9 +126,9 @@ class MainMapImpl extends React.Component {
           {drawingType === "point" && !drawingPosition &&
               <PointMarker point={{data: {position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "cross" && drawingPosition &&
-              <CrossMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, position: drawingPosition.toJS()}}}></CrossMarker>}
+              <CrossMarker point={{data: {size: this.props.drawing.get('size') || DEFAULT_CROSS_SIZE, color: this.props.drawing.get('color') || DEFAULT_COLOR, position: drawingPosition.toJS()}}}></CrossMarker>}
           {drawingType === "cross" && !drawingPosition &&
-              <CrossMarker point={{data: {position: this.props.cursor.toJS()}}}></CrossMarker>}
+              <CrossMarker point={{data: {size: this.props.drawing.get('size') || DEFAULT_CROSS_SIZE, position: this.props.cursor.toJS()}}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 1 &&
               <ArrowMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 2 &&
