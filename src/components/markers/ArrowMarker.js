@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayerGroup, Polyline, Popup } from 'react-leaflet';
+import { LayerGroup, Polyline, Popup, Polygon } from 'react-leaflet';
 import * as Victor from "victor";
 import {PropTypes} from "prop-types";
 
@@ -12,17 +12,21 @@ export default function ArrowMarker(props) {
 
     return (
         <LayerGroup>
-            <Polyline positions={[props.point.data.origin, props.point.data.dest]}
-                      onMouseOver={(e) => e.target.openPopup()}
-                      onMouseOut={(e) => e.target.closePopup()}
-                      onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
+            <Polyline positions={[props.point.data.origin, props.point.data.dest]}></Polyline>
+            <Polyline positions={[props.point.data.dest, arrow_point1.toArray()]}></Polyline>
+            <Polyline positions={[props.point.data.dest, arrow_point2.toArray()]}></Polyline>
+
+            <Polygon positions={[props.point.data.dest, arrow_point2.toArray(), props.point.data.origin, arrow_point1.toArray()]}
+                     onMouseOver={(e) => e.target.openPopup()}
+                     onMouseOut={(e) => e.target.closePopup()}
+                     onClick={(e) => props.onClickItem && props.onClickItem(props.point)}
+                     opacity={0}
+                     fillOpacity={0}>
               {props.point.name &&
                 <Popup>
                   <span className="title">{props.point.name}</span>
                 </Popup>}
-            </Polyline>
-            <Polyline positions={[props.point.data.dest, arrow_point1.toArray()]}></Polyline>
-            <Polyline positions={[props.point.data.dest, arrow_point2.toArray()]}></Polyline>
+            </Polygon>
         </LayerGroup>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayerGroup, Polyline, Popup } from 'react-leaflet';
+import { LayerGroup, Polyline, Popup, Polygon } from 'react-leaflet';
 import {PropTypes} from "prop-types";
 
 export default function CrossMarker(props) {
@@ -19,17 +19,20 @@ export default function CrossMarker(props) {
     ]];
     return (
         <LayerGroup>
-            <Polyline positions={line1}
-                      onMouseOver={(e) => e.target.openPopup()}
-                      onMouseOut={(e) => e.target.closePopup()}
-                      onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
-                {props.point.name &&
-                  <Popup>
-                    <span className="title">{props.point.name}</span>
-                  </Popup>}
-            </Polyline>
-            <Polyline positions={line2}>
-            </Polyline>
+            <Polyline positions={line1}></Polyline>
+            <Polyline positions={line2}></Polyline>
+
+            <Polygon positions={[line1[0], line2[0], line1[1], line2[1]]}
+                     onMouseOver={(e) => e.target.openPopup()}
+                     onMouseOut={(e) => e.target.closePopup()}
+                     onClick={(e) => props.onClickItem && props.onClickItem(props.point)}
+                     opacity={0}
+                     fillOpacity={0}>
+              {props.point.name &&
+                <Popup>
+                  <span className="title">{props.point.name}</span>
+                </Popup>}
+            </Polygon>
         </LayerGroup>
     )
 }
