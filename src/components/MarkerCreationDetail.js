@@ -33,18 +33,35 @@ class MarkerCreationDetailImpl extends React.Component {
     }
 
     addPoint(event) {
-       this.props.onSaveMarker(
-           this.props.project.get('slug'),
-           {
-               "name": this.state.name,
-               "description": this.state.description,
-               "type": this.props.drawing.get('type'),
-               "data": {
-                   position: this.props.drawing.get('position').toJS(),
-                   icon: this.props.drawing.get('icon'),
-               }
-           }
-       );
+        let data = {};
+        if (this.props.drawing.get('type') === "point") {
+            data = {
+                position: this.props.drawing.get('position').toJS(),
+                icon: this.props.drawing.get('icon'),
+            }
+        } else if (this.props.drawing.get('type') === "cross") {
+            data = {
+                position: this.props.drawing.get('position').toJS(),
+            }
+        } else if (this.props.drawing.get('type') === "polygon") {
+            data = {
+                positions: this.props.drawing.get('points').toJS(),
+            }
+        } else if (this.props.drawing.get('type') === "arrow") {
+            data = {
+                origin: this.props.drawing.getIn(['points', 0]).toJS(),
+                dest: this.props.drawing.getIn(['points', 1]).toJS(),
+            }
+        }
+        this.props.onSaveMarker(
+            this.props.project.get('slug'),
+            {
+                "name": this.state.name,
+                "description": this.state.description,
+                "type": this.props.drawing.get('type'),
+                "data": data
+            }
+        );
     }
 
     render() {

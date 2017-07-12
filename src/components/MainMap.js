@@ -12,19 +12,19 @@ import PolygonMarker from "./markers/PolygonMarker";
 function Point(props) {
   if (props.point.get('type') === "point") {
     return (
-      <PointMarker selected={props.selected} point={props.point.toJS()} onClickMarker={props.onClickMarker}></PointMarker>
+      <PointMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem}></PointMarker>
     )
   } else if (props.point.get('type') === "arrow") {
     return (
-      <ArrowMarker selected={props.selected} point={props.point.toJS()}></ArrowMarker>
+      <ArrowMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem}></ArrowMarker>
     );
   } else if (props.point.get('type') === "cross") {
     return (
-      <CrossMarker selected={props.selected} point={props.point.toJS()}></CrossMarker>
+      <CrossMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem}></CrossMarker>
     );
   } else if (props.point.get('type') === "polygon") {
     return (
-      <PolygonMarker selected={props.selected} point={props.point.toJS()}></PolygonMarker>
+      <PolygonMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem}></PolygonMarker>
     );
   }
   return null;
@@ -95,7 +95,7 @@ class MainMapImpl extends React.Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
-          {this.props.project.get('mapitems').map((point) => <Point selected={point.get('id') === this.props.selectedId} onClickMarker={this.props.onClickMarker} point={point} key={point.get('id')}></Point>)}
+          {this.props.project.get('mapitems').map((point) => <Point selected={point.get('id') === this.props.selectedId} onClickItem={this.props.onClickItem} point={point} key={point.get('id')}></Point>)}
           {drawingType === "point" && drawingPosition &&
               <PointMarker point={{data: {position: drawingPosition.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
@@ -135,7 +135,7 @@ MainMapImpl.propTypes = {
     onCancelDrawing: PropTypes.func.isRequired,
     onConfirmPolygonDrawing: PropTypes.func.isRequired,
     onCursorMove: PropTypes.func.isRequired,
-    onClickMarker: PropTypes.func.isRequired,
+    onClickItem: PropTypes.func.isRequired,
 }
 
 const MainMap = connect(
@@ -167,7 +167,7 @@ const MainMap = connect(
         onCursorMove: (lat, lng) => {
             dispatch({type: "CURSOR_MOVE", "payload": [lat, lng]});
         },
-        onClickMarker: (point) => {
+        onClickItem: (point) => {
             dispatch({type: "VISUALIZE_MARKER", "payload": point});
         },
     })

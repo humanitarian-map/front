@@ -14,7 +14,8 @@ export default function ArrowMarker(props) {
         <LayerGroup>
             <Polyline positions={[props.point.data.origin, props.point.data.dest]}
                       onMouseOver={(e) => e.target.openPopup()}
-                      onMouseOut={(e) => e.target.closePopup()}>
+                      onMouseOut={(e) => e.target.closePopup()}
+                      onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
               <Popup>
                 <span className="title">{props.point.name}</span>
               </Popup>}
