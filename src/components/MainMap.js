@@ -55,11 +55,15 @@ class MainMapImpl extends React.Component {
     }
 
     click(event) {
+        if (this.props.drawing.get('ready-to-edit')) {
+            return false;
+        }
+
         if (this.props.drawing.get('type') === "point") {
             this.props.onAddMarker(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "cross") {
             this.props.onAddCross(this.props.cursor.get(0), this.props.cursor.get(1));
-        } else if (this.props.drawing.get('type') === "arrow" && !this.props.drawing.get('ready-to-edit')) {
+        } else if (this.props.drawing.get('type') === "arrow") {
             this.props.onAddArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "polygon") {
             this.props.onAddPolygonPoint(this.props.cursor.get(0), this.props.cursor.get(1));
@@ -88,7 +92,7 @@ class MainMapImpl extends React.Component {
              zoom={this.props.project.get('zoom')}
              className="MainMap"
              onMouseMove={this.getPosition}>
-          {drawingType && !drawingPosition &&
+          {drawingType && !this.props.drawing.get('ready-to-edit') &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
           <TileLayer
@@ -122,7 +126,7 @@ MainMapImpl.propTypes = {
                 0: PropTypes.number.isRequired,
                 1: PropTypes.number.isRequired,
             ),
-    selectedId: PropTypes.number,
+    selectedId: PropTypes.string,
     project: PropTypes.object,
     drawing: ImmutablePropTypes.mapContains({
                 type: PropTypes.string,

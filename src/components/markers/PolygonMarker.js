@@ -8,9 +8,10 @@ export default function PolygonMarker(props) {
                  onMouseOver={(e) => e.target.openPopup()}
                  onMouseOut={(e) => e.target.closePopup()}
                  onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
-          <Popup>
-            <span className="title">{props.point.name}</span>
-          </Popup>}
+          {props.point.name &&
+            <Popup>
+              <span className="title">{props.point.name}</span>
+            </Popup>}
         </Polygon>
     )
 }
