@@ -6,9 +6,50 @@ import './ProjectDetail.css';
 
 export default function ProjectDetail(pros) {
     return (
-      <div className="ProjectDetail">
-        ProjectDetail
-      </div>
+      <section className="ProjectDetail">
+        <h2 className="title">Project</h2>
+        <div className="content">
+          <div className="block">
+            <h2 className="name">Project name que se va a dos líneas sin problemas</h2>
+            <p className="description">Project description que se va seguramente a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más</p>
+          </div>
+          <div className="block">
+            <h2 className="title mdi mdi-lan mdi-16px">Organization</h2>
+          </div>
+          <div className="block">
+            <h2 className="title mdi mdi-attachment mdi-16px">Documents</h2>
+            <a href="#" alt="">'https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0'</a>
+            <a href="#" alt="">'https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0'</a>
+          </div>
+          <div className="block">
+            <h2 className="title mdi mdi-map-marker mdi-16px">Markers</h2>
+            <ul>
+              <li>
+                <span className="name">Camps</span>
+                <span className="tag">3</span>
+                <ul>
+                  <li>
+                    Camp name
+                  </li>
+                  <li>
+                    Camp name
+                  </li>
+                  <li>
+                    Camp name
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div className="block">
+            <h2 className="title mdi mdi-calendar mdi-16px">Timeframe</h2>
+            <div  className="timeframe">
+              <span className="label">Start:</span> <span className="value">23/09/2017</span>
+              <span className="label">End:</span> <span className="value">01/02/2018</span>
+            </div>
+          </div>
+        </div>
+      </section>
     );
 }
 

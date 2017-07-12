@@ -11,12 +11,13 @@
 }
 
 .MapPage .project-detail-container {
-  width: 300px;
+  width: 320px;
   flex-grow: 0;
+  background-color: var(--color-grey-lighter);
 }
 
 .MapPage .point-detail-container {
-  width: 300px;
+  width: 320px;
   flex-grow: 0;
 }
 
