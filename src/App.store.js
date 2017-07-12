@@ -3,20 +3,22 @@ import {fromJS} from "immutable";
 export const initialState = fromJS({
     "map": {
         "center": [28.505, 37.09],
+        "cursor": [0, 0],
         "zoom": 7,
         "drawing": {
             type: null
         },
         "points": [
-            {"id": 1, "name": "Future placement", "type": "point", "icon": "cross", "position": [28.505, 37.09]},
-            {"id": 2, "name": "Camp mosul", "type": "point", "icon": "house1", "position": [29.605, 37.59]},
-            {"id": 3, "name": "Camp damasco", "type": "point", "icon": "house2", "position": [29.505, 39.09]},
-            {"id": 4, "name": "Bombed", "type": "point", "icon": "info", "position": [27.005, 38.09]},
-            {"id": 5, "name": "Refugees X", "type": "point", "icon": "people", "position": [27.505, 37.89]},
+            {"id": 1, "name": "Future placement", "type": "cross", "position": [28.505, 37.09]},
+            {"id": 2, "name": "Camp mosul", "type": "point", "icon": "camp", "position": [29.605, 37.59]},
+            {"id": 3, "name": "Camp damasco", "type": "point", "icon": "camp", "position": [29.505, 39.09]},
+            {"id": 4, "name": "Bombed", "type": "point", "icon": "warning", "position": [27.005, 38.09]},
+            {"id": 5, "name": "Refugees X", "type": "point", "icon": "idps", "position": [27.505, 37.89]},
             {"id": 6, "name": "Expected movement", "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]},
             {"id": 7, "name": "Dangerous area", "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
         ]
     },
+    "displayProjectDetail": true,
     "user": {
         "id": 1,
         "username": "ali.ahmed",
@@ -27,11 +29,12 @@ export const initialState = fromJS({
 
 export function reducer(state, action) {
     if (action.type === "ADD_MARKER") {
-        let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
-        return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: fromJS(action.payload.position), icon: "cross"})))
-                    .setIn(['map', 'drawing', "type"], null);
+        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload));
+    } else if (action.type === "ADD_CROSS") {
+        return state.setIn(['map', 'drawing', "position"], fromJS(action.payload));
     } else if (action.type === "SELECT_TOOL") {
-        return state.setIn(['map', 'drawing'], fromJS({type: action.payload}));
+        return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
+                    .setIn(["map", "viewing"], null);
     } else if (action.type === "ADD_ARROW_POINT") {
         if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
             let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
@@ -55,6 +58,26 @@ export function reducer(state, action) {
             return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "polygon", positions: positions.toJS()})))
                         .setIn(['map', 'drawing'], fromJS({type: null}));
         }
+    } else if (action.type === "CURSOR_MOVE") {
+        return state.setIn(['map', 'cursor'], fromJS(action.payload));
+    } else if (action.type === "TOGGLE_DISPLAY_DETAIL") {
+        return state.update("displayProjectDetail", (v) => !v);
+    } else if (action.type === "SELECT_MARKER_ICON") {
+        return state.setIn(["map", "drawing", "icon"], action.payload);
+    } else if (action.type === "SAVE_MARKER") {
+        let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
+        let position = action.payload.position;
+        let icon = action.payload.icon;
+        let name = action.payload.name;
+        let description = action.payload.description;
+        return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: position, icon: icon, name: name, description: description})))
+                    .setIn(['map', 'drawing'], fromJS({type: null}));
+    } else if (action.type === "VISUALIZE_MARKER") {
+        return state.setIn(["map", "viewing"], fromJS(action.payload))
+                    .setIn(["map", "drawing"], fromJS({type: null}));
+    } else if (action.type === "DELETE_MARKER") {
+        return state.updateIn(["map", "points"], (points) => points.filter((p) => p.get('id') !== action.payload))
+                    .setIn(["map", "viewing"], null);
     }
     return state;
 }

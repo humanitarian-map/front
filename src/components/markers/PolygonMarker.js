@@ -4,13 +4,11 @@ import {PropTypes} from "prop-types";
 
 export default function PolygonMarker(props) {
     return (
-        <Polygon positions={[props.point.positions]}>
+        <Polygon positions={[props.point.positions]}
+                 onMouseOver={(e) => e.target.openPopup()}
+                 onMouseOut={(e) => e.target.closePopup()}>
           <Popup>
-            <div>
-              <h1>{props.point.name}</h1>
-              {props.point.description &&
-                <p>{props.point.description}</p>}
-            </div>
+            <span className="title">{props.point.name}</span>
           </Popup>}
         </Polygon>
     )

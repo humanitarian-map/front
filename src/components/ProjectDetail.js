@@ -13,5 +13,5 @@ export default function ProjectDetail(pros) {
 }
 
 ProjectDetail.propTypes = {
-    project: PropTypes.object.isRequired
+    project: PropTypes.object
 }

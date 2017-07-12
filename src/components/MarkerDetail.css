@@ -1,0 +1,110 @@
+.MarkerDetail {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    height: 100%;
+}
+
+.MarkerDetail h1 {
+    padding: 16px 0;
+    font-size: 24px;
+    margin: 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.MarkerDetail h2 {
+    padding: 3px 0;
+    font-size: 18px;
+    margin: 0px;
+}
+
+.MarkerDetail .title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.MarkerDetail input {
+    padding: 10px;
+    margin: 15px 0;
+    width: 88%;
+    background: #F5F8FA;
+    border: 1px solid #cccccc;
+}
+
+.MarkerDetail textarea {
+    padding: 10px;
+    margin: 10px 0;
+    width: 88%;
+    height: 100px;
+    background: #F5F8FA;
+    border: 1px solid #cccccc;
+}
+
+.MarkerDetail a {
+    color: #65B3F0;
+}
+
+.MarkerDetail .coordinates-inputs input {
+    width: 130px;
+    margin: 5px;
+}
+.MarkerDetail .coordinates-inputs span {
+    display: inline-block;
+    width: 60px;
+}
+
+.MarkerDetail .content {
+    flex-grow: 1;
+}
+
+.MarkerDetail .docs .plus{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.MarkerDetail .buttons {
+    padding: 5px 0;
+    border-top: 1px solid #cccccc;
+    background: #F5F8FA;
+}
+.MarkerDetail .buttons .delete {
+    width: 100px;
+    margin: 5px;
+    padding: 10px;
+    background: #F5F8FA;
+    border: 1px solid #cccccc;
+}
+
+.MarkerDetail h2.mdi:before {
+    margin-right: 8px;
+}
+
+.MarkerDetail .markers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 5px 0 10px;
+}
+
+.MarkerDetail .MarkerIcon {
+    display: flex;
+    padding: 8px;
+    font-size: 10px;
+    items-align: center;
+    text-align: center;
+    flex-direction: column;
+    border: 1px solid #cccccc;
+    width: 35px;
+}
+
+.MarkerDetail .MarkerIcon.active {
+    background: #dddddd;
+}
+
+.MarkerDetail .MarkerIcon span {
+    margin: 3px 0;
+}
+
+.MarkerDetail .MarkerIcon .marker-icon {
+    border-radius: 10px;
+}

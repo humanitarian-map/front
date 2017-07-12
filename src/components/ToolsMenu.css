@@ -2,110 +2,37 @@
     flex-direction: row;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 60px;
     display: flex;
-    background: #eeeeee;
+    background: #29353D;
+    color: #859cad;
     z-index: 60000;
     height: 100%;
 }
 
-.ToolsMenu .logo {
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-}
-
-.ToolsMenu .user {
-    padding: 10px;
-    font-size: .7rem;
-}
-
-.ToolsMenu .user .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-}
-
-.ToolsMenu .members {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.ToolsMenu .chat {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.ToolsMenu .document {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.ToolsMenu .folder {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
 .ToolsMenu .marker {
     align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
+    padding: 18px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
-.ToolsMenu .map {
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
+.ToolsMenu .marker.active {
+    background: #38556A;
+    color: #ffffff;
 }
 
-.ToolsMenu .add-marker {
-    position: relative;
-    align-self: center;
-    width: 48px;
-    height: 48px;
-    padding: 10px;
-}
-
-.ToolsMenu .actions {
+.ToolsMenu .cursor-box {
     display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-}
-
-.ToolsMenu .end {
-    flex-grow: 0;
-    padding: 10px;
-}
-
-.ToolsMenu .markers-box {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
     position: absolute;
-    right: 60px;
-    top: -190px;
-    width: 150px;
-    height: 320px;
-    background: #eeeeee;
-    padding: 0;
-    border-radius: 10px;
-    border: 1px solid #aaaaaa;
-    box-shadow: 3px 3px 3px #888888;
+    right: 10px;
+    width: 140px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
 }
 
-.ToolsMenu .markers-box .marker-icon {
-    align-self: center;
-    padding: 14px;
-    width: 50px;
-    height: 50px;
+.ToolsMenu .cursor-box span {
+    width: 60px;
 }

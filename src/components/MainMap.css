@@ -12,23 +12,37 @@
     height: 100%;
 }
 
-.MainMap .cursor-box {
-    display: flex;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 140px;
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #cccccc;
-    z-index: 10000;
+.MainMap .drawing-polygon {
+    cursor: crosshair;
 }
 
-.MainMap .cursor-box span {
-    width: 70px;
+.MainMap .drawing-arrow {
+    cursor: crosshair;
 }
 
-.MainMap .cursor-box span.lat {
-    border-right: 1px solid #cccccc;
+.MainMap .drawing-point {
+    cursor: none;
+}
+
+.MainMap .drawing-cross {
+    cursor: none;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper{
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.leaflet-popup .leaflet-popup-content{
+    margin: 8px 14px;
+}
+
+.leaflet-popup .leaflet-popup-tip{
+    width: 10px;
+    height: 10px;
+    box-shadow: none;
+}
+
+.leaflet-popup .leaflet-popup-close-button{
+    display: none;
 }

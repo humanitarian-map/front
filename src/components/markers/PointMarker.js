@@ -2,54 +2,39 @@ import React from 'react';
 import { Marker, Popup} from 'react-leaflet';
 import * as L from "leaflet";
 import {PropTypes} from "prop-types";
-import infoSvg from "./InfoIcon.svg";
-import peopleSvg from "./PeopleIcon.svg";
-import crossSvg from "./CrossIcon.svg";
-import house1Svg from "./House1Icon.svg";
-import house2Svg from "./House2Icon.svg";
+import "./PointMarker.css";
+
+function createIcon(markerId, iconName) {
+    return L.divIcon({
+        className: "marker-icon " + markerId + "-icon mdi mdi-" + iconName + " mdi-24px",
+        iconSize: [40, 40],
+        html: "<div class='arrow'></div>",
+        iconAnchor: [20, 44],
+        popupAnchor: [0, -40],
+    })
+}
 
 const icons = {
-    "info": L.icon({
-        iconUrl: infoSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "people": L.icon({
-        iconUrl: peopleSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "cross": L.icon({
-        iconUrl: crossSvg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "house1": L.icon({
-        iconUrl: house1Svg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
-    "house2": L.icon({
-        iconUrl: house2Svg,
-        iconSize: [48, 48],
-        iconAnchor: [24, 24],
-        popupAnchor: [0, -24],
-    }),
+    "warning": createIcon("warning", "fire"),
+    "camp": createIcon("camp", "tent"),
+    "checkpoint": createIcon("checkpoint", "marker-check"),
+    "hospital": createIcon("hospital", "hospital"),
+    "idps": createIcon("idps", "walk"),
+    "mobile-clinic": createIcon("mobile-clinic", "truck"),
+    "other": createIcon("other", "map-marker"),
 }
 
 export default function PointMarker(props) {
     return (
-        <Marker position={props.point.position} icon={icons[props.point.icon]}>
+        <Marker
+            className="PointMarker"
+            position={props.point.position}
+            icon={icons[props.point.icon || "other"]}
+            onMouseOver={(e) => e.target.openPopup()}
+            onMouseOut={(e) => e.target.closePopup()}
+            onClick={(e) => props.onClickMarker && props.onClickMarker(props.point)}>
           <Popup>
-            <div>
-              <h1>{props.point.name}</h1>
-              {props.point.description &&
-                <p>{props.point.description}</p>}
-            </div>
+            <span className="title">{props.point.name}</span>
           </Popup>
         </Marker>
     )

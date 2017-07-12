@@ -1,0 +1,48 @@
+.PointMarker {
+}
+
+.marker-icon {
+    border-radius: 14px 14px 24px 24px;
+    color: white;
+}
+
+.marker-icon .arrow {
+    transform: rotate(45deg);
+    position: absolute;
+    bottom: -4px;
+    left: 15px;
+    width: 10px;
+    height: 10px;
+}
+
+.marker-icon:before {
+    padding: 3px;
+}
+
+.warning-icon, .warning-icon .arrow {
+    background: #FA5E59;
+}
+
+.checkpoint-icon, .checkpoint-icon .arrow {
+    background: #A6BE1F;
+}
+
+.idps-icon, .idps-icon .arrow {
+    background: #A25FA6;
+}
+
+.camp-icon, .camp-icon .arrow {
+    background: #F79D68;
+}
+
+.hospital-icon, .hospital-icon .arrow {
+    background: #599DD9;
+}
+
+.mobile-clinic-icon, .mobile-clinic-icon .arrow {
+    background: #59BCD9;
+}
+
+.other-icon, .other-icon .arrow {
+    background: #859CAD;
+}
