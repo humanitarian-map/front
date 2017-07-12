@@ -90,6 +90,7 @@
 .MarkerCreationDetail .color-block {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .MarkerCreationDetail .color-block div.selected {
@@ -97,30 +98,10 @@
 }
 
 .MarkerCreationDetail .color-block div {
-    border: 1px solid #cccccc;
+    border: 2px solid white;
     border-radius: 5px;
     width: 30px;
     height: 30px;
-    margin: 0 10px 0 0;
+    margin: 0 5px 5px 0;
     cursor: pointer;
-}
-
-.MarkerCreationDetail .color-block .white-color {
-    background: white;
-}
-
-.MarkerCreationDetail .color-block .red-color {
-    background: red;
-}
-
-.MarkerCreationDetail .color-block .green-color {
-    background: green;
-}
-
-.MarkerCreationDetail .color-block .blue-color {
-    background: blue;
-}
-
-.MarkerCreationDetail .color-block .black-color {
-    background: black;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { LayerGroup, Polyline, Popup, Polygon } from 'react-leaflet';
 import {PropTypes} from "prop-types";
+import {DEFAULT_COLOR} from "../../utils/colors";
 
 export default function CrossMarker(props) {
     let line1 = [[
@@ -19,8 +20,8 @@ export default function CrossMarker(props) {
     ]];
     return (
         <LayerGroup>
-            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={line1}></Polyline>
-            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={line2}></Polyline>
+            <Polyline color={props.point.data.color || DEFAULT_COLOR} fillColor={props.point.data.color || DEFAULT_COLOR} positions={line1}></Polyline>
+            <Polyline color={props.point.data.color || DEFAULT_COLOR} fillColor={props.point.data.color || DEFAULT_COLOR} positions={line2}></Polyline>
 
             <Polygon positions={[line1[0], line2[0], line1[1], line2[1]]}
                      onMouseOver={(e) => e.target.openPopup()}

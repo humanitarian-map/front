@@ -8,6 +8,7 @@ import ArrowMarker from "./markers/ArrowMarker";
 import PointMarker from "./markers/PointMarker";
 import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
+import {DEFAULT_COLOR} from "../utils/colors";
 
 function Point(props) {
   if (props.point.get('type') === "point") {
@@ -114,19 +115,19 @@ class MainMapImpl extends React.Component {
           {drawingType === "point" && !drawingPosition &&
               <PointMarker point={{data: {position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "cross" && drawingPosition &&
-              <CrossMarker point={{data: {color: this.props.drawing.get('color') || "blue", position: drawingPosition.toJS()}}}></CrossMarker>}
+              <CrossMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, position: drawingPosition.toJS()}}}></CrossMarker>}
           {drawingType === "cross" && !drawingPosition &&
               <CrossMarker point={{data: {position: this.props.cursor.toJS()}}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 1 &&
-              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || "blue", origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 2 &&
-              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || "blue", origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
           {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
-              <Polyline color="blue" colorFill="blue" positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
+              <Polyline color={DEFAULT_COLOR} colorFill={DEFAULT_COLOR} positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
           {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 1 &&
               <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
-              <PolygonMarker point={{data: {color: this.props.drawing.get('color') || "blue", positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
+              <PolygonMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
         </Map>
       );
     }

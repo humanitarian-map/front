@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './MarkerCreationDetail.css';
+import {COLORS, DEFAULT_COLOR} from "../utils/colors";
 
 function MarkerIcon(props) {
     let typesToIcon = {
@@ -101,11 +102,9 @@ class MarkerCreationDetailImpl extends React.Component {
                 <div className="block">
                   <h3 className="title mdi mdi-comment mdi-16px">Color</h3>
                   <div className="color-block">
-                    <div className={"white-color" + (this.state.color === "white"? " selected": "")} onClick={() => props.setDrawingColor("white")}></div>
-                    <div className={"red-color" + (this.state.color === "red"? " selected": "")} onClick={() => props.setDrawingColor("red")}></div>
-                    <div className={"green-color" + (this.state.color === "green"? " selected": "")} onClick={() => props.setDrawingColor("green")}></div>
-                    <div className={"blue-color" + (this.state.color === "blue"? " selected": "")} onClick={() => props.setDrawingColor("blue")}></div>
-                    <div className={"black-color" + (this.state.color === "black"? " selected": "")} onClick={() => props.setDrawingColor("black")}></div>
+                    {COLORS.map((color) => (
+                      <div style={{background: color}} className={(this.props.drawing.get('color') || DEFAULT_COLOR) === color? "selected": ""} onClick={() => props.setDrawingColor(color)}></div>
+                    ))}
                   </div>
                 </div>}
 
