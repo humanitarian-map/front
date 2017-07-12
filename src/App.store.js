@@ -28,6 +28,8 @@ export function reducer(state, action) {
     } else if (action.type === "SELECT_TOOL") {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
                     .setIn(["map", "viewing"], null);
+    } else if (action.type === "SET_DRAWING_COLOR") {
+        return state.setIn(['map', 'drawing', 'color'], action.payload);
     } else if (action.type === "ADD_ARROW_POINT") {
         if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
             return state.updateIn(['map', 'drawing', 'points'], (points) => points.push(fromJS(action.payload)))

@@ -86,3 +86,41 @@
 .MarkerCreationDetail .MarkerIcon .marker-icon:before {
     margin-top: 6px;
 }
+
+.MarkerCreationDetail .color-block {
+    display: flex;
+    flex-direction: row;
+}
+
+.MarkerCreationDetail .color-block div.selected {
+    border: 2px solid #777777;
+}
+
+.MarkerCreationDetail .color-block div {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+.MarkerCreationDetail .color-block .white-color {
+    background: white;
+}
+
+.MarkerCreationDetail .color-block .red-color {
+    background: red;
+}
+
+.MarkerCreationDetail .color-block .green-color {
+    background: green;
+}
+
+.MarkerCreationDetail .color-block .blue-color {
+    background: blue;
+}
+
+.MarkerCreationDetail .color-block .black-color {
+    background: black;
+}

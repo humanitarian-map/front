@@ -19,8 +19,8 @@ export default function CrossMarker(props) {
     ]];
     return (
         <LayerGroup>
-            <Polyline positions={line1}></Polyline>
-            <Polyline positions={line2}></Polyline>
+            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={line1}></Polyline>
+            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={line2}></Polyline>
 
             <Polygon positions={[line1[0], line2[0], line1[1], line2[1]]}
                      onMouseOver={(e) => e.target.openPopup()}

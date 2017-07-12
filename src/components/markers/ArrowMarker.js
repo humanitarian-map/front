@@ -12,9 +12,9 @@ export default function ArrowMarker(props) {
 
     return (
         <LayerGroup>
-            <Polyline positions={[props.point.data.origin, props.point.data.dest]}></Polyline>
-            <Polyline positions={[props.point.data.dest, arrow_point1.toArray()]}></Polyline>
-            <Polyline positions={[props.point.data.dest, arrow_point2.toArray()]}></Polyline>
+            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={[props.point.data.origin, props.point.data.dest]}></Polyline>
+            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={[props.point.data.dest, arrow_point1.toArray()]}></Polyline>
+            <Polyline color={props.point.data.color || "blue"} fillColor={props.point.data.color || "blue"} positions={[props.point.data.dest, arrow_point2.toArray()]}></Polyline>
 
             <Polygon positions={[props.point.data.dest, arrow_point2.toArray(), props.point.data.origin, arrow_point1.toArray()]}
                      onMouseOver={(e) => e.target.openPopup()}

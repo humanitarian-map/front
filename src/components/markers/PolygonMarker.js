@@ -5,6 +5,8 @@ import {PropTypes} from "prop-types";
 export default function PolygonMarker(props) {
     return (
         <Polygon positions={[props.point.data.positions]}
+                 color={props.point.data.color || "blue"}
+                 fillColor={props.point.data.color || "blue"}
                  onMouseOver={(e) => e.target.openPopup()}
                  onMouseOut={(e) => e.target.closePopup()}
                  onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>

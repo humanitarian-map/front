@@ -37,17 +37,21 @@ Point.propTypes = {
 class MainMapImpl extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {pointer: [0, 0]}
         this.getPosition = this.getPosition.bind(this);
         this.click = this.click.bind(this);
         this.keyup = this.keyup.bind(this);
+        this.mouseMove = this.mouseMove.bind(this);
     }
 
     componentWillMount() {
         document.addEventListener("keyup", this.keyup);
+        document.addEventListener("mousemove", this.mouseMove);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keyup", this.keyup);
+        document.removeEventListener("mousemove", this.mouseMove);
     }
 
     getPosition(event) {
@@ -78,6 +82,11 @@ class MainMapImpl extends React.Component {
         }
     }
 
+    mouseMove(event) {
+        this.setState({pointer: [event.clientX - 60, event.clientY - 60]})
+    }
+
+
     render() {
       let drawingType = this.props.drawing.get('type');
       let drawingPosition = this.props.drawing.get('position');
@@ -105,17 +114,19 @@ class MainMapImpl extends React.Component {
           {drawingType === "point" && !drawingPosition &&
               <PointMarker point={{data: {position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "cross" && drawingPosition &&
-              <CrossMarker point={{data: {position: drawingPosition.toJS()}}}></CrossMarker>}
+              <CrossMarker point={{data: {color: this.props.drawing.get('color') || "blue", position: drawingPosition.toJS()}}}></CrossMarker>}
           {drawingType === "cross" && !drawingPosition &&
               <CrossMarker point={{data: {position: this.props.cursor.toJS()}}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 1 &&
-              <ArrowMarker point={{data: {origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || "blue", origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 2 &&
-              <ArrowMarker point={{data: {origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || "blue", origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
           {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
-              <Polyline positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
+              <Polyline color="blue" colorFill="blue" positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
+          {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 1 &&
+              <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
-              <PolygonMarker point={{data: {positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
+              <PolygonMarker point={{data: {color: this.props.drawing.get('color') || "blue", positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
         </Map>
       );
     }

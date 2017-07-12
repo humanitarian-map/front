@@ -42,15 +42,18 @@ class MarkerCreationDetailImpl extends React.Component {
         } else if (this.props.drawing.get('type') === "cross") {
             data = {
                 position: this.props.drawing.get('position').toJS(),
+                color: this.props.drawing.get('color'),
             }
         } else if (this.props.drawing.get('type') === "polygon") {
             data = {
                 positions: this.props.drawing.get('points').toJS(),
+                color: this.props.drawing.get('color'),
             }
         } else if (this.props.drawing.get('type') === "arrow") {
             data = {
                 origin: this.props.drawing.getIn(['points', 0]).toJS(),
                 dest: this.props.drawing.getIn(['points', 1]).toJS(),
+                color: this.props.drawing.get('color'),
             }
         }
         this.props.onSaveMarker(
@@ -94,6 +97,18 @@ class MarkerCreationDetailImpl extends React.Component {
                     <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} type="other" name="Other" />
                   </div>
                 </div>}
+              {(type === "polygon" || type === "arrow" || type === "cross") &&
+                <div className="block">
+                  <h3 className="title mdi mdi-comment mdi-16px">Color</h3>
+                  <div className="color-block">
+                    <div className={"white-color" + (this.state.color === "white"? " selected": "")} onClick={() => props.setDrawingColor("white")}></div>
+                    <div className={"red-color" + (this.state.color === "red"? " selected": "")} onClick={() => props.setDrawingColor("red")}></div>
+                    <div className={"green-color" + (this.state.color === "green"? " selected": "")} onClick={() => props.setDrawingColor("green")}></div>
+                    <div className={"blue-color" + (this.state.color === "blue"? " selected": "")} onClick={() => props.setDrawingColor("blue")}></div>
+                    <div className={"black-color" + (this.state.color === "black"? " selected": "")} onClick={() => props.setDrawingColor("black")}></div>
+                  </div>
+                </div>}
+
               <div className="block">
                 <h3 className="title mdi mdi-comment mdi-16px">Comment</h3>
                 <textarea placeholder="Write a comment" onChange={(event) => this.setState({description: event.target.value})}>
@@ -139,8 +154,8 @@ class MarkerCreationDetailImpl extends React.Component {
                   </div>}
                 {(type === "polygon") &&
                   <div className="coordinates-inputs polygon">
-                    {props.drawing.get('points').map((point) => (
-                      <div>
+                    {props.drawing.get('points').map((point, idx) => (
+                      <div key={idx}>
                         <input placeholder="Lat"
                                value={point.get(0)}
                                onChange={(e) => props.onChangeLocation(e.target.value, point.get(1))} />
@@ -186,6 +201,9 @@ const MarkerCreationDetail = connect(
         },
         onSaveMarker: (projectSlug, point) => {
             dispatch({type: "ADD_POINT", "payload": {projectSlug: projectSlug, point: point}});
+        },
+        setDrawingColor: (color) => {
+            dispatch({type: "SET_DRAWING_COLOR", "payload": color});
         },
     })
 )(MarkerCreationDetailImpl);
