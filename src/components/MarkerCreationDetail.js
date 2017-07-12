@@ -122,13 +122,13 @@ class MarkerCreationDetailImpl extends React.Component {
                       <span>Lat:</span>
                       <input placeholder="Lat"
                              value={props.drawing.getIn(['position', 0])}
-                             onChange={(e) => props.onChangeLocation(e.target.value, props.drawing.getIn(['position', 1]))} />
+                             onChange={(e) => props.onChangeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1]))} />
                     </div>
                     <div>
                       <span>Lng:</span>
                       <input placeholder="Lng"
                              value={props.drawing.getIn(['position', 1])}
-                             onChange={(e) => props.onChangeLocation(props.drawing.getIn(['position', 0]), e.target.value)} />
+                             onChange={(e) => props.onChangeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
                   </div>}
                 {(type === "arrow") &&
@@ -137,19 +137,19 @@ class MarkerCreationDetailImpl extends React.Component {
                     <div>
                       <input placeholder="Lat"
                              value={props.drawing.getIn(['points', 0, 0])}
-                             onChange={(e) => props.onChangeLocation(e.target.value, props.drawing.getIn(['points', 0, 1]))} />
+                             onChange={(e) => props.onChangeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1]))} />
                       <input placeholder="Lng"
                              value={props.drawing.getIn(['points', 0, 1])}
-                             onChange={(e) => props.onChangeLocation(props.drawing.getIn(['points', 0, 0]), e.target.value)} />
+                             onChange={(e) => props.onChangeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
                     <span>Destination:</span>
                     <div>
                       <input placeholder="Lat"
                              value={props.drawing.getIn(['points', 1, 0])}
-                             onChange={(e) => props.onChangeLocation(e.target.value, props.drawing.getIn(['points', 1, 1]))} />
+                             onChange={(e) => props.onChangeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1]))} />
                       <input placeholder="Lng"
                              value={props.drawing.getIn(['points', 1, 1])}
-                             onChange={(e) => props.onChangeLocation(props.drawing.getIn(['points', 1, 0]), e.target.value)} />
+                             onChange={(e) => props.onChangeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value)))} />
                     </div>
                   </div>}
                 {(type === "polygon") &&
@@ -158,10 +158,10 @@ class MarkerCreationDetailImpl extends React.Component {
                       <div key={idx}>
                         <input placeholder="Lat"
                                value={point.get(0)}
-                               onChange={(e) => props.onChangeLocation(e.target.value, point.get(1))} />
+                               onChange={(e) => props.onChangePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1))} />
                         <input placeholder="Lng"
                                value={point.get(1)}
-                               onChange={(e) => props.onChangeLocation(point.get(0), e.target.value)} />
+                               onChange={(e) => props.onChangePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value)))} />
                       </div>))}
                   </div>}
               </div>
@@ -192,6 +192,15 @@ const MarkerCreationDetail = connect(
     (dispatch) => ({
         onChangeLocation: (lat, lng) => {
             dispatch({type: "ADD_MARKER", "payload": [lat, lng]});
+        },
+        onChangeArrowOrigin: (lat, lng) => {
+            dispatch({type: "CHANGE_ARROW_ORIGIN", "payload": [lat, lng]});
+        },
+        onChangeArrowDest: (lat, lng) => {
+            dispatch({type: "CHANGE_ARROW_DEST", "payload": [lat, lng]});
+        },
+        onChangePolygonPoint: (idx, lat, lng) => {
+            dispatch({type: "CHANGE_POLYGON_POINT", "payload": {idx:idx, position: [lat, lng]}});
         },
         onCancelDrawing: () => {
             dispatch({type: "CANCEL_DRAWING", "payload": null});

@@ -20,6 +20,7 @@ export const initialState = fromJS({
 
 export function reducer(state, action) {
     if (action.type === "ADD_MARKER") {
+        console.log(action.payload);
         return state.setIn(['map', 'drawing', "position"], fromJS(action.payload))
                     .setIn(['map', 'drawing', "ready-to-edit"], true);
     } else if (action.type === "ADD_CROSS") {
@@ -64,6 +65,12 @@ export function reducer(state, action) {
         return state.set("projects-list", fromJS(action.payload));
     } else if (action.type === "SET_CURRENT_PROJECT") {
         return state.set("current-project", fromJS(action.payload));
+    } else if (action.type === "CHANGE_ARROW_ORIGIN") {
+        return state.setIn(['map', 'drawing', "points", 0], fromJS(action.payload));
+    } else if (action.type === "CHANGE_ARROW_DEST") {
+        return state.setIn(['map', 'drawing', "points", 1], fromJS(action.payload));
+    } else if (action.type === "CHANGE_POLYGON_POINT") {
+        return state.setIn(['map', 'drawing', "points", action.payload.idx], fromJS(action.payload.position));
     }
     return state;
 }
