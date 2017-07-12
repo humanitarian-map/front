@@ -80,7 +80,7 @@
 .block .title:before {
   margin-right: 0.5rem;
 }
-.block .project-name {
+.block .panel-name {
   font-size: 1.2rem;
 }
 .description {
@@ -93,4 +93,30 @@
 }
 .block-documents a:last-child {
   margin-bottom: 0;
+}
+
+
+
+.buttons-set {
+    padding: 1rem;
+    border-top: 1px solid var(--color-grey-light);
+}
+.buttons-set button {
+    margin-right: 1rem;
+    width: 135px;
+}
+.buttons-set button:last-child {
+    margin-right: 0;
+}
+button.cancel,
+button.delete {
+    padding: 10px;
+    background: #F5F8FA;
+    border: 1px solid var(--color-grey-light);
+}
+button.save {
+    padding: 10px;
+    background: var(--color-blue);
+    color: var(--color-white);
+    border: none;
 }

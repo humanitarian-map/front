@@ -38,22 +38,29 @@ class MarkerCreationDetailImpl extends React.Component {
           <section className="MarkerCreationDetail panel">
             <h2 className="header-title">Marker</h2>
             <div className="content">
-              <input placeholder="Write a tittle" onChange={(event) => this.setState({name: event.target.value})}/>
-              <h2 className="mdi mdi-bookmark mdi-16px">Category</h2>
-              <div className="markers">
-                <MarkerIcon active={activeMarker === "camp"} onClick={() => props.onSelectIcon("camp")} type="camp" name="Camp" />
-                <MarkerIcon active={activeMarker === "hospital"} onClick={() => props.onSelectIcon("hospital")} type="hospital" name="Hospital" />
-                <MarkerIcon active={activeMarker === "warning"} onClick={() => props.onSelectIcon("warning")} type="warning" name="Warning" />
-                <MarkerIcon active={activeMarker === "idps"} onClick={() => props.onSelectIcon("idps")} type="idps" name="IDPs" />
-                <MarkerIcon active={activeMarker === "checkpoint"} onClick={() => props.onSelectIcon("checkpoint")} type="checkpoint" name="Check point" />
-                <MarkerIcon active={activeMarker === "mobile-clinic"} onClick={() => props.onSelectIcon("mobile-clinic")} type="mobile-clinic" name="Mobile clinic"/>
-                <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} type="other" name="Other" />
+              <div className="block">
+                <input placeholder="Write a title" onChange={(event) => this.setState({name: event.target.value})}/>
               </div>
-              <h2 className="mdi mdi-comment mdi-16px">Comment</h2>
-              <textarea placeholder="Write a comment" onChange={(event) => this.setState({description: event.target.value})}>
-              </textarea>
-              <h2 className="mdi mdi-map mdi-16px">Coordinates</h2>
-              <div className="coordinates-inputs">
+              <div className="block">
+                <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
+                <div className="markers">
+                  <MarkerIcon active={activeMarker === "camp"} onClick={() => props.onSelectIcon("camp")} type="camp" name="Camp" />
+                  <MarkerIcon active={activeMarker === "hospital"} onClick={() => props.onSelectIcon("hospital")} type="hospital" name="Hospital" />
+                  <MarkerIcon active={activeMarker === "warning"} onClick={() => props.onSelectIcon("warning")} type="warning" name="Warning" />
+                  <MarkerIcon active={activeMarker === "idps"} onClick={() => props.onSelectIcon("idps")} type="idps" name="IDPs" />
+                  <MarkerIcon active={activeMarker === "checkpoint"} onClick={() => props.onSelectIcon("checkpoint")} type="checkpoint" name="Check point" />
+                  <MarkerIcon active={activeMarker === "mobile-clinic"} onClick={() => props.onSelectIcon("mobile-clinic")} type="mobile-clinic" name="Mobile clinic"/>
+                  <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} type="other" name="Other" />
+                </div>
+              </div>
+              <div className="block">
+                <h3 className="title mdi mdi-comment mdi-16px">Comment</h3>
+                <textarea placeholder="Write a comment" onChange={(event) => this.setState({description: event.target.value})}>
+                </textarea>
+              </div>
+              <div className="block">
+                <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
+                <div className="coordinates-inputs">
                   <div>
                     <span>Lat:</span>
                     <input placeholder="Lat"
@@ -66,11 +73,14 @@ class MarkerCreationDetailImpl extends React.Component {
                            value={props.drawing.getIn(['position', 1])}
                            onChange={(e) => props.onChangeLocation(props.drawing.getIn(['position', 0]), e.target.value)} />
                   </div>
+                </div>
               </div>
-              <h2 className="mdi mdi-attachment mdi-16px">Docs</h2>
-              <a>+ add link to doc</a>
+              <div className="block">
+                <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
+                <a>+ add link to doc</a>
+              </div>
             </div>
-            <div className="buttons">
+            <div className="buttons-set">
               <button className="save" onClick={() => props.onSaveMarker(activeMarker, this.state.name, this.state.description, props.drawing.get('position').toJS())}>Save</button>
               <button className="cancel" onClick={props.onCancelDrawing}>Cancel</button>
             </div>

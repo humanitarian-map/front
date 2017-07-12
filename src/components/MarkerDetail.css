@@ -4,10 +4,6 @@
     text-align: left;
     height: 100%;
 }
-.MarkerDetail .title {
-    font-size: 22px;
-    font-weight: bold;
-}
 
 .MarkerDetail input {
     padding: 10px;
@@ -26,10 +22,6 @@
     border: 1px solid #cccccc;
 }
 
-.MarkerDetail a {
-    color: #65B3F0;
-}
-
 .MarkerDetail .coordinates-inputs input {
     width: 130px;
     margin: 5px;
@@ -44,21 +36,7 @@
 }
 
 .MarkerDetail .docs .plus{
-    font-size: 30px;
     cursor: pointer;
-}
-
-.MarkerDetail .buttons {
-    padding: 5px 0;
-    border-top: 1px solid #cccccc;
-    background: #F5F8FA;
-}
-.MarkerDetail .buttons .delete {
-    width: 100px;
-    margin: 5px;
-    padding: 10px;
-    background: #F5F8FA;
-    border: 1px solid #cccccc;
 }
 
 .MarkerDetail h2.mdi:before {

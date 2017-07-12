@@ -10,7 +10,7 @@ export default function ProjectDetail(pros) {
         <h2 className="header-title">Project</h2>
         <div className="content">
           <div className="block">
-            <h3 className="title project-name">Project name que se va a dos líneas sin problemas</h3>
+            <h3 className="title panel-name">Project name que se va a dos líneas sin problemas</h3>
             <p className="description">Project description que se va seguramente a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más a unas cuantas líneas más</p>
           </div>
           <div className="block">
