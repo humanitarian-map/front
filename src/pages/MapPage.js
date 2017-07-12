@@ -37,20 +37,7 @@ class MapPageImpl extends Component {
               <ToolsMenu />
             </div>
             <div className="map-container">
-              {this.props.project &&
-                <MainMap center={this.props.project.get('center_point')}
-                         zoom={this.props.project.get('zoom')}
-                         points={this.props.project.get('mapitems')}
-                         drawing={this.props.map.get('drawing')}
-                         cursor={this.props.map.get('cursor')}
-                         onCursorMove={this.props.onCursorMove}
-                         onClickMarker={this.props.onClickMarker}
-                         onAddMarker={this.props.onAddMarker}
-                         onAddCross={this.props.onAddCross}
-                         onAddArrowPoint={this.props.onAddArrowPoint}
-                         onAddPolygonPoint={this.props.onAddPolygonPoint}
-                         onCancelDrawing={this.props.onCancelDrawing}
-                         onConfirmPolygonDrawing={this.props.onConfirmPolygonDrawing} />}
+              <MainMap />}
             </div>
           </div>
         </div>
@@ -66,30 +53,6 @@ const MapPage = connect(
         displayProjectDetail: state.get('displayProjectDetail')
     }),
     (dispatch) => ({
-        onAddMarker: (lat, lng) => {
-            dispatch({type: "ADD_MARKER", "payload": [lat, lng]});
-        },
-        onAddCross: (lat, lng) => {
-            dispatch({type: "ADD_CROSS", "payload": [lat, lng]});
-        },
-        onAddArrowPoint: (lat, lng) => {
-            dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});
-        },
-        onAddPolygonPoint: (lat, lng) => {
-            dispatch({type: "ADD_POLYGON_POINT", "payload": [lat, lng]});
-        },
-        onCancelDrawing: () => {
-            dispatch({type: "CANCEL_DRAWING", "payload": null});
-        },
-        onConfirmPolygonDrawing: () => {
-            dispatch({type: "CONFIRM_POLYGON_DRAWING", "payload": null});
-        },
-        onCursorMove: (lat, lng) => {
-            dispatch({type: "CURSOR_MOVE", "payload": [lat, lng]});
-        },
-        onClickMarker: (point) => {
-            dispatch({type: "VISUALIZE_MARKER", "payload": point});
-        },
         getProject: (slug) => {
             dispatch({type: "GET_CURRENT_PROJECT", "payload": slug});
         }

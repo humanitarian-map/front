@@ -6,6 +6,10 @@
     color: white;
 }
 
+.marker-icon.active {
+    filter: brightness(130%);
+}
+
 .marker-icon .arrow {
     transform: rotate(45deg);
     position: absolute;
