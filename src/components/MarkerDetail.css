@@ -4,20 +4,6 @@
     text-align: left;
     height: 100%;
 }
-
-.MarkerDetail h1 {
-    padding: 16px 0;
-    font-size: 24px;
-    margin: 0px;
-    border-bottom: 1px solid #cccccc;
-}
-
-.MarkerDetail h2 {
-    padding: 3px 0;
-    font-size: 18px;
-    margin: 0px;
-}
-
 .MarkerDetail .title {
     font-size: 22px;
     font-weight: bold;

@@ -28,10 +28,8 @@ class MarkerDetailImpl extends React.Component {
         let props = this.props
 
         return (
-          <div className="MarkerDetail">
-            <div className="title">
-              <h1>Marker</h1>
-            </div>
+          <section className="MarkerDetail panel">
+            <h2 className="header-title">Marker</h2>
             <div className="content">
               <p className="title">{props.marker.name}</p>
               <h2 className="mdi mdi-bookmark mdi-16px">Category</h2>
@@ -54,7 +52,7 @@ class MarkerDetailImpl extends React.Component {
             <div className="buttons">
               <button className="delete" onClick={() => props.onDeleteMarker(props.marker.id)}>Delete</button>
             </div>
-          </div>
+          </section>
         );
     }
 }

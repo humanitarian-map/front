@@ -31,3 +31,9 @@ body {
 a {
   color: var(--color-blue);
 }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

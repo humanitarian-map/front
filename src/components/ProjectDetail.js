@@ -6,7 +6,7 @@ import './ProjectDetail.css';
 
 export default function ProjectDetail(pros) {
     return (
-      <section className="ProjectDetail">
+      <section className="ProjectDetail panel">
         <h2 className="header-title">Project</h2>
         <div className="content">
           <div className="block">
@@ -20,10 +20,10 @@ export default function ProjectDetail(pros) {
               Médicos del Mundo
             </div>
           </div>
-          <div className="block">
+          <div className="block block-documents">
             <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
-            <a href="#" alt="">'https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0'</a>
-            <a href="#" alt="">'https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0'</a>
+            <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
+            <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
           </div>
           <div className="block">
             <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>

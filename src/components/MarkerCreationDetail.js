@@ -35,10 +35,8 @@ class MarkerCreationDetailImpl extends React.Component {
         let activeMarker = props.drawing.get('icon');
 
         return (
-          <div className="MarkerCreationDetail">
-            <div className="title">
-              <h1>Marker</h1>
-            </div>
+          <section className="MarkerCreationDetail panel">
+            <h2 className="header-title">Marker</h2>
             <div className="content">
               <input placeholder="Write a tittle" onChange={(event) => this.setState({name: event.target.value})}/>
               <h2 className="mdi mdi-bookmark mdi-16px">Category</h2>
@@ -76,7 +74,7 @@ class MarkerCreationDetailImpl extends React.Component {
               <button className="save" onClick={() => props.onSaveMarker(activeMarker, this.state.name, this.state.description, props.drawing.get('position').toJS())}>Save</button>
               <button className="cancel" onClick={props.onCancelDrawing}>Cancel</button>
             </div>
-          </div>
+          </section>
         );
     }
 }
