@@ -9,6 +9,10 @@ import MarkerDetail from "../components/MarkerDetail";
 import './MapPage.css';
 
 class MapPageImpl extends Component {
+  componentWillMount() {
+      this.props.listProjects(this.props.match.params.slug);
+  }
+
   render() {
       return (
         <div className="MapPage">
@@ -83,6 +87,9 @@ const MapPage = connect(
         },
         onClickMarker: (point) => {
             dispatch({type: "VISUALIZE_MARKER", "payload": point});
+        },
+        listProjects: (slug) => {
+            dispatch({type: "LIST_PROJECTS", "payload": slug});
         }
     })
 )(MapPageImpl);
