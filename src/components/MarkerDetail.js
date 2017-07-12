@@ -50,14 +50,31 @@ class MarkerDetailImpl extends React.Component {
                 <h3 className="title mdi mdi-comment mdi-16px">Comment</h3>
                 <p>{props.marker.description}</p>
               </div>
-              {props.marker.type === "point" &&
-                <div className="block">
-                  <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
+              <div className="block">
+                <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
+                {(props.marker.type === "point" || props.marker.type === "cross") &&
                   <div className="coordinates-inputs">
                       <span>{props.marker.data.position[0].toFixed(4)}</span>,
                       <span>{props.marker.data.position[1].toFixed(4)}</span>
-                  </div>
-                </div>}
+                  </div>}
+                {props.marker.type === "arrow" &&
+                  <div className="coordinates-inputs">
+                      <h4>Origin</h4>
+                      <span>{props.marker.data.origin[0].toFixed(4)}</span>,
+                      <span>{props.marker.data.origin[1].toFixed(4)}</span>
+                      <h4>Destination</h4>
+                      <span>{props.marker.data.dest[0].toFixed(4)}</span>,
+                      <span>{props.marker.data.dest[1].toFixed(4)}</span>
+                  </div>}
+                {props.marker.type === "polygon" &&
+                  <div className="coordinates-inputs">
+                      {props.marker.data.positions.map((point) => (
+                        <p>
+                          <span>{point[0].toFixed(4)}</span>,
+                          <span>{point[1].toFixed(4)}</span>
+                        </p>))}
+                  </div>}
+              </div>
               {props.marker.type === "point" &&
                 <div className="block block-documents">
                   <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
