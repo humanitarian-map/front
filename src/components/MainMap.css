@@ -103,20 +103,28 @@
 }
 .buttons-set button {
     margin-right: 1rem;
-    width: 135px;
+    width: 155px;
+    cursor: pointer;
 }
 .buttons-set button:last-child {
     margin-right: 0;
 }
-button.cancel,
-button.delete {
-    padding: 10px;
-    background: #F5F8FA;
-    border: 1px solid var(--color-grey-light);
+button {
+  padding: 10px;
+  font-size: 0.9rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-grey-light);
+  color: var(--color-grey-medium);
+}
+button:hover {
+  opacity: 0.9;
 }
 button.save {
     padding: 10px;
     background: var(--color-blue);
     color: var(--color-white);
     border: none;
+}
+button.cancel,
+button.delete {
 }

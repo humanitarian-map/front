@@ -15,10 +15,6 @@
     height: 10px;
 }
 
-.marker-icon:before {
-    padding: 3px;
-}
-
 .warning-icon, .warning-icon .arrow {
     background: #FA5E59;
 }

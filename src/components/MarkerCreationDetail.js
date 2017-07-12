@@ -15,7 +15,7 @@ function MarkerIcon(props) {
     }
     return (
         <div className={"MarkerIcon " + (props.active? "active" : "")} onClick={props.onClick}>
-          <div className={"marker-icon " + props.type + "-icon mdi mdi-" + typesToIcon[props.type || "other"] + " mdi-24px"}  />
+          <div className={"marker-icon " + props.type + "-icon mdi mdi-" + typesToIcon[props.type || "other"] + " mdi-18px"}  />
           <span>{props.name}</span>
         </div>
     )
