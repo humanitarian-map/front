@@ -26,6 +26,7 @@ function Point(props) {
       <PolygonMarker point={props.point.toJS()}></PolygonMarker>
     );
   }
+  return null;
 }
 Point.propTypes = {
     point: ImmutablePropTypes.mapContains({}).isRequired

@@ -2,22 +2,13 @@ import {fromJS} from "immutable";
 
 export const initialState = fromJS({
     "map": {
-        "center": [28.505, 37.09],
         "cursor": [0, 0],
-        "zoom": 7,
         "drawing": {
             type: null
-        },
-        "points": [
-            {"id": 1, "description": "xxx", "name": "Future placement", "type": "cross", "position": [28.505, 37.09]},
-            {"id": 2, "description": "xxx", "name": "Camp mosul", "type": "point", "icon": "camp", "position": [29.605, 37.59]},
-            {"id": 3, "description": "xxx", "name": "Camp damasco", "type": "point", "icon": "camp", "position": [29.505, 39.09]},
-            {"id": 4, "description": "xxx", "name": "Bombed", "type": "point", "icon": "warning", "position": [27.005, 38.09]},
-            {"id": 5, "description": "xxx", "name": "Refugees X", "type": "point", "icon": "idps", "position": [27.505, 37.89]},
-            {"id": 6, "description": "xxx", "name": "Expected movement", "type": "arrow", "origin": [27.705, 37.80], "dest": [28.305, 37.29]},
-            {"id": 7, "description": "xxx", "name": "Dangerous area", "type": "polygon", "positions": [[28.705, 37.80], [28.705, 38.80], [29.305, 37.29]]}
-        ]
+        }
     },
+    "current-project": null,
+    "projects": [],
     "displayProjectDetail": true,
     "user": {
         "id": 1,

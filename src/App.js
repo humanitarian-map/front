@@ -18,7 +18,7 @@ export default class App extends Component {
         <Provider store={store}>
 		  <BrowserRouter>
             <div className="App">
-              <Route exact path="/"><Redirect to="/map/example-project-1" /></Route>
+              <Route exact path="/"><Redirect to="/map/project-example-1" /></Route>
               <Route exact path="/map/:slug" component={MapPage}/>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/profile" component={UserProfilePage}/>

@@ -4,18 +4,18 @@ import {PropTypes} from "prop-types";
 
 export default function CrossMarker(props) {
     let line1 = [[
-        props.point.position[0] - 0.1,
-        props.point.position[1] - 0.1,
+        props.point.data.position[0] - 0.1,
+        props.point.data.position[1] - 0.1,
     ], [
-        props.point.position[0] + 0.1,
-        props.point.position[1] + 0.1,
+        props.point.data.position[0] + 0.1,
+        props.point.data.position[1] + 0.1,
     ]];
     let line2 = [[
-        props.point.position[0] - 0.1,
-        props.point.position[1] + 0.1,
+        props.point.data.position[0] - 0.1,
+        props.point.data.position[1] + 0.1,
     ], [
-        props.point.position[0] + 0.1,
-        props.point.position[1] - 0.1,
+        props.point.data.position[0] + 0.1,
+        props.point.data.position[1] - 0.1,
     ]];
     return (
         <LayerGroup>

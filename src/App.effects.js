@@ -5,14 +5,18 @@ export default function ({dispatch, getState}) {
     switch (action.type) {
       case 'LIST_PROJECTS':
         return repo.listProjects().then((projects) => {
-            return dispatch({type: "SET_PROJECTS_LIST", payload: projects});
+            dispatch({type: "SET_PROJECTS_LIST", payload: projects});
         })
       case 'GET_CURRENT_PROJECT':
         return repo.getProject(action.payload).then((project) => {
-            return dispatch({type: "SET_CURRENT_PROJECT", payload: project});
+            dispatch({type: "SET_CURRENT_PROJECT", payload: project});
+        })
+      case 'ADD_POINT':
+        return repo.addPoint(action.payload.projectId, action.payload.point).then(() => {
+            dispatch({type: "GET_CURRENT_PROJECT", payload: action.payload.projectId});
         })
       default:
-        return next(action)
+        return next(action);
     }
   }
 }

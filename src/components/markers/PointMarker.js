@@ -28,8 +28,8 @@ export default function PointMarker(props) {
     return (
         <Marker
             className="PointMarker"
-            position={props.point.position}
-            icon={icons[props.point.icon || "other"]}
+            position={props.point.data.position}
+            icon={icons[props.point.data.icon || "other"]}
             onMouseOver={(e) => e.target.openPopup()}
             onMouseOut={(e) => e.target.closePopup()}
             onClick={(e) => props.onClickMarker && props.onClickMarker(props.point)}>

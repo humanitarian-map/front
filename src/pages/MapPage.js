@@ -10,7 +10,7 @@ import './MapPage.css';
 
 class MapPageImpl extends Component {
   componentWillMount() {
-      this.props.listProjects(this.props.match.params.slug);
+      this.props.getProject(this.props.match.params.slug);
   }
 
   render() {
@@ -37,19 +37,20 @@ class MapPageImpl extends Component {
               <ToolsMenu />
             </div>
             <div className="map-container">
-              <MainMap center={this.props.map.get('center')}
-                       cursor={this.props.map.get('cursor')}
-                       zoom={this.props.map.get('zoom')}
-                       points={this.props.map.get('points')}
-                       drawing={this.props.map.get('drawing')}
-                       onCursorMove={this.props.onCursorMove}
-                       onClickMarker={this.props.onClickMarker}
-                       onAddMarker={this.props.onAddMarker}
-                       onAddCross={this.props.onAddCross}
-                       onAddArrowPoint={this.props.onAddArrowPoint}
-                       onAddPolygonPoint={this.props.onAddPolygonPoint}
-                       onCancelDrawing={this.props.onCancelDrawing}
-                       onConfirmPolygonDrawing={this.props.onConfirmPolygonDrawing} />
+              {this.props.project &&
+                <MainMap center={this.props.project.get('center_point')}
+                         zoom={this.props.project.get('zoom')}
+                         points={this.props.project.get('mapitems')}
+                         drawing={this.props.map.get('drawing')}
+                         cursor={this.props.map.get('cursor')}
+                         onCursorMove={this.props.onCursorMove}
+                         onClickMarker={this.props.onClickMarker}
+                         onAddMarker={this.props.onAddMarker}
+                         onAddCross={this.props.onAddCross}
+                         onAddArrowPoint={this.props.onAddArrowPoint}
+                         onAddPolygonPoint={this.props.onAddPolygonPoint}
+                         onCancelDrawing={this.props.onCancelDrawing}
+                         onConfirmPolygonDrawing={this.props.onConfirmPolygonDrawing} />}
             </div>
           </div>
         </div>
@@ -61,6 +62,7 @@ const MapPage = connect(
     (state) => ({
         map: state.get('map'),
         user: state.get('user'),
+        project: state.get('current-project'),
         displayProjectDetail: state.get('displayProjectDetail')
     }),
     (dispatch) => ({
@@ -88,8 +90,8 @@ const MapPage = connect(
         onClickMarker: (point) => {
             dispatch({type: "VISUALIZE_MARKER", "payload": point});
         },
-        listProjects: (slug) => {
-            dispatch({type: "LIST_PROJECTS", "payload": slug});
+        getProject: (slug) => {
+            dispatch({type: "GET_CURRENT_PROJECT", "payload": slug});
         }
     })
 )(MapPageImpl);
