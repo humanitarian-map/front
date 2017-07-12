@@ -4,6 +4,8 @@ import './ProjectDetail.css';
 import moment from "moment";
 
 export default function ProjectDetail(props) {
+    let organization = props.project.get("organization")
+
     let camps = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "camp");
     let hospitals = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "hospital");
     let mobileClinics = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "mobile-clinic");
@@ -23,8 +25,8 @@ export default function ProjectDetail(props) {
           <div className="block">
             <h3 className="title mdi mdi-lan mdi-16px">Organization</h3>
             <div className="organization">
-              <span className="logo"></span>
-              Médicos del Mundo
+              <span className="logo"><img src={organization.get('image')} alt={organization.get('name')} /></span>
+              <span className="title">{organization.get('name')}</span>
             </div>
           </div>
           <div className="block block-documents">
