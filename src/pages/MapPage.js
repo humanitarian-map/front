@@ -23,8 +23,7 @@ class MapPageImpl extends Component {
             <div className="project-detail-container">
               <ProjectDetail project={this.props.project}/>
             </div>}
-          {this.props.map.getIn(["drawing", "type"]) === "point" &&
-           this.props.map.getIn(["drawing", "position"]) &&
+          {this.props.map.getIn(["drawing", "ready-to-edit"]) &&
              <div className="point-detail-container">
                <MarkerCreationDetail />
              </div>}

@@ -59,7 +59,7 @@ class MainMapImpl extends React.Component {
             this.props.onAddMarker(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "cross") {
             this.props.onAddCross(this.props.cursor.get(0), this.props.cursor.get(1));
-        } else if (this.props.drawing.get('type') === "arrow") {
+        } else if (this.props.drawing.get('type') === "arrow" && !this.props.drawing.get('ready-to-edit')) {
             this.props.onAddArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1));
         } else if (this.props.drawing.get('type') === "polygon") {
             this.props.onAddPolygonPoint(this.props.cursor.get(0), this.props.cursor.get(1));
@@ -104,10 +104,14 @@ class MainMapImpl extends React.Component {
               <CrossMarker point={{data: {position: drawingPosition.toJS()}}}></CrossMarker>}
           {drawingType === "cross" && !drawingPosition &&
               <CrossMarker point={{data: {position: this.props.cursor.toJS()}}}></CrossMarker>}
-          {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
+          {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 1 &&
               <ArrowMarker point={{data: {origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
-          {drawingType === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
+          {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 2 &&
+              <ArrowMarker point={{data: {origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
+          {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <Polyline positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
+          {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
+              <PolygonMarker point={{data: {positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
         </Map>
       );
     }
