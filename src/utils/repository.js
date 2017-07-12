@@ -1,9 +1,8 @@
 import axios from "axios";
-
-const API_HOST="http://localhost:8000";
+import config from "../config";
 
 export function listProjects() {
-  return axios.get(API_HOST + '/api/projects')
+  return axios.get(config.API_HOST + '/api/projects')
               .then(function (response) {
                 return response.data;
               })
@@ -13,7 +12,7 @@ export function listProjects() {
 }
 
 export function getProject(slug) {
-  return axios.get(API_HOST + '/api/projects/'+slug)
+  return axios.get(config.API_HOST + '/api/projects/'+slug)
               .then(function (response) {
                 return response.data;
               })
@@ -23,7 +22,7 @@ export function getProject(slug) {
 }
 
 export function deleteProject(slug) {
-  return axios.delete(API_HOST + '/api/projects/'+slug)
+  return axios.delete(config.API_HOST + '/api/projects/'+slug)
               .then(function (response) {
                 return response.data;
               })
@@ -33,7 +32,7 @@ export function deleteProject(slug) {
 }
 
 export function updateProject(slug, project) {
-  return axios.put(API_HOST + '/api/projects/'+slug, project)
+  return axios.put(config.API_HOST + '/api/projects/'+slug, project)
               .then(function (response) {
                 return response.data;
               })
@@ -43,7 +42,7 @@ export function updateProject(slug, project) {
 }
 
 export function createProject(project) {
-  return axios.post(API_HOST + '/api/projects/', project)
+  return axios.post(config.API_HOST + '/api/projects/', project)
               .then(function (response) {
                 return response.data;
               })
@@ -53,7 +52,7 @@ export function createProject(project) {
 }
 
 export function createPoint(projectSlug, point) {
-  return axios.post(API_HOST + '/api/projects/' + projectSlug +'/mapitems', point)
+  return axios.post(config.API_HOST + '/api/projects/' + projectSlug +'/mapitems', point)
               .then(function (response) {
                 return response.data;
               })
@@ -63,7 +62,7 @@ export function createPoint(projectSlug, point) {
 }
 
 export function deletePoint(projectSlug, pointId) {
-  return axios.delete(API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId)
+  return axios.delete(config.API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId)
               .then(function (response) {})
               .catch(function (error) {
                 console.log(error);
@@ -71,7 +70,7 @@ export function deletePoint(projectSlug, pointId) {
 }
 
 export function updatePoint(projectSlug, pointId, point) {
-  return axios.put(API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId, point)
+  return axios.put(config.API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId, point)
               .then(function (response) {})
               .catch(function (error) {
                 console.log(error);
