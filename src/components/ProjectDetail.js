@@ -3,6 +3,14 @@ import {PropTypes} from "prop-types";
 import './ProjectDetail.css';
 
 export default function ProjectDetail(props) {
+    let camps = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "camp");
+    let hospitals = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "hospital");
+    let mobileClinics = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "mobile-clinic");
+    let warnings = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "warning");
+    let checkpoints = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "checkpoint");
+    let idps = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "idps");
+    let others = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "other");
+
     return (
       <section className="ProjectDetail panel">
         <h2 className="header-title">Project</h2>
@@ -28,17 +36,51 @@ export default function ProjectDetail(props) {
             <ul>
               <li>
                 <span className="name">Camps</span>
-                <span className="tag">3</span>
+                <span className="tag">{camps.size}</span>
                 <ul>
-                  <li>
-                    Camp name
-                  </li>
-                  <li>
-                    Camp name
-                  </li>
-                  <li>
-                    Camp name
-                  </li>
+                  {camps.map((camp) => <li>{camp.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">Hospitals</span>
+                <span className="tag">{hospitals.size}</span>
+                <ul>
+                  {hospitals.map((hospital) => <li>{hospital.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">Warnings</span>
+                <span className="tag">{warnings.size}</span>
+                <ul>
+                  {warnings.map((warning) => <li>{warning.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">IDPs</span>
+                <span className="tag">{idps.size}</span>
+                <ul>
+                  {idps.map((idp) => <li>{idp.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">Check points</span>
+                <span className="tag">{checkpoints.size}</span>
+                <ul>
+                  {checkpoints.map((checkpoint) => <li>{checkpoint.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">Mobile clinics</span>
+                <span className="tag">{mobileClinics.size}</span>
+                <ul>
+                  {mobileClinics.map((mobileClinic) => <li>{mobileClinic.get('name')}</li>)}
+                </ul>
+              </li>
+              <li>
+                <span className="name">Other</span>
+                <span className="tag">{others.size}</span>
+                <ul>
+                  {others.map((other) => <li>{other.get('name')}</li>)}
                 </ul>
               </li>
             </ul>
