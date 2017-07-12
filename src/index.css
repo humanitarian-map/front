@@ -1,3 +1,19 @@
+:root {
+  /* colours */
+  --color-grey-dark: #29353d;
+  --color-grey-medium: #859cad;
+  --color-grey-light: #e7ecef;
+  --color-grey-lighter: #f5f8fa;
+  --color-white: #ffffff;
+  --color-red: #fa5e59;
+  --color-yellow: #ffa500;
+  --color-green: #a6be1f;
+  --color-orange: #f79d68;
+  --color-blue: #65b3f0;
+  --color-aqua: #59bcd9;
+  --color-navy: #599dd9;
+}
+
 html, body {
     height: 100%;
 }
