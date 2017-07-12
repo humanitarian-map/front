@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './MarkerCreationDetail.css';
 import {COLORS, DEFAULT_COLOR} from "../utils/colors";
+import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
 
 function MarkerIcon(props) {
     let typesToIcon = {
@@ -115,9 +116,17 @@ class MarkerCreationDetailImpl extends React.Component {
 
               {(type === "cross") &&
                 <div className="block">
-                  <h3 className="title mdi mdi-comment mdi-16px">Color</h3>
+                  <h3 className="title mdi mdi-comment mdi-16px">Size</h3>
                   <input type="number" placeholder="Size"
-                         value={props.drawing.getIn(['size']) || 0.1}
+                         value={props.drawing.getIn(['size']) || DEFAULT_CROSS_SIZE}
+                         onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
+                </div>}
+
+              {(type == "arrow") &&
+                <div className="block">
+                  <h3 className="title mdi mdi-comment mdi-16px">Arrowhead Size (%)</h3>
+                  <input type="number" placeholder="Size"
+                         value={props.drawing.getIn(['size']) || DEFAULT_ARROWHEAD_SIZE}
                          onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
                 </div>}
 

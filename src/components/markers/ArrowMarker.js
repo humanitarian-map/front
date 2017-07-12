@@ -3,13 +3,15 @@ import { LayerGroup, Polyline, Popup, Polygon } from 'react-leaflet';
 import * as Victor from "victor";
 import {PropTypes} from "prop-types";
 import {DEFAULT_COLOR} from "../../utils/colors";
+import {DEFAULT_ARROWHEAD_SIZE} from "../../utils/sizes";
 
 export default function ArrowMarker(props) {
+    let arrowhead_multiplier = (props.point.data.size || DEFAULT_ARROWHEAD_SIZE) / 100
     let origin = Victor.fromArray(props.point.data.origin);
     let dest = Victor.fromArray(props.point.data.dest);
     let canonical = dest.clone().subtract(origin.clone());
-    let arrow_point1 = canonical.clone().multiply(Victor.fromArray([-0.1, -0.1])).rotateDeg(25).add(dest.clone());
-    let arrow_point2 = canonical.clone().multiply(Victor.fromArray([-0.1, -0.1])).rotateDeg(-25).add(dest.clone());
+    let arrow_point1 = canonical.clone().multiply(Victor.fromArray([-arrowhead_multiplier, -arrowhead_multiplier])).rotateDeg(25).add(dest.clone());
+    let arrow_point2 = canonical.clone().multiply(Victor.fromArray([-arrowhead_multiplier, -arrowhead_multiplier])).rotateDeg(-25).add(dest.clone());
 
     return (
         <LayerGroup>

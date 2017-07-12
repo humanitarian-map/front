@@ -9,7 +9,7 @@ import PointMarker from "./markers/PointMarker";
 import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 import {DEFAULT_COLOR} from "../utils/colors";
-import {DEFAULT_CROSS_SIZE} from "../utils/sizes";
+import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
 import * as _ from "lodash";
 
 function Point(props) {
@@ -130,9 +130,9 @@ class MainMapImpl extends React.Component {
           {drawingType === "cross" && !drawingPosition &&
               <CrossMarker point={{data: {size: this.props.drawing.get('size') || DEFAULT_CROSS_SIZE, position: this.props.cursor.toJS()}}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 1 &&
-              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {size: this.props.drawing.get('size') || DEFAULT_ARROWHEAD_SIZE, color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size === 2 &&
-              <ArrowMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
+              <ArrowMarker point={{data: {size: this.props.drawing.get('size') || DEFAULT_ARROWHEAD_SIZE, color: this.props.drawing.get('color') || DEFAULT_COLOR, origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.drawing.getIn(['points', 1]).toJS()}}}></ArrowMarker>}
           {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <Polyline color={DEFAULT_COLOR} colorFill={DEFAULT_COLOR} positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
           {drawingType === "polygon" && !this.props.drawing.get('ready-to-edit') && this.props.drawing.get('points') && this.props.drawing.get('points').size > 1 &&
