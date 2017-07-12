@@ -68,8 +68,8 @@ class MarkerDetailImpl extends React.Component {
                   </div>}
                 {props.marker.type === "polygon" &&
                   <div className="coordinates-inputs">
-                      {props.marker.data.positions.map((point) => (
-                        <p>
+                      {props.marker.data.positions.map((point, idx) => (
+                        <p key={idx}>
                           <span>{point[0].toFixed(4)}</span>,
                           <span>{point[1].toFixed(4)}</span>
                         </p>))}

@@ -7,6 +7,7 @@
     "immutable": "^3.8.1",
     "leaflet": "^1.1.0",
     "mdi": "^1.9.33",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-immutable-proptypes": "^2.1.0",

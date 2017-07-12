@@ -1,6 +1,7 @@
 import React from 'react';
 import {PropTypes} from "prop-types";
 import './ProjectDetail.css';
+import moment from "moment";
 
 export default function ProjectDetail(props) {
     let camps = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "camp");
@@ -88,8 +89,8 @@ export default function ProjectDetail(props) {
           <div className="block">
             <h3 className="title mdi mdi-calendar mdi-16px">Timeframe</h3>
             <div  className="timeframe">
-              <span className="label">Start:</span> <span className="value">23/09/2017</span>
-              <span className="label">End:</span> <span className="value">01/02/2018</span>
+              <span className="label">Start:</span> <span className="value">{moment(props.project.get('start_datetime')).calendar()}</span>
+              <span className="label">End:</span> <span className="value">{moment(props.project.get('end_datetime')).calendar()}</span>
             </div>
           </div>
         </div>

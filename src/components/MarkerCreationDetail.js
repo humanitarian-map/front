@@ -103,7 +103,11 @@ class MarkerCreationDetailImpl extends React.Component {
                   <h3 className="title mdi mdi-comment mdi-16px">Color</h3>
                   <div className="color-block">
                     {COLORS.map((color) => (
-                      <div style={{background: color}} className={(this.props.drawing.get('color') || DEFAULT_COLOR) === color? "selected": ""} onClick={() => props.setDrawingColor(color)}></div>
+                      <div key={color}
+                           style={{background: color}}
+                           className={(this.props.drawing.get('color') || DEFAULT_COLOR) === color? "selected": ""}
+                           onClick={() => props.setDrawingColor(color)}>
+                      </div>
                     ))}
                   </div>
                 </div>}
