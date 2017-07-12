@@ -19,8 +19,9 @@
 }
 
 .MarkerCreationDetail .coordinates-inputs input {
-    width: 130px;
-    margin: 5px;
+    width: 170px;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
 }
 .MarkerCreationDetail .coordinates-inputs span {
     display: inline-block;
