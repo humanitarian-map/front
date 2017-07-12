@@ -1,10 +1,15 @@
 
 .ProjectDetail {
+  overflow-y: hidden;
+  height: 100%;
   text-align: left;
-    font-size: 0.9rem;
+  font-size: 0.9rem;
   border-bottom: 1px solid var(--color-grey-light);
 }
-
+.content {
+  height: 100%;
+  overflow-y: auto;
+}
 .header-title {
   margin: 0;
   padding-left: 1rem;
@@ -23,9 +28,13 @@
   font-size: 1rem;
   margin: 0 0 1rem;
 }
+.block .title:before {
+  margin-right: 0.5rem;
+}
 .block .project-name {
   font-size: 1.2rem;
 }
 .description {
   font-size: 0.9rem;
+  margin: 0;
 }
