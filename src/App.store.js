@@ -8,7 +8,7 @@ export const initialState = fromJS({
         }
     },
     "current-project": null,
-    "projects": [],
+    "projects-list": [],
     "displayProjectDetail": true,
     "user": {
         "id": 1,
