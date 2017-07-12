@@ -8,6 +8,7 @@
 .App .menu-container {
   width: 60px;
   flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .App .map-container {
