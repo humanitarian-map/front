@@ -28,6 +28,22 @@ class MarkerCreationDetailImpl extends React.Component {
             "name": "",
             "description": ""
         }
+
+        this.addPoint = this.addPoint.bind(this);
+    }
+
+    addPoint(event) {
+       this.props.onSaveMarker(
+           this.props.project.get('slug'),
+           {
+               "name": this.state.name,
+               "description": this.state.description,
+               "data": {
+                   position: this.props.drawing.get('position').toJS(),
+                   icon: this.props.drawing.get('icon'),
+               }
+           }
+       );
     }
 
     render() {
@@ -81,7 +97,7 @@ class MarkerCreationDetailImpl extends React.Component {
               </div>
             </div>
             <div className="buttons-set">
-              <button className="save" onClick={() => props.onSaveMarker(activeMarker, this.state.name, this.state.description, props.drawing.get('position').toJS())}>Save</button>
+              <button className="save" onClick={this.addPoint}>Save</button>
               <button className="cancel" onClick={props.onCancelDrawing}>Cancel</button>
             </div>
           </section>
@@ -96,6 +112,7 @@ MarkerCreationDetailImpl.propTypes = {
 const MarkerCreationDetail = connect(
     (state) => ({
         drawing: state.getIn(['map', 'drawing']),
+        project: state.get("current-project"),
     }),
     (dispatch) => ({
         onChangeLocation: (lat, lng) => {
@@ -107,8 +124,8 @@ const MarkerCreationDetail = connect(
         onSelectIcon: (icon) => {
             dispatch({type: "SELECT_MARKER_ICON", "payload": icon});
         },
-        onSaveMarker: (icon, name, description, position) => {
-            dispatch({type: "SAVE_MARKER", "payload": {icon: icon, name: name, position: position, description: description}});
+        onSaveMarker: (projectSlug, point) => {
+            dispatch({type: "ADD_POINT", "payload": {projectSlug: projectSlug, point: point}});
         },
     })
 )(MarkerCreationDetailImpl);

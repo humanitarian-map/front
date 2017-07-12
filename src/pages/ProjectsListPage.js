@@ -12,7 +12,7 @@ class ProjectsListPageImpl extends React.Component {
       return (
         <div className="ProjectsListPage">
           <h1>Projects</h1>
-          {this.props.projects.map((project) => (
+          {this.props.projects && this.props.projects.map((project) => (
             <div>
               <Link to={"/map/"+ project.get('slug')} >{project.get('name')}</Link>
               <p>{project.get('description')}</p>

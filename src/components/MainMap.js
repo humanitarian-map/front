@@ -91,15 +91,15 @@ export default class MainMap extends React.Component {
           />
           {this.props.points.map((point) => <Point onClickMarker={this.props.onClickMarker} point={point} key={point.get('id')}></Point>)}
           {drawingType === "point" && drawingPosition &&
-              <PointMarker point={{position: drawingPosition.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
+              <PointMarker point={{data: {position: drawingPosition.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "point" && !drawingPosition &&
-              <PointMarker point={{position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}></PointMarker>}
+              <PointMarker point={{data: {position: this.props.cursor.toJS(), icon: drawingIcon || "other"}}}></PointMarker>}
           {drawingType === "cross" && drawingPosition &&
-              <CrossMarker point={{position: drawingPosition.toJS()}}></CrossMarker>}
+              <CrossMarker point={{data: {position: drawingPosition.toJS()}}}></CrossMarker>}
           {drawingType === "cross" && !drawingPosition &&
-              <CrossMarker point={{position: this.props.cursor.toJS()}}></CrossMarker>}
+              <CrossMarker point={{data: {position: this.props.cursor.toJS()}}}></CrossMarker>}
           {drawingType === "arrow" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
-              <ArrowMarker point={{origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}></ArrowMarker>}
+              <ArrowMarker point={{data: {origin: this.props.drawing.getIn(['points', 0]).toJS(), dest: this.props.cursor.toJS()}}}></ArrowMarker>}
           {drawingType === "polygon" && this.props.drawing.get('points') && this.props.drawing.get('points').size > 0 &&
               <Polyline positions={this.props.drawing.get('points').toJS().concat([this.props.cursor.toJS()])}></Polyline>}
         </Map>

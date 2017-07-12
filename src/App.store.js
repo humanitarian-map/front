@@ -27,13 +27,13 @@ export function reducer(state, action) {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
                     .setIn(["map", "viewing"], null);
     } else if (action.type === "ADD_ARROW_POINT") {
-        if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
-            let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
-            let origin = state.getIn(['map', 'drawing', 'points', 0])
-            return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "arrow", origin: origin, dest: fromJS(action.payload)})))
-                        .setIn(['map', 'drawing'], fromJS({type: null}));
-        }
-
+        // if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
+        //     let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
+        //     let origin = state.getIn(['map', 'drawing', 'points', 0])
+        //     return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "arrow", origin: origin, dest: fromJS(action.payload)})))
+        //                 .setIn(['map', 'drawing'], fromJS({type: null}));
+        // }
+        //
         return state.setIn(['map', 'drawing', 'points'], fromJS([action.payload]))
     } else if (action.type === "ADD_POLYGON_POINT") {
         if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size > 0) {
@@ -42,33 +42,27 @@ export function reducer(state, action) {
         return state.setIn(['map', 'drawing', 'points'], fromJS([action.payload]))
     } else if (action.type === "CANCEL_DRAWING") {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}));
-    } else if (action.type === "CONFIRM_POLYGON_DRAWING") {
-        if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size > 1) {
-            let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
-            let positions = state.getIn(['map', 'drawing', 'points']);
-            return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "polygon", positions: positions.toJS()})))
-                        .setIn(['map', 'drawing'], fromJS({type: null}));
-        }
+    // } else if (action.type === "CONFIRM_POLYGON_DRAWING") {
+    //     if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size > 1) {
+    //         let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
+    //         let positions = state.getIn(['map', 'drawing', 'points']);
+    //         return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "polygon", positions: positions.toJS()})))
+    //                     .setIn(['map', 'drawing'], fromJS({type: null}));
+    //     }
     } else if (action.type === "CURSOR_MOVE") {
         return state.setIn(['map', 'cursor'], fromJS(action.payload));
     } else if (action.type === "TOGGLE_DISPLAY_DETAIL") {
         return state.update("displayProjectDetail", (v) => !v);
     } else if (action.type === "SELECT_MARKER_ICON") {
         return state.setIn(["map", "drawing", "icon"], action.payload);
-    } else if (action.type === "SAVE_MARKER") {
-        let max = state.getIn(['map', 'points']).map((p) => p.get('id')).reduce((acc, p) => p > acc ? p : acc, 0);
-        let position = action.payload.position;
-        let icon = action.payload.icon;
-        let name = action.payload.name;
-        let description = action.payload.description;
-        return state.updateIn(['map', 'points'], (points) => points.push(fromJS({id: max + 1, type: "point", position: position, icon: icon, name: name, description: description})))
-                    .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === "VISUALIZE_MARKER") {
-        return state.setIn(["map", "viewing"], fromJS(action.payload))
+        return state.updateIn(["map", "viewing"], (viewing) => {
+                        if (viewing && viewing.get('id') === action.payload.id) {
+                            return null
+                        }
+                        return fromJS(action.payload)
+                    })
                     .setIn(["map", "drawing"], fromJS({type: null}));
-    } else if (action.type === "DELETE_MARKER") {
-        return state.updateIn(["map", "points"], (points) => points.filter((p) => p.get('id') !== action.payload))
-                    .setIn(["map", "viewing"], null);
     } else if (action.type === "SET_PROJECTS_LIST") {
         return state.set("projects-list", fromJS(action.payload));
     } else if (action.type === "SET_CURRENT_PROJECT") {

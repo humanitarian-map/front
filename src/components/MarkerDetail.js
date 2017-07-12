@@ -37,7 +37,7 @@ class MarkerDetailImpl extends React.Component {
               <div className="block">
                 <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
                 <div className="markers">
-                  <MarkerIcon type={props.marker.icon} />
+                  <MarkerIcon type={props.marker.data.icon} />
                 </div>
               </div>
               <div className="block">
@@ -47,8 +47,8 @@ class MarkerDetailImpl extends React.Component {
               <div className="block">
                 <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
                 <div className="coordinates-inputs">
-                    <span>{props.marker.position[0].toFixed(4)}</span>,
-                    <span>{props.marker.position[1].toFixed(4)}</span>
+                    <span>{props.marker.data.position[0].toFixed(4)}</span>,
+                    <span>{props.marker.data.position[1].toFixed(4)}</span>
                 </div>
               </div>
               <div className="block block-documents">
@@ -61,7 +61,7 @@ class MarkerDetailImpl extends React.Component {
               </div>
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => props.onDeleteMarker(props.marker.id)}>Delete</button>
+              <button className="delete" onClick={() => props.onDeleteMarker(props.project.get('slug'), props.marker.id)}>Delete</button>
             </div>
           </section>
         );
@@ -75,10 +75,11 @@ MarkerDetailImpl.propTypes = {
 const MarkerDetail = connect(
     (state) => ({
         marker: state.getIn(['map', 'viewing']).toJS(),
+        project: state.get("current-project"),
     }),
     (dispatch) => ({
-        onDeleteMarker: (id) => {
-            dispatch({type: "DELETE_MARKER", payload: id});
+        onDeleteMarker: (projectSlug, pointId) => {
+            dispatch({type: "DELETE_POINT", payload: {projectSlug, pointId}});
         }
     })
 )(MarkerDetailImpl);
