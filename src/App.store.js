@@ -9,7 +9,7 @@ export const initialState = fromJS({
     },
     "current-project": null,
     "projects-list": [],
-    "displayProjectDetail": true,
+    "display-project-detail": false,
     "user": {
         "id": 1,
         "username": "ali.ahmed",
@@ -52,7 +52,7 @@ export function reducer(state, action) {
     } else if (action.type === "CURSOR_MOVE") {
         return state.setIn(['map', 'cursor'], fromJS(action.payload));
     } else if (action.type === "TOGGLE_DISPLAY_DETAIL") {
-        return state.update("displayProjectDetail", (v) => !v);
+        return state.update("display-project-detail", (v) => !v);
     } else if (action.type === "SELECT_MARKER_ICON") {
         return state.setIn(["map", "drawing", "icon"], action.payload);
     } else if (action.type === "VISUALIZE_MARKER") {

@@ -33,7 +33,7 @@ export function deleteProject(slug) {
 }
 
 export function updateProject(slug, project) {
-  return axios.put(API_HOST + '/api/projects/'+slug, {data: project})
+  return axios.put(API_HOST + '/api/projects/'+slug, project)
               .then(function (response) {
                 return response.data;
               })
@@ -43,7 +43,7 @@ export function updateProject(slug, project) {
 }
 
 export function createProject(project) {
-  return axios.post(API_HOST + '/api/projects/', {data: project})
+  return axios.post(API_HOST + '/api/projects/', project)
               .then(function (response) {
                 return response.data;
               })
@@ -52,8 +52,8 @@ export function createProject(project) {
               });
 }
 
-export function createPoint(projectId, point) {
-  return axios.post(API_HOST + '/api/projects/'+projectId+"/items", {data: point})
+export function createPoint(projectSlug, point) {
+  return axios.post(API_HOST + '/api/projects/' + projectSlug +'/mapitems', point)
               .then(function (response) {
                 return response.data;
               })
@@ -62,16 +62,16 @@ export function createPoint(projectId, point) {
               });
 }
 
-export function deletePoint(projectId, pointId) {
-  return axios.delete(API_HOST + '/api/projects/'+projectId+"/items/"+pointId)
+export function deletePoint(projectSlug, pointId) {
+  return axios.delete(API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId)
               .then(function (response) {})
               .catch(function (error) {
                 console.log(error);
               });
 }
 
-export function updatePoint(projectId, pointId, point) {
-  return axios.put(API_HOST + '/api/projects/'+projectId+"/items/"+pointId, {data: point})
+export function updatePoint(projectSlug, pointId, point) {
+  return axios.put(API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId, point)
               .then(function (response) {})
               .catch(function (error) {
                 console.log(error);

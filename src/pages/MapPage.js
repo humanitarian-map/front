@@ -21,7 +21,7 @@ class MapPageImpl extends Component {
           </div>
           {this.props.displayProjectDetail &&
             <div className="project-detail-container">
-              <ProjectDetail />
+              <ProjectDetail project={this.props.project}/>
             </div>}
           {this.props.map.getIn(["drawing", "type"]) === "point" &&
            this.props.map.getIn(["drawing", "position"]) &&
@@ -37,7 +37,7 @@ class MapPageImpl extends Component {
               <ToolsMenu />
             </div>
             <div className="map-container">
-              <MainMap />}
+              <MainMap />
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ const MapPage = connect(
         map: state.get('map'),
         user: state.get('user'),
         project: state.get('current-project'),
-        displayProjectDetail: state.get('displayProjectDetail')
+        displayProjectDetail: state.get('display-project-detail')
     }),
     (dispatch) => ({
         getProject: (slug) => {

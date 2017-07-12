@@ -38,6 +38,7 @@ class MarkerCreationDetailImpl extends React.Component {
            {
                "name": this.state.name,
                "description": this.state.description,
+               "type": "point",
                "data": {
                    position: this.props.drawing.get('position').toJS(),
                    icon: this.props.drawing.get('icon'),

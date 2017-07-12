@@ -80,7 +80,7 @@ class MainMapImpl extends React.Component {
       let drawingIcon = this.props.drawing.get('icon');
 
       if (!this.props.project) {
-          return null;
+          return <div></div>;
       }
 
       return (
@@ -119,7 +119,7 @@ MainMapImpl.propTypes = {
                 1: PropTypes.number.isRequired,
             ),
     selectedId: PropTypes.number,
-    project: PropTypes.object.isRequired,
+    project: PropTypes.object,
     drawing: ImmutablePropTypes.mapContains({
                 type: PropTypes.string,
                 data: PropTypes.object,

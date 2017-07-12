@@ -36,7 +36,7 @@ MenuImpl.propTypes = {
 const Menu = connect(
     (state) => ({
         user: state.get('user'),
-        openDetail: state.get('displayProjectDetail')
+        openDetail: state.get('display-project-detail')
     }),
     (dispatch) => ({
         selectTool: (tool) => {
