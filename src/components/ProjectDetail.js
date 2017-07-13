@@ -36,7 +36,7 @@ export default function ProjectDetail(props) {
           </div>
           <div className="block">
             <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
-            <ul>
+            <ul className="markers-list">
               <li>
                 <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
                 <span className="name">Camps</span>

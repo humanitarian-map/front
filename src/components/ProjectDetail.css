@@ -12,9 +12,34 @@
   width: 26px;
   display: inline-block;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: baseline;
   margin-right: 0.2rem;
 }
 .ProjectDetail .marker-icon::before {
   margin-top: 3px;
+}
+.ProjectDetail .markers-list .name {
+  font-weight: bold;
+}
+.ProjectDetail .markers-list li {
+  margin-bottom: 0.5rem;
+}
+.ProjectDetail .markers-list ul li {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 1.4rem;
+  padding: 0.5rem;
+}
+.ProjectDetail .markers-list ul li:hover {
+  cursor: pointer;
+  background-color: var(--color-white);
+}
+.ProjectDetail .markers-list .tag {
+  color: var(--color-grey-medium);
+  font-size: 0.8rem;
+  background-color: var(--color-grey-light);
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  vertical-align: text-top;
 }
