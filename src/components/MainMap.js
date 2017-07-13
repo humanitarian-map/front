@@ -234,6 +234,7 @@ const MainMap = connect(
             delete updatedProject.mapitems;
             delete updatedProject.documents_url;
             delete updatedProject.slug;
+            delete updatedProject.organization;
             dispatch({type: "UPDATE_PROJECT", "payload": {projectSlug: project.slug, project: updatedProject}});
         },
         onMoveMarker: (projectSlug, point, newLatLng) => {
