@@ -121,7 +121,7 @@ class MainMapImpl extends React.Component {
           {this.props.project.get('mapitems').map((point) => (
               <Point selected={point.get('id') === this.props.selectedId}
                      onClickItem={this.props.onClickItem}
-                     onMoveMarker={(point, latlng) => this.props.onMoveMarker(this.props.projectSlug, point, latlng)}
+                     onMoveMarker={(point, latlng) => this.props.onMoveMarker(this.props.project.get('slug'), point, latlng)}
                      draggable={this.props.moving}
                      point={point}
                      key={point.get('id')}>
@@ -211,7 +211,10 @@ const MainMap = connect(
             dispatch({type: "DELETE_POINT", "payload": {projectSlug, pointId}});
         },
         onMoveMarker: (projectSlug, point, newLatLng) => {
-            let updatedPoint = _.extend({}, point, {position: newLatLng})
+            let updatedPoint = _.extend({}, point)
+            updatedPoint.data.position = [newLatLng.lat, newLatLng.lng];
+            delete updatedPoint['id'];
+            delete updatedPoint['is_active'];
             dispatch({type: "UPDATE_POINT", "payload": {projectSlug, pointId: point.id, point: updatedPoint}});
         },
     })

@@ -64,6 +64,13 @@ export function reducer(state, action) {
                         return fromJS(action.payload)
                     })
                     .setIn(["map", "drawing"], fromJS({type: null}));
+    } else if (action.type === "UPDATE_VISUALIZED_MARKER") {
+        return state.updateIn(["map", "viewing"], (viewing) => {
+                        if (action.payload.id === viewing.get('id')) {
+                            return fromJS(action.payload)
+                        }
+                        return viewing;
+                    });
     } else if (action.type === "SET_PROJECTS_LIST") {
         return state.set("projects-list", fromJS(action.payload));
     } else if (action.type === "SET_CURRENT_PROJECT") {

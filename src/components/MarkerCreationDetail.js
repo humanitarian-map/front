@@ -57,6 +57,7 @@ class MarkerCreationDetailImpl extends React.Component {
                 origin: this.props.drawing.getIn(['points', 0]).toJS(),
                 dest: this.props.drawing.getIn(['points', 1]).toJS(),
                 color: this.props.drawing.get('color'),
+                size: this.props.drawing.get('size'),
             }
         }
         this.props.onSaveMarker(
