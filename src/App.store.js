@@ -66,7 +66,7 @@ export function reducer(state, action) {
                     .setIn(["map", "drawing"], fromJS({type: null}));
     } else if (action.type === "UPDATE_VISUALIZED_MARKER") {
         return state.updateIn(["map", "viewing"], (viewing) => {
-                        if (action.payload.id === viewing.get('id')) {
+                        if (viewing && action.payload.id === viewing.get('id')) {
                             return fromJS(action.payload)
                         }
                         return viewing;
