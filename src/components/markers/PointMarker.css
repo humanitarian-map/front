@@ -2,8 +2,11 @@
 }
 
 .marker-icon {
-    border-radius: 14px 14px 24px 24px;
+    border-radius: 40px;
     color: white;
+}
+.marker-icon.mdi:before {
+    margin-top: 2px;
 }
 
 .marker-icon.active {
