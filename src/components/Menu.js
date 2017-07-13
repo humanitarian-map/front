@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
+import logoSvg from './img/logo-navbar.svg';
 import './Menu.css';
 
 class MenuImpl extends Component {
@@ -27,6 +28,7 @@ class MenuImpl extends Component {
                 </Link>
             </div>
           </div>
+          <img src={logoSvg} />
         );
     }
 }
