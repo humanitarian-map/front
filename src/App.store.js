@@ -83,6 +83,10 @@ export function reducer(state, action) {
         return state.set("projects-list", fromJS(action.payload));
     } else if (action.type === "SET_CURRENT_PROJECT") {
         return state.set("current-project", fromJS(action.payload));
+    } else if (action.type === "RESET_PROJECT") {
+        return state.set("map", initialState.get('map'))
+                    .set("current-project", null)
+                    .set("display-project-detail", false);
     } else if (action.type === "CHANGE_ARROW_ORIGIN") {
         return state.setIn(['map', 'drawing', "points", 0], fromJS(action.payload));
     } else if (action.type === "CHANGE_ARROW_DEST") {

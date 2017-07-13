@@ -7,6 +7,7 @@ import logoSvg from './img/logo-navbar.svg';
 class ProjectsListPageImpl extends React.Component {
   componentWillMount() {
       this.props.listProjects();
+      this.props.resetProject();
   }
 
   render() {
@@ -45,7 +46,8 @@ const ProjectsListPage = connect(
         projects: state.get('projects-list'),
     }),
     (dispatch) => ({
-        listProjects: () => dispatch({type: "LIST_PROJECTS", payload: null})
+        listProjects: () => dispatch({type: "LIST_PROJECTS", payload: null}),
+        resetProject: () => dispatch({type: "RESET_PROJECT", payload: null})
     })
 )(ProjectsListPageImpl);
 
