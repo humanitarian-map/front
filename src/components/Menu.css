@@ -19,6 +19,22 @@
     cursor: pointer;
 }
 
+.Menu .logo {
+    padding: 10px;
+    display: flex;
+    flex-grow: 0;
+    flex-direction: column;
+    cursor: pointer;
+    color: #859cad;
+    text-decoration: none;
+}
+
+.Menu .logo .logo-icon {
+    margin: 0px;
+    padding: 0px;
+}
+
+
 .Menu .project-info-icon.active {
     background: #38556A;
     color: #ffffff;

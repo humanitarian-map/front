@@ -15,7 +15,11 @@ import * as _ from "lodash";
 function Point(props) {
   if (props.point.get('type') === "point") {
     return (
-      <PointMarker selected={props.selected} point={props.point.toJS()} onClickItem={props.onClickItem} onMoveMarker={props.onMoveMarker}></PointMarker>
+      <PointMarker selected={props.selected}
+                   point={props.point.toJS()}
+                   draggable={props.draggable}
+                   onClickItem={props.onClickItem}
+                   onMoveMarker={props.onMoveMarker}></PointMarker>
     )
   } else if (props.point.get('type') === "arrow") {
     return (
@@ -80,6 +84,7 @@ class MainMapImpl extends React.Component {
     keyup(event) {
         if (event.keyCode === 27) {
             this.props.onCancelDrawing();
+            this.props.onCancelViewing();
         } else if (event.keyCode === 13 && this.props.drawing.get('type') === "polygon") {
             this.props.onConfirmPolygonDrawing();
         } else if (event.keyCode === 46 && this.props.selectedId) {
@@ -117,6 +122,7 @@ class MainMapImpl extends React.Component {
               <Point selected={point.get('id') === this.props.selectedId}
                      onClickItem={this.props.onClickItem}
                      onMoveMarker={(point, latlng) => this.props.onMoveMarker(this.props.projectSlug, point, latlng)}
+                     draggable={this.props.moving}
                      point={point}
                      key={point.get('id')}>
               </Point>
@@ -169,6 +175,7 @@ const MainMap = connect(
     (state) => ({
         selectedId: state.getIn(['map', 'viewing', 'id']),
         drawing: state.getIn(['map', 'drawing']),
+        moving: state.getIn(['map', 'moving']),
         cursor: state.getIn(['map', 'cursor']),
         project: state.get('current-project'),
     }),
@@ -187,6 +194,9 @@ const MainMap = connect(
         },
         onCancelDrawing: () => {
             dispatch({type: "CANCEL_DRAWING", "payload": null});
+        },
+        onCancelViewing: (point) => {
+            dispatch({type: "VISUALIZE_MARKER", "payload": null});
         },
         onConfirmPolygonDrawing: () => {
             dispatch({type: "CONFIRM_POLYGON_DRAWING", "payload": null});
