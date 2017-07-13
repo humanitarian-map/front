@@ -10,10 +10,19 @@ export default class ProjectDetail extends React.Component {
             openMarker: ""
         }
         this.centerMap = this.centerMap.bind(this);
+        this.toggleMarkerList = this.toggleMarkerList.bind(this);
     }
 
     centerMap(point) {
         this.props.onMarkerClick(point);
+    }
+
+    toggleMarkerList(marker) {
+        if (marker == this.state.openMarker) {
+            this.setState({openMarker: ""});
+        } else {
+            this.setState({openMarker: marker});
+        }
     }
 
     render() {
@@ -66,7 +75,7 @@ export default class ProjectDetail extends React.Component {
               <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
               <ul className="markers-list">
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "camps"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("camps")}>
                     <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
                     <span className="name">Camps</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -81,7 +90,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "hospitals"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("hospitals")}>
                     <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
                     <span className="name">Hospitals</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -96,7 +105,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "warnings"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("warnings")}>
                     <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
                     <span className="name">Warnings</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -111,7 +120,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "idps"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("idps")}>
                     <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
                     <span className="name">IDPs</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -126,7 +135,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "checkpoints"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("checkpoints")}>
                     <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
                     <span className="name">Check points</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -141,7 +150,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "mobile-clinics"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("mobile-clinics")}>
                     <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
                     <span className="name">Mobile clinics</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
@@ -156,7 +165,7 @@ export default class ProjectDetail extends React.Component {
                     </ul>}
                 </li>
                 <li>
-                  <div className="header" onClick={() => this.setState({openMarker: "other"})}>
+                  <div className="header" onClick={() => this.toggleMarkerList("other")}>
                     <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
                     <span className="name">Other</span>
                     <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
