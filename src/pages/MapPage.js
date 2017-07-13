@@ -20,7 +20,7 @@ class MapPageImpl extends Component {
           <div className="menu-container">
             <Menu />
           </div>
-          {this.props.displayProjectDetail && this.props.project && this.props.documents &&
+          {this.props.displayProjectDetail && this.props.project &&
             <div className="project-detail-container">
               <ProjectDetail project={this.props.project} documents={this.props.documents} onMarkerClick={this.props.onMarkerClick} />
             </div>}

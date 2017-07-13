@@ -18,7 +18,7 @@ export default class ProjectDetail extends React.Component {
     }
 
     toggleMarkerList(marker) {
-        if (marker == this.state.openMarker) {
+        if (marker === this.state.openMarker) {
             this.setState({openMarker: ""});
         } else {
             this.setState({openMarker: marker});
@@ -36,12 +36,15 @@ export default class ProjectDetail extends React.Component {
       let idps = this.props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "idps");
       let others = this.props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "other");
 
-      let projectDocuments = this.props.documents.filter((doc) => {
+      let projectDocuments = [];
+      if (this.props.documents) {
+        projectDocuments = this.props.documents.filter((doc) => {
           let isFile = doc.get('type') === "file";
           let splittedPath = doc.get('path').split("/");
           let isInTheProjectFolder = splittedPath.length === 3 && splittedPath[1] === this.props.project.get('slug');
           return isFile && isInTheProjectFolder;
-      });
+        });
+      }
 
       return (
         <section className="ProjectDetail panel">
