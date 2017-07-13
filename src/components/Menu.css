@@ -20,13 +20,17 @@
 }
 
 .Menu .logo {
-    padding: 10px;
-    display: flex;
     flex-grow: 0;
     flex-direction: column;
     cursor: pointer;
     color: #859cad;
     text-decoration: none;
+}
+.Menu .logo img {
+    height: 44px;
+    width: 44px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .Menu .logo .logo-icon {
@@ -49,8 +53,6 @@
 }
 
 .Menu .user {
-    padding: 5px;
-    font-size: .7rem;
 }
 
 .Menu .user .avatar {

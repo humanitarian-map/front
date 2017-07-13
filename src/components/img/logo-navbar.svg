@@ -14,7 +14,7 @@
    viewBox="0 0 23.47648 26.458334"
    version="1.1"
    id="svg33644"
-   sodipodi:docname="humap-logo.svg"
+   sodipodi:docname="logo-navbar.svg"
    inkscape:version="0.92.1 unknown">
   <defs
      id="defs33638" />
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="313.05827"
+     inkscape:cx="-49.586495"
      inkscape:cy="18.933833"
      inkscape:document-units="mm"
      inkscape:current-layer="g43244"
@@ -34,7 +34,7 @@
      units="px"
      inkscape:window-width="1718"
      inkscape:window-height="1027"
-     inkscape:window-x="2260"
+     inkscape:window-x="2120"
      inkscape:window-y="24"
      inkscape:window-maximized="0">
     <inkscape:grid
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -66,7 +66,7 @@
          cy="205.74803"
          cx="43.656246"
          id="path43079"
-         style="display:inline;opacity:1;vector-effect:none;fill:#3dd9ee;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.52916665, 0.52916664999999996;stroke-dashoffset:0;stroke-opacity:1" />
+         style="display:inline;opacity:1;vector-effect:none;fill:#0094ab;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.52916665, 0.52916664999999996;stroke-dashoffset:0;stroke-opacity:1" />
       <g
          transform="matrix(0.77429064,0,0,0.77429064,36.735981,-16.239897)"
          style="display:inline;fill:#ffffff"

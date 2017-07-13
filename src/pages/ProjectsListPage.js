@@ -11,13 +11,18 @@ class ProjectsListPageImpl extends React.Component {
   render() {
       return (
         <div className="ProjectsListPage">
-          <h1>Projects</h1>
+          <header className="header-menu">
+            <h1>The Humanitarian Map</h1>
+          </header>
+          <div className="content">
+          <h2>Projects</h2>
           {this.props.projects && this.props.projects.map((project) => (
             <div key={project.get('id')}>
               <Link to={"/map/"+ project.get('slug')} >{project.get('name')}</Link>
               <p>{project.get('description')}</p>
             </div>
           ))}
+          </div>
         </div>
       );
   }

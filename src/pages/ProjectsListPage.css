@@ -1,2 +1,21 @@
-.ProjectsListPage {
+.content {
+  padding: 5rem 1rem 0;
+  max-width: 65rem;
+  margin: auto;
+  text-align: left;
+}
+
+.header-menu {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  background: var(--color-grey-dark);
+  color: var(--color-grey-light);
+  z-index: 10;
+}
+.header-menu h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
 }
