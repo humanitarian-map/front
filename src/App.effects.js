@@ -34,8 +34,9 @@ export default function ({dispatch, getState}) {
             dispatch({type: "SELECT_TOOL", payload: null});
         })
       case 'UPDATE_POINT':
-        return repo.updatePoint(action.payload.projectSlug, action.payload.pointId, action.payload.point).then(() => {
+        return repo.updatePoint(action.payload.projectSlug, action.payload.pointId, action.payload.point).then((point) => {
             dispatch({type: "GET_CURRENT_PROJECT", payload: action.payload.projectSlug});
+            dispatch({type: "UPDATE_VISUALIZED_MARKER", "payload": point});
         })
       default:
         return next(action);

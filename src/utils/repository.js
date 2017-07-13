@@ -71,7 +71,9 @@ export function deletePoint(projectSlug, pointId) {
 
 export function updatePoint(projectSlug, pointId, point) {
   return axios.put(config.API_HOST + '/api/projects/' + projectSlug +'/mapitems/'+pointId, point)
-              .then(function (response) {})
+              .then(function (response) {
+                  return response.data;
+              })
               .catch(function (error) {
                 console.log(error);
               });
