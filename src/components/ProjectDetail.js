@@ -38,57 +38,78 @@ export default function ProjectDetail(props) {
             <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
             <ul className="markers-list">
               <li>
-                <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
-                <span className="name">Camps</span>
-                <span className="tag">{camps.size}</span>
+                <div className="header">
+                  <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
+                  <span className="name">Camps</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{camps.size}</span>
+                </div>
                 <ul>
                   {camps.map((camp) => <li>{camp.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
-                <span className="name">Hospitals</span>
-                <span className="tag">{hospitals.size}</span>
+                <div className="header">
+                  <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
+                  <span className="name">Hospitals</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{hospitals.size}</span>
+                </div>
                 <ul>
                   {hospitals.map((hospital) => <li>{hospital.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
-                <span className="name">Warnings</span>
-                <span className="tag">{warnings.size}</span>
+                <div className="header">
+                  <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
+                  <span className="name">Warnings</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{warnings.size}</span>
+                </div>
                 <ul>
                   {warnings.map((warning) => <li>{warning.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
-                <span className="name">IDPs</span>
-                <span className="tag">{idps.size}</span>
+                <div className="header">
+                  <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
+                  <span className="name">IDPs</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{idps.size}</span>
+                </div>
                 <ul>
                   {idps.map((idp) => <li>{idp.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
-                <span className="name">Check points</span>
-                <span className="tag">{checkpoints.size}</span>
+                <div className="header">
+                  <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
+                  <span className="name">Check points</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{checkpoints.size}</span>
+                </div>
                 <ul>
                   {checkpoints.map((checkpoint) => <li>{checkpoint.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
-                <span className="name">Mobile clinics</span>
-                <span className="tag">{mobileClinics.size}</span>
+                <div className="header">
+                  <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
+                  <span className="name">Mobile clinics</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{mobileClinics.size}</span>
+                </div>
                 <ul>
                   {mobileClinics.map((mobileClinic) => <li>{mobileClinic.get('name')}</li>)}
                 </ul>
               </li>
               <li>
-                <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
-                <span className="name">Other</span>
-                <span className="tag">{others.size}</span>
+                <div className="header">
+                  <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
+                  <span className="name">Other</span>
+                  <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                  <span className="tag">{others.size}</span>
+                </div>
                 <ul>
                   {others.map((other) => <li>{other.get('name')}</li>)}
                 </ul>

@@ -35,3 +35,7 @@
 .MarkerDetail h2.mdi:before {
     margin-right: 8px;
 }
+
+.MarkerDetail .marker-icon.mdi:before {
+  margin-top: 3px;
+}

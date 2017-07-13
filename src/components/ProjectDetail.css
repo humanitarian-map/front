@@ -27,9 +27,20 @@
 .ProjectDetail .markers-list ul li {
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: 1.4rem;
-  padding: 0.5rem;
+  margin-left: 1.6rem;
+  padding: 0.3rem;
+  font-size: 0.8rem;
 }
+.ProjectDetail .markers-list .header:hover {
+  cursor: pointer;
+  background-color: var(--color-white);
+}
+.ProjectDetail .markers-list .header .arrow {
+  float: right;
+  margin-top: 3px;
+  color: var(--color-grey-medium);
+}
+
 .ProjectDetail .markers-list ul li:hover {
   cursor: pointer;
   background-color: var(--color-white);
@@ -42,4 +53,6 @@
   padding: 0.1rem 0.3rem;
   border-radius: 4px;
   vertical-align: text-top;
+  float: right;
+  margin-top: 4px;
 }
