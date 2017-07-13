@@ -87,3 +87,22 @@
 .MarkerCreationDetail .MarkerIcon .marker-icon:before {
     margin-top: 6px;
 }
+
+.MarkerCreationDetail .color-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.MarkerCreationDetail .color-block div.selected {
+    border: 2px solid #777777;
+}
+
+.MarkerCreationDetail .color-block div {
+    border: 2px solid white;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+}

@@ -1,1 +1,6 @@
+.organization img {
+    max-width: 2rem;
+    vertical-align: middle;
+    padding-right: .75rem;
+}
 .events-list {}

@@ -12,6 +12,18 @@
     height: 100%;
 }
 
+.MainMap .close-polygon-tooltip {
+    position: absolute;
+    z-index: 10000;
+    height: 35px;
+    width: 90px;
+    padding: 5px;
+    border-radius: 4px;
+    background: #29353D;
+    color: #859cad;
+    font-weight: bold;
+}
+
 .MainMap .drawing-polygon {
     cursor: crosshair;
 }

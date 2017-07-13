@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MapPage from "./pages/MapPage";
 import LoginPage from "./pages/LoginPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import ProjectsListPage from "./pages/ProjectsListPage";
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import effects from "redux-effects";
@@ -18,10 +19,11 @@ export default class App extends Component {
         <Provider store={store}>
 		  <BrowserRouter>
             <div className="App">
-              <Route exact path="/"><Redirect to="/map/example-project-1" /></Route>
+              <Route exact path="/projects" component={ProjectsListPage}/>
               <Route exact path="/map/:slug" component={MapPage}/>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/profile" component={UserProfilePage}/>
+              <Route exact path="/" render={() => <Redirect to="/map/project-example-1" />}></Route>
             </div>
 		  </BrowserRouter>
         </Provider>

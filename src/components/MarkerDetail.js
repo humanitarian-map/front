@@ -7,7 +7,7 @@ function MarkerIcon(props) {
     let types = {
         "warning": {name: "Warning", icon: "fire"},
         "camp": {name: "Camp", icon: "tent"},
-        "checkpoint": {name: "Checkpoint", icon: "marker-check"},
+        "checkpoint": {name: "Check point", icon: "marker-check"},
         "hospital": {name: "Hospital", icon: "hospital"},
         "idps": {name: "IDPs", icon: "walk"},
         "mobile-clinic": {name: "Mobile clinic", icon: "truck"},
@@ -29,39 +29,64 @@ class MarkerDetailImpl extends React.Component {
 
         return (
           <section className="MarkerDetail panel">
-            <h2 className="header-title">Marker</h2>
+            <h2 className="header-title">
+              {props.marker.type === "point" && "Marker"}
+              {props.marker.type === "arrow" && "Arrow"}
+              {props.marker.type === "polygon" && "Polygon"}
+              {props.marker.type === "cross" && "Cross"}
+            </h2>
             <div className="content">
               <div className="block">
                 <h3 className="title panel-name">{props.marker.name}</h3>
               </div>
-              <div className="block">
-                <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
-                <div className="markers">
-                  <MarkerIcon type={props.marker.icon} />
-                </div>
-              </div>
+              {props.marker.type === "point" &&
+                <div className="block">
+                  <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
+                  <div className="markers">
+                    <MarkerIcon type={props.marker.data.icon} />
+                  </div>
+                </div>}
               <div className="block">
                 <h3 className="title mdi mdi-comment mdi-16px">Comment</h3>
                 <p>{props.marker.description}</p>
               </div>
               <div className="block">
                 <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
-                <div className="coordinates-inputs">
-                    <span>{props.marker.position[0].toFixed(4)}</span>,
-                    <span>{props.marker.position[1].toFixed(4)}</span>
-                </div>
+                {(props.marker.type === "point" || props.marker.type === "cross") &&
+                  <div className="coordinates-inputs">
+                      <span>{props.marker.data.position[0].toFixed(4)}</span>,
+                      <span>{props.marker.data.position[1].toFixed(4)}</span>
+                  </div>}
+                {props.marker.type === "arrow" &&
+                  <div className="coordinates-inputs">
+                      <h4>Origin</h4>
+                      <span>{props.marker.data.origin[0].toFixed(4)}</span>,
+                      <span>{props.marker.data.origin[1].toFixed(4)}</span>
+                      <h4>Destination</h4>
+                      <span>{props.marker.data.dest[0].toFixed(4)}</span>,
+                      <span>{props.marker.data.dest[1].toFixed(4)}</span>
+                  </div>}
+                {props.marker.type === "polygon" &&
+                  <div className="coordinates-inputs">
+                      {props.marker.data.positions.map((point, idx) => (
+                        <p key={idx}>
+                          <span>{point[0].toFixed(4)}</span>,
+                          <span>{point[1].toFixed(4)}</span>
+                        </p>))}
+                  </div>}
               </div>
-              <div className="block block-documents">
-                <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
-                <div className="docs">
-                  <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
-                  <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
-                  <a href="#"><span className="plus">+</span> add document</a>
-                </div>
-              </div>
+              {props.marker.type === "point" &&
+                <div className="block block-documents">
+                  <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
+                  <div className="docs">
+                    <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
+                    <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
+                    <a href="#"><span className="plus">+</span> add document</a>
+                  </div>
+                </div>}
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => props.onDeleteMarker(props.marker.id)}>Delete</button>
+              <button className="delete" onClick={() => props.onDeleteMarker(props.project.get('slug'), props.marker.id)}>Delete</button>
             </div>
           </section>
         );
@@ -75,10 +100,11 @@ MarkerDetailImpl.propTypes = {
 const MarkerDetail = connect(
     (state) => ({
         marker: state.getIn(['map', 'viewing']).toJS(),
+        project: state.get("current-project"),
     }),
     (dispatch) => ({
-        onDeleteMarker: (id) => {
-            dispatch({type: "DELETE_MARKER", payload: id});
+        onDeleteMarker: (projectSlug, pointId) => {
+            dispatch({type: "DELETE_POINT", payload: {projectSlug, pointId}});
         }
     })
 )(MarkerDetailImpl);

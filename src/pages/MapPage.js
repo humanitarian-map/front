@@ -10,7 +10,7 @@ import './MapPage.css';
 
 class MapPageImpl extends Component {
   componentWillMount() {
-      this.props.listProjects(this.props.match.params.slug);
+      this.props.getProject(this.props.match.params.slug);
   }
 
   render() {
@@ -21,10 +21,9 @@ class MapPageImpl extends Component {
           </div>
           {this.props.displayProjectDetail &&
             <div className="project-detail-container">
-              <ProjectDetail />
+              <ProjectDetail project={this.props.project}/>
             </div>}
-          {this.props.map.getIn(["drawing", "type"]) === "point" &&
-           this.props.map.getIn(["drawing", "position"]) &&
+          {this.props.map.getIn(["drawing", "ready-to-edit"]) &&
              <div className="point-detail-container">
                <MarkerCreationDetail />
              </div>}
@@ -37,19 +36,7 @@ class MapPageImpl extends Component {
               <ToolsMenu />
             </div>
             <div className="map-container">
-              <MainMap center={this.props.map.get('center')}
-                       cursor={this.props.map.get('cursor')}
-                       zoom={this.props.map.get('zoom')}
-                       points={this.props.map.get('points')}
-                       drawing={this.props.map.get('drawing')}
-                       onCursorMove={this.props.onCursorMove}
-                       onClickMarker={this.props.onClickMarker}
-                       onAddMarker={this.props.onAddMarker}
-                       onAddCross={this.props.onAddCross}
-                       onAddArrowPoint={this.props.onAddArrowPoint}
-                       onAddPolygonPoint={this.props.onAddPolygonPoint}
-                       onCancelDrawing={this.props.onCancelDrawing}
-                       onConfirmPolygonDrawing={this.props.onConfirmPolygonDrawing} />
+              <MainMap />
             </div>
           </div>
         </div>
@@ -61,35 +48,12 @@ const MapPage = connect(
     (state) => ({
         map: state.get('map'),
         user: state.get('user'),
-        displayProjectDetail: state.get('displayProjectDetail')
+        project: state.get('current-project'),
+        displayProjectDetail: state.get('display-project-detail')
     }),
     (dispatch) => ({
-        onAddMarker: (lat, lng) => {
-            dispatch({type: "ADD_MARKER", "payload": [lat, lng]});
-        },
-        onAddCross: (lat, lng) => {
-            dispatch({type: "ADD_CROSS", "payload": [lat, lng]});
-        },
-        onAddArrowPoint: (lat, lng) => {
-            dispatch({type: "ADD_ARROW_POINT", "payload": [lat, lng]});
-        },
-        onAddPolygonPoint: (lat, lng) => {
-            dispatch({type: "ADD_POLYGON_POINT", "payload": [lat, lng]});
-        },
-        onCancelDrawing: () => {
-            dispatch({type: "CANCEL_DRAWING", "payload": null});
-        },
-        onConfirmPolygonDrawing: () => {
-            dispatch({type: "CONFIRM_POLYGON_DRAWING", "payload": null});
-        },
-        onCursorMove: (lat, lng) => {
-            dispatch({type: "CURSOR_MOVE", "payload": [lat, lng]});
-        },
-        onClickMarker: (point) => {
-            dispatch({type: "VISUALIZE_MARKER", "payload": point});
-        },
-        listProjects: (slug) => {
-            dispatch({type: "LIST_PROJECTS", "payload": slug});
+        getProject: (slug) => {
+            dispatch({type: "GET_CURRENT_PROJECT", "payload": slug});
         }
     })
 )(MapPageImpl);
