@@ -49,16 +49,24 @@ class MainMapImpl extends React.Component {
         this.click = this.click.bind(this);
         this.keyup = this.keyup.bind(this);
         this.mouseMove = this.mouseMove.bind(this);
+        this.centerMap = this.centerMap.bind(this);
     }
 
     componentWillMount() {
         document.addEventListener("keyup", this.keyup);
         document.addEventListener("mousemove", this.mouseMove);
+        document.addEventListener("centerMap", this.centerMap);
     }
 
     componentWillUnmount() {
         document.removeEventListener("keyup", this.keyup);
         document.removeEventListener("mousemove", this.mouseMove);
+        document.addEventListener("centerMap", this.centerMap);
+    }
+
+    centerMap(event) {
+        this.map.invalidateSize();
+        this.map.flyTo(event.detail, this.map.getZoom());
     }
 
     getPosition(event) {
@@ -110,6 +118,7 @@ class MainMapImpl extends React.Component {
         <Map center={this.props.project.get('center_point').toJS()}
              zoom={this.props.project.get('zoom')}
              className="MainMap"
+             whenReady={(e) => this.map = e.target}
              onMouseMove={this.getPosition}>
           {drawingType && !this.props.drawing.get('ready-to-edit') &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
@@ -149,6 +158,7 @@ class MainMapImpl extends React.Component {
               <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
               <PolygonMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
+          <button className="button-map">Set as map center</button>
         </Map>
       );
     }

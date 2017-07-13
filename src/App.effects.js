@@ -1,4 +1,5 @@
 import * as repo from "./utils/repository";
+import {fromJS} from "immutable";
 
 export default function ({dispatch, getState}) {
   return next => action => {
@@ -41,6 +42,14 @@ export default function ({dispatch, getState}) {
         return repo.updatePoint(action.payload.projectSlug, action.payload.pointId, action.payload.point).then((point) => {
             dispatch({type: "GET_CURRENT_PROJECT", payload: action.payload.projectSlug});
             dispatch({type: "UPDATE_VISUALIZED_MARKER", "payload": point});
+        })
+      case 'CENTER_AND_OPEN_MARKER':
+        return new Promise((accept) => {
+            dispatch({type: "FORCE_VISUALIZE_MARKER", "payload": fromJS(action.payload)});
+            setTimeout(() => {
+                let event = new CustomEvent("centerMap", {"detail": action.payload.data.position});
+                document.dispatchEvent(event);
+            }, 100);
         })
       default:
         return next(action);

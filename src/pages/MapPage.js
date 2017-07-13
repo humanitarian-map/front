@@ -20,9 +20,9 @@ class MapPageImpl extends Component {
           <div className="menu-container">
             <Menu />
           </div>
-          {this.props.displayProjectDetail &&
+          {this.props.displayProjectDetail && this.props.project && this.props.documents &&
             <div className="project-detail-container">
-              <ProjectDetail project={this.props.project} documents={this.props.documents}/>
+              <ProjectDetail project={this.props.project} documents={this.props.documents} onMarkerClick={this.props.onMarkerClick} />
             </div>}
           {this.props.map.getIn(["drawing", "ready-to-edit"]) &&
              <div className="point-detail-container">
@@ -38,7 +38,6 @@ class MapPageImpl extends Component {
             </div>
             <div className="map-container">
               <MainMap />
-              <button className="button-map">Set as map center</button>
             </div>
           </div>
         </div>
@@ -60,6 +59,9 @@ const MapPage = connect(
         },
         getProjectDocuments: (slug) => {
             dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": slug});
+        },
+        onMarkerClick: (point) => {
+            dispatch({type: "CENTER_AND_OPEN_MARKER", "payload": point});
         }
     })
 )(MapPageImpl);
