@@ -215,6 +215,7 @@ const MainMap = connect(
             updatedPoint.data.position = [newLatLng.lat, newLatLng.lng];
             delete updatedPoint['id'];
             delete updatedPoint['is_active'];
+            delete updatedPoint['documents_url'];
             dispatch({type: "UPDATE_POINT", "payload": {projectSlug, pointId: point.id, point: updatedPoint}});
         },
     })
