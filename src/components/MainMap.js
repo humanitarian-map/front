@@ -66,7 +66,7 @@ class MainMapImpl extends React.Component {
 
     centerMap(event) {
         this.map.invalidateSize();
-        this.map.flyTo(event.detail, this.map.getZoom());
+        setTimeout(() => this.map.flyTo(event.detail, this.map.getZoom()), 100);
     }
 
     getPosition(event) {
