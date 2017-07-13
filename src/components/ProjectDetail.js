@@ -91,8 +91,8 @@ export default function ProjectDetail(props) {
           <div className="block">
             <h3 className="title mdi mdi-calendar mdi-16px">Timeframe</h3>
             <div  className="timeframe">
-              <span className="label">Start:</span> <span className="value">{moment(props.project.get('start_datetime')).calendar()}</span>
-              <span className="label">End:</span> <span className="value">{moment(props.project.get('end_datetime')).calendar()}</span>
+              <span className="label">Start:</span> <span className="value">{moment(props.project.get('start_date')).calendar()}</span>
+              <span className="label">End:</span> <span className="value">{moment(props.project.get('end_date')).calendar()}</span>
             </div>
           </div>
         </div>
