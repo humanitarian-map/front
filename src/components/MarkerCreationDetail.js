@@ -195,11 +195,6 @@ class MarkerCreationDetailImpl extends React.Component {
                       </div>))}
                   </div>}
               </div>
-              {type === "point" &&
-                <div className="block">
-                  <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
-                  <a>+ add link to doc</a>
-                </div>}
             </div>
             <div className="buttons-set">
               <button className="save" onClick={this.addPoint}>Save</button>

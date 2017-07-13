@@ -79,9 +79,10 @@ class MarkerDetailImpl extends React.Component {
                 <div className="block block-documents">
                   <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
                   <div className="docs">
-                    <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
-                    <a className="ellipsis" href="#" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
-                    <a href="#"><span className="plus">+</span> add document</a>
+                    {(props.marker.documents || []).map((item) => (
+                      <a className="ellipsis" href={item.url} alt={item.name}>{item.name}</a>
+                    ))}
+                    <a target="_blank" href={props.marker.documents_url}>Open documents folder</a>
                   </div>
                 </div>}
             </div>
