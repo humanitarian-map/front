@@ -141,14 +141,14 @@ class MarkerCreationDetailImpl extends React.Component {
                 {(type === "point" || type === "cross") &&
                   <div className="coordinates-inputs point cross">
                     <div>
-                      <span>Lat:</span>
+                      <span>Latitude</span>
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['position', 0])}
                              onChange={(e) => props.onChangeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1]))} />
                     </div>
                     <div>
-                      <span>Lng:</span>
+                      <span>Longitude</span>
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['position', 1])}
@@ -183,11 +183,13 @@ class MarkerCreationDetailImpl extends React.Component {
                 {(type === "polygon") &&
                   <div className="coordinates-inputs polygon">
                     {props.drawing.get('points').map((point, idx) => (
-                      <div key={idx}>
+                      <div className="point" key={idx}>
+                        <span>Latitude</span>
                         <input placeholder="Lat"
                                type="number"
                                value={point.get(0)}
                                onChange={(e) => props.onChangePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1))} />
+                        <span>Longitude</span>
                         <input placeholder="Lng"
                                type="number"
                                value={point.get(1)}

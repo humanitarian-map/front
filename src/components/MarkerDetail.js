@@ -60,24 +60,24 @@ class MarkerDetailImpl extends React.Component {
                 <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
                 {(props.marker.type === "point" || props.marker.type === "cross") &&
                   <div className="coordinates-inputs">
-                      <span>{props.marker.data.position[0].toFixed(4)}</span>,
-                      <span>{props.marker.data.position[1].toFixed(4)}</span>
+                      <span>Latitude {props.marker.data.position[0].toFixed(4)}</span>
+                      <span>Longitude {props.marker.data.position[1].toFixed(4)}</span>
                   </div>}
                 {props.marker.type === "arrow" &&
                   <div className="coordinates-inputs">
                       <h4>Origin</h4>
-                      <span>{props.marker.data.origin[0].toFixed(4)}</span>,
-                      <span>{props.marker.data.origin[1].toFixed(4)}</span>
+                      <span>Latitude {props.marker.data.origin[0].toFixed(4)}</span>,
+                      <span>Longitude {props.marker.data.origin[1].toFixed(4)}</span>
                       <h4>Destination</h4>
-                      <span>{props.marker.data.dest[0].toFixed(4)}</span>,
-                      <span>{props.marker.data.dest[1].toFixed(4)}</span>
+                      <span>Latitude {props.marker.data.dest[0].toFixed(4)}</span>,
+                      <span>Longitude {props.marker.data.dest[1].toFixed(4)}</span>
                   </div>}
                 {props.marker.type === "polygon" &&
                   <div className="coordinates-inputs">
                       {props.marker.data.positions.map((point, idx) => (
                         <p key={idx}>
-                          <span>{point[0].toFixed(4)}</span>,
-                          <span>{point[1].toFixed(4)}</span>
+                          <span>Latitude {point[0].toFixed(4)}</span>,
+                          <span>Longitude {point[1].toFixed(4)}</span>
                         </p>))}
                   </div>}
               </div>

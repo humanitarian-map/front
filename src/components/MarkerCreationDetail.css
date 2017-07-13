@@ -25,7 +25,14 @@
 }
 .MarkerCreationDetail .coordinates-inputs span {
     display: inline-block;
-    width: 35px;
+    width: 75px;
+}
+.MarkerCreationDetail .coordinates-inputs > * {
+    margin-top: 10px;
+}
+
+.MarkerCreationDetail .coordinates-inputs > *:first-child {
+    margin-top: 0px;
 }
 
 .MarkerCreationDetail .content {
