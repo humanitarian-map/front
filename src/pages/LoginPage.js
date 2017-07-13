@@ -15,7 +15,7 @@ export default class LoginPage extends Component {
               <input type="text" placeholder="Username" />
               <input type="password" placeholder="Password" />
             </fieldset>
-            <Link to="/map">
+            <Link to="/projects">
               <button>Login</button>
             </Link>
           </form>

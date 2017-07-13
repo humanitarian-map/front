@@ -7,3 +7,14 @@
     padding-right: .75rem;
 }
 .events-list {}
+.ProjectDetail .marker-icon {
+  height: 26px;
+  width: 26px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.ProjectDetail .marker-icon::before {
+  margin-top: 3px;
+}

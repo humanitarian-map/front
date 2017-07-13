@@ -38,6 +38,7 @@ export default function ProjectDetail(props) {
             <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
             <ul>
               <li>
+                <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
                 <span className="name">Camps</span>
                 <span className="tag">{camps.size}</span>
                 <ul>
@@ -45,6 +46,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
                 <span className="name">Hospitals</span>
                 <span className="tag">{hospitals.size}</span>
                 <ul>
@@ -52,6 +54,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
                 <span className="name">Warnings</span>
                 <span className="tag">{warnings.size}</span>
                 <ul>
@@ -59,6 +62,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
                 <span className="name">IDPs</span>
                 <span className="tag">{idps.size}</span>
                 <ul>
@@ -66,6 +70,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
                 <span className="name">Check points</span>
                 <span className="tag">{checkpoints.size}</span>
                 <ul>
@@ -73,6 +78,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
                 <span className="name">Mobile clinics</span>
                 <span className="tag">{mobileClinics.size}</span>
                 <ul>
@@ -80,6 +86,7 @@ export default function ProjectDetail(props) {
                 </ul>
               </li>
               <li>
+                <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
                 <span className="name">Other</span>
                 <span className="tag">{others.size}</span>
                 <ul>
