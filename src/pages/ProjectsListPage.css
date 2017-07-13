@@ -16,7 +16,7 @@ html {
 
 .ProjectsListPage .projects-content {
   padding: 1rem;
-  max-width: 65rem;
+  max-width: 85rem;
   margin: auto;
   text-align: left;
 }
@@ -46,15 +46,20 @@ html {
   display: flex;
   flex-wrap: wrap;
 }
-.ProjectsListPage .project {
+.ProjectsListPage .grid-cell {
   flex: 1 0 25%;
+  display: flex;
+}
+.ProjectsListPage .project {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  text-decoration: none;
   box-sizing: border-box;
   margin: 0.5rem;
   padding: 1rem;
-  background-color: var(--color-white);;
-}
-.ProjectsListPage .project a {
-  text-decoration: none;
+  background-color: var(--color-white);
 }
 .ProjectsListPage .project:hover {
   background-color: var(--color-blue);

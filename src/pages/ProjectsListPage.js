@@ -20,10 +20,12 @@ class ProjectsListPageImpl extends React.Component {
             <h2>Projects</h2>
             <ul className="grid">
             {this.props.projects && this.props.projects.map((project) => (
-              <li className="project" key={project.get('id')}>
-                  <Link to={"/map/"+ project.get('slug')} >
-                    <div className="project-name">{project.get('name')}</div>
-                    <p>{project.get('description')}</p>
+              <li className="grid-cell" key={project.get('id')}>
+                  <Link className="project" to={"/map/"+ project.get('slug')} >
+                    <div>
+                      <div className="project-name">{project.get('name')}</div>
+                      <p>{project.get('description')}</p>
+                    </div>
                     <div className="organization">
                       <img src={project.get('organization').get('image')} />
                       {project.get('organization').get('name')}
