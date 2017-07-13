@@ -5,7 +5,7 @@ import {DEFAULT_COLOR} from "../../utils/colors";
 import {DEFAULT_CROSS_SIZE} from "../../utils/sizes";
 
 export default function CrossMarker(props) {
-    let size = props.point.data.size || DEFAULT_CROSS_SIZE;
+    let size = (props.point.data.size || DEFAULT_CROSS_SIZE) / 10000;
     let line1 = [[
         props.point.data.position[0] - size,
         props.point.data.position[1] - size,
