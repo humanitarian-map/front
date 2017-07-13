@@ -158,6 +158,7 @@ class MainMapImpl extends React.Component {
               <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
               <PolygonMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
+          <button className="button-map">Set as map center</button>
         </Map>
       );
     }
