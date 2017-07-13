@@ -38,6 +38,7 @@ class MapPageImpl extends Component {
             </div>
             <div className="map-container">
               <MainMap />
+              <button className="button-map">Set as map center</button>
             </div>
           </div>
         </div>

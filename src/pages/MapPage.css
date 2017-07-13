@@ -50,3 +50,18 @@
   padding: 20px;
   color: white;
 }
+
+.button-map {
+  position: absolute;
+  right: 50%;
+  margin-right: -80px;
+  bottom: 1rem;
+  opacity: 0.8;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  border: none;
+  z-index: 1000;
+}
+.button-map:hover {
+  opacity: 1;
+}
