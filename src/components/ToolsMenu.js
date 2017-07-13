@@ -25,7 +25,7 @@ class ToolsMenuImpl extends Component {
                onClick={() => this.props.selectTool('point')}></div>
             <div className={"marker mdi mdi-arrow-top-right mdi-24px " + (active === 'arrow' ? 'active' : '')}
                  onClick={() => this.props.selectTool('arrow')}></div>
-            <div className={"marker mdi mdi-square-outline mdi-24px " + (active === 'polygon' ? 'active' : '')}
+            <div className={"marker mdi mdi-vector-triangle mdi-24px " + (active === 'polygon' ? 'active' : '')}
                  onClick={() => this.props.selectTool('polygon')}></div>
             <div className={"marker mdi mdi-close mdi-24px " + (active === 'cross' ? 'active' : '')}
                  onClick={() => this.props.selectTool('cross')}></div>
