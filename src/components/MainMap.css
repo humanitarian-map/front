@@ -169,7 +169,6 @@
     border-radius: 30px;
     width: 32px;
     height: 32px;
-    background-color: var(--color-grey-medium);
 }
 
 .MarkerIcon .marker-icon {
@@ -179,5 +178,11 @@
     align-self: center;
 }
 .MarkerIcon .marker-icon.mdi:before {
-    margin-top: 3px;
+    margin-top: 6px;
+}
+.marker-icon.mdi:before {
+  margin-top: 3px;
+}
+.marker-icon {
+  background-color: var(--color-grey-medium);
 }
