@@ -54,6 +54,14 @@ export function reducer(state, action) {
         return state.update("display-project-detail", (v) => !v);
     } else if (action.type === "SELECT_MARKER_ICON") {
         return state.setIn(["map", "drawing", "icon"], action.payload);
+    } else if (action.type === "FORCE_VISUALIZE_MARKER") {
+        return state.updateIn(["map", "viewing"], (viewing) => {
+                        if (!action.payload) {
+                            return null;
+                        }
+                        return fromJS(action.payload)
+                    })
+                    .setIn(["map", "drawing"], fromJS({type: null}));
     } else if (action.type === "VISUALIZE_MARKER") {
         return state.updateIn(["map", "viewing"], (viewing) => {
                         if (!action.payload) {

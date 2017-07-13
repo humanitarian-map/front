@@ -9,6 +9,11 @@ export default class ProjectDetail extends React.Component {
         this.state = {
             openMarker: ""
         }
+        this.centerMap = this.centerMap.bind(this);
+    }
+
+    centerMap(point) {
+        this.props.onMarkerClick(point);
     }
 
     render() {
@@ -69,7 +74,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "camps" &&
                     <ul>
-                      {camps.map((camp) => <li key={camp.get('id')}>{camp.get('name')}</li>)}
+                      {camps.map((camp) => (
+                          <li onClick={() => this.centerMap(camp.toJS())}
+                              key={camp.get('id')}>{camp.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -81,7 +89,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "hospitals" &&
                     <ul>
-                      {hospitals.map((hospital) => <li key={hospital.get('id')}>{hospital.get('name')}</li>)}
+                      {hospitals.map((hospital) => (
+                          <li onClick={() => this.centerMap(hospital.toJS())}
+                              key={hospital.get('id')}>{hospital.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -93,7 +104,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "warnings" &&
                     <ul>
-                      {warnings.map((warning) => <li key={warning.get('id')}>{warning.get('name')}</li>)}
+                      {warnings.map((warning) => (
+                          <li onClick={() => this.centerMap(warning.toJS())}
+                              key={warning.get('id')}>{warning.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -105,7 +119,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "idps" &&
                     <ul>
-                      {idps.map((idp) => <li key={idp.get('id')}>{idp.get('name')}</li>)}
+                      {idps.map((idp) => (
+                          <li onClick={() => this.centerMap(idp.toJS())}
+                              key={idp.get('id')}>{idp.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -117,7 +134,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "checkpoints" &&
                     <ul>
-                      {checkpoints.map((checkpoint) => <li key={checkpoint.get('id')}>{checkpoint.get('name')}</li>)}
+                      {checkpoints.map((checkpoint) => (
+                          <li onClick={() => this.centerMap(checkpoint.toJS())}
+                              key={checkpoint.get('id')}>{checkpoint.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -129,7 +149,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "mobile-clinics" &&
                     <ul>
-                      {mobileClinics.map((mobileClinic) => <li key={mobileClinic.get('id')}>{mobileClinic.get('name')}</li>)}
+                      {mobileClinics.map((mobileClinic) => (
+                          <li onClick={() => this.centerMap(mobileClinic.toJS())}
+                              key={mobileClinic.get('id')}>{mobileClinic.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
                 <li>
@@ -141,7 +164,10 @@ export default class ProjectDetail extends React.Component {
                   </div>
                   {this.state.openMarker === "other" &&
                     <ul>
-                      {others.map((other) => <li key={other.get('id')}>{other.get('name')}</li>)}
+                      {others.map((other) => (
+                          <li onClick={() => this.centerMap(other.toJS())}
+                              key={other.get('id')}>{other.get('name')}</li>
+                      ))}
                     </ul>}
                 </li>
               </ul>
@@ -161,5 +187,6 @@ export default class ProjectDetail extends React.Component {
 
 ProjectDetail.propTypes = {
     project: PropTypes.object,
-    documents: PropTypes.object
+    documents: PropTypes.object,
+    onMarkerClick: PropTypes.func
 }
