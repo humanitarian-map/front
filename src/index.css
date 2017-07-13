@@ -62,6 +62,7 @@ button {
   background: var(--color-white);
   border: 1px solid var(--color-grey-light);
   color: var(--color-grey-medium);
+  cursor: pointer;
 }
 button:hover {
   opacity: 0.9;
@@ -72,6 +73,8 @@ button.save {
     color: var(--color-white);
     border: none;
 }
-button.cancel,
-button.delete {
+button.delete:hover {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
 }

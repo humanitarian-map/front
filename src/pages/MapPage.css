@@ -35,6 +35,7 @@
   flex-grow: 1;
   height: 60px;
   width: 100%;
+  border-left: 1px solid #40525f;
 }
 
 .MapPage .map-container {

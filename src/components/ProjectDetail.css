@@ -1,3 +1,6 @@
+.ProjectDetail.panel {
+  background-color: var(--color-grey-lighter);
+}
 .organization img {
     max-width: 2rem;
     vertical-align: middle;
