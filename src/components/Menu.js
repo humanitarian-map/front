@@ -24,7 +24,7 @@ class MenuImpl extends Component {
                   <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />
                 </Link>
                 <Link className="logo" to="/projects">
-                  <img src={logoSvg} />
+                  <img src={logoSvg} alt="logo" />
                 </Link>
             </div>
           </div>

@@ -123,7 +123,7 @@ class MarkerCreationDetailImpl extends React.Component {
                          onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
                 </div>}
 
-              {(type == "arrow") &&
+              {(type === "arrow") &&
                 <div className="block">
                   <h3 className="title mdi mdi-comment mdi-16px">Arrowhead Size (%)</h3>
                   <input type="number" placeholder="Size"

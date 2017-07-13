@@ -14,7 +14,7 @@ class ProjectsListPageImpl extends React.Component {
       return (
         <div className="ProjectsListPage">
           <header className="header-menu">
-            <img className="header-logo" src={logoSvg} />
+            <img className="header-logo" src={logoSvg} alt="logo" />
             <h1>The Humanitarian Map</h1>
           </header>
           <div className="projects-content">
@@ -28,7 +28,7 @@ class ProjectsListPageImpl extends React.Component {
                       <p>{project.get('description')}</p>
                     </div>
                     <div className="organization">
-                      <img src={project.get('organization').get('image')} />
+                      <img src={project.get('organization').get('image')} alt="organization logo"/>
                       {project.get('organization').get('name')}
                     </div>
                   </Link>

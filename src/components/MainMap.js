@@ -158,7 +158,10 @@ class MainMapImpl extends React.Component {
               <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
               <PolygonMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
-          <button className="button-map">Set as map center</button>
+          <button className="button-map"
+                  onClick={() => this.props.onSetCenterClick(this.props.project.toJS(), this.map.getCenter(), this.map.getZoom())}>
+            Set as map center
+          </button>
         </Map>
       );
     }
@@ -223,6 +226,15 @@ const MainMap = connect(
         },
         onDeleteItem: (projectSlug, pointId) => {
             dispatch({type: "DELETE_POINT", "payload": {projectSlug, pointId}});
+        },
+        onSetCenterClick: (project, center, zoom) => {
+            let updatedProject = _.extend({}, project);
+            updatedProject.center_point = [parseFloat(center.lat), parseFloat(center.lng)];
+            updatedProject.zoom = zoom;
+            delete updatedProject.mapitems;
+            delete updatedProject.documents_url;
+            delete updatedProject.slug;
+            dispatch({type: "UPDATE_PROJECT", "payload": {projectSlug: project.slug, project: updatedProject}});
         },
         onMoveMarker: (projectSlug, point, newLatLng) => {
             let updatedPoint = _.extend({}, point)
