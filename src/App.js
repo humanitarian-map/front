@@ -23,7 +23,7 @@ export default class App extends Component {
               <Route exact path="/map/:slug" component={MapPage}/>
               <Route exact path="/login" component={LoginPage}/>
               <Route exact path="/profile" component={UserProfilePage}/>
-              <Route exact path="/" render={() => <Redirect to="/map/project-example-1" />}></Route>
+              <Route exact path="/" render={() => <Redirect to="/login" />}></Route>
             </div>
 		  </BrowserRouter>
         </Provider>
