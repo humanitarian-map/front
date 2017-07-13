@@ -22,6 +22,7 @@ html {
 }
 
 .ProjectsListPage .header-menu {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   padding: 1rem;
