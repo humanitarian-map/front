@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import './ProjectsListPage.css';
+import logoSvg from './img/logo-navbar.svg';
 
 class ProjectsListPageImpl extends React.Component {
   componentWillMount() {
@@ -12,6 +13,7 @@ class ProjectsListPageImpl extends React.Component {
       return (
         <div className="ProjectsListPage">
           <header className="header-menu">
+            <img className="header-logo" src={logoSvg} />
             <h1>The Humanitarian Map</h1>
           </header>
           <div className="projects-content">

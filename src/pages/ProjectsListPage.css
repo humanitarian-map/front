@@ -29,6 +29,12 @@ html {
   color: var(--color-grey-light);
   z-index: 10;
 }
+.ProjectsListPage .header-logo {
+  height: 36px;
+  margin-right: 1rem;
+  margin-top: -6px;
+  margin-bottom: -6px;
+}
 .ProjectsListPage .header-menu h1 {
   margin: 0;
   padding: 0;
