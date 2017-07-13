@@ -22,7 +22,9 @@ class MenuImpl extends Component {
                 <Link className="user" to="/profile">
                   <img className="avatar" alt="avatar" src={this.props.user.get('avatar')} />
                 </Link>
-                <div className="map mdi mdi-map mdi-36px"></div>
+                <Link className="logo" to="/projects">
+                  <div className="logo-icon map mdi mdi-map mdi-36px"></div>
+                </Link>
             </div>
           </div>
         );
