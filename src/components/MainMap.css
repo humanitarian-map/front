@@ -140,3 +140,57 @@ button.save {
 button.cancel,
 button.delete {
 }
+
+
+
+.markers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 5px 0 10px;
+}
+
+.MarkerIcon {
+    display: flex;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 0.8rem;
+    items-align: center;
+    text-align: center;
+    flex-direction: column;
+    border: 1px solid var(--color-grey-light);
+    color: var(--color-grey-medium);
+    margin-left: -1px;
+    margin-bottom: -1px;
+    width: 25%;
+    cursor: pointer;
+}
+.MarkerIcon:hover {
+    background: var(--color-blue-soft);
+}
+
+.MarkerIcon.active {
+    color: var(--color-grey-dark);
+    background: var(--color-blue-soft);
+    font-weight: bold;
+}
+
+.MarkerIcon span {
+    margin-top: 0.5rem;
+}
+
+.MarkerIcon .marker-icon {
+    border-radius: 30px;
+    width: 32px;
+    height: 32px;
+}
+
+.MarkerIcon .marker-icon {
+    border-radius: 30px;
+    width: 32px;
+    height: 32px;
+    align-self: center;
+}
+.MarkerIcon .marker-icon:before {
+    margin-top: 6px;
+}

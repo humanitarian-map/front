@@ -42,33 +42,3 @@
 .MarkerDetail h2.mdi:before {
     margin-right: 8px;
 }
-
-.MarkerDetail .markers {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin: 5px 0 10px;
-}
-
-.MarkerDetail .MarkerIcon {
-    display: flex;
-    padding: 8px;
-    font-size: 10px;
-    items-align: center;
-    text-align: center;
-    flex-direction: column;
-    border: 1px solid #cccccc;
-    width: 35px;
-}
-
-.MarkerDetail .MarkerIcon.active {
-    background: #dddddd;
-}
-
-.MarkerDetail .MarkerIcon span {
-    margin: 3px 0;
-}
-
-.MarkerDetail .MarkerIcon .marker-icon {
-    border-radius: 10px;
-}

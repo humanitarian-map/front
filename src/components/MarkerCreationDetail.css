@@ -36,58 +36,6 @@
     margin-right: 8px;
 }
 
-.MarkerCreationDetail .markers {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin: 5px 0 10px;
-}
-
-.MarkerCreationDetail .MarkerIcon {
-    display: flex;
-    box-sizing: border-box;
-    padding: 8px;
-    font-size: 0.8rem;
-    items-align: center;
-    text-align: center;
-    flex-direction: column;
-    border: 1px solid var(--color-grey-light);
-    color: var(--color-grey-medium);
-    margin-left: -1px;
-    margin-bottom: -1px;
-    width: 25%;
-    cursor: pointer;
-}
-.MarkerCreationDetail .MarkerIcon:hover {
-    background: var(--color-blue-soft);
-}
-
-.MarkerCreationDetail .MarkerIcon.active {
-    color: var(--color-grey-dark);
-    background: var(--color-blue-soft);
-    font-weight: bold;
-}
-
-.MarkerCreationDetail .MarkerIcon span {
-    margin-top: 0.5rem;
-}
-
-.MarkerCreationDetail .MarkerIcon .marker-icon {
-    border-radius: 30px;
-    width: 32px;
-    height: 32px;
-}
-
-.MarkerCreationDetail .MarkerIcon .marker-icon {
-    border-radius: 30px;
-    width: 32px;
-    height: 32px;
-    align-self: center;
-}
-.MarkerCreationDetail .MarkerIcon .marker-icon:before {
-    margin-top: 6px;
-}
-
 .MarkerCreationDetail .color-block {
     display: flex;
     flex-direction: row;
