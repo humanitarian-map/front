@@ -86,6 +86,8 @@ export function reducer(state, action) {
     } else if (action.type === "TOGGLE_MOVE") {
         return state.updateIn(['map', 'moving'], (m) => !m)
                     .setIn(["map", "drawing"], fromJS({type: null}));
+    } else if (action.type === "SET_PROJECT_DOCUMENTS") {
+        return state.set("documents", fromJS(action.payload));
     }
     return state;
 }

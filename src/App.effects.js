@@ -7,6 +7,10 @@ export default function ({dispatch, getState}) {
         return repo.listProjects().then((projects) => {
             dispatch({type: "SET_PROJECTS_LIST", payload: projects});
         })
+      case 'GET_PROJECT_DOCUMENTS':
+        return repo.getProjectDocuments(action.payload).then((documents) => {
+            dispatch({type: "SET_PROJECT_DOCUMENTS", payload: documents});
+        })
       case 'GET_CURRENT_PROJECT':
         return repo.getProject(action.payload).then((project) => {
             dispatch({type: "SET_CURRENT_PROJECT", payload: project});

@@ -26,6 +26,12 @@ function MarkerIcon(props) {
 class MarkerDetailImpl extends React.Component {
     render() {
         let props = this.props
+        let projectDocuments = props.documents.filter((doc) => {
+            let isFile = doc.get('type') === "file";
+            let splittedPath = doc.get('path').split("/");
+            let isInThePointFolder = splittedPath.length >= 4 && splittedPath[2] === props.marker.name;
+            return isFile && isInThePointFolder;
+        });
 
         return (
           <section className="MarkerDetail panel">
@@ -79,8 +85,13 @@ class MarkerDetailImpl extends React.Component {
                 <div className="block block-documents">
                   <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
                   <div className="docs">
-                    {(props.marker.documents || []).map((item) => (
-                      <a className="ellipsis" href={item.url} alt={item.name}>{item.name}</a>
+                    {(projectDocuments || []).map((doc) => (
+                      <a className="ellipsis"
+                         key={doc.get('path')}
+                         href={props.marker.documents_url}
+                         alt={doc.get('name')}>
+                        {doc.get('name')}
+                      </a>
                     ))}
                     <a target="_blank" href={props.marker.documents_url}>Open documents folder</a>
                   </div>
@@ -95,13 +106,16 @@ class MarkerDetailImpl extends React.Component {
 }
 
 MarkerDetailImpl.propTypes = {
-    marker: PropTypes.object.isRequired
+    marker: PropTypes.object.isRequired,
+    project: PropTypes.object,
+    documents: PropTypes.object
 }
 
 const MarkerDetail = connect(
     (state) => ({
         marker: state.getIn(['map', 'viewing']).toJS(),
         project: state.get("current-project"),
+        documents: state.get("documents"),
     }),
     (dispatch) => ({
         onDeleteMarker: (projectSlug, pointId) => {

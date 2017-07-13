@@ -11,6 +11,7 @@ import './MapPage.css';
 class MapPageImpl extends Component {
   componentWillMount() {
       this.props.getProject(this.props.match.params.slug);
+      this.props.getProjectDocuments(this.props.match.params.slug);
   }
 
   render() {
@@ -21,7 +22,7 @@ class MapPageImpl extends Component {
           </div>
           {this.props.displayProjectDetail &&
             <div className="project-detail-container">
-              <ProjectDetail project={this.props.project}/>
+              <ProjectDetail project={this.props.project} documents={this.props.documents}/>
             </div>}
           {this.props.map.getIn(["drawing", "ready-to-edit"]) &&
              <div className="point-detail-container">
@@ -49,11 +50,15 @@ const MapPage = connect(
         map: state.get('map'),
         user: state.get('user'),
         project: state.get('current-project'),
+        documents: state.get('documents'),
         displayProjectDetail: state.get('display-project-detail')
     }),
     (dispatch) => ({
         getProject: (slug) => {
             dispatch({type: "GET_CURRENT_PROJECT", "payload": slug});
+        },
+        getProjectDocuments: (slug) => {
+            dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": slug});
         }
     })
 )(MapPageImpl);

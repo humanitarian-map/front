@@ -14,6 +14,13 @@ export default function ProjectDetail(props) {
     let idps = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "idps");
     let others = props.project.get('mapitems').filter((i) => i.getIn(['data', 'icon']) === "other");
 
+    let projectDocuments = props.documents.filter((doc) => {
+        let isFile = doc.get('type') === "file";
+        let splittedPath = doc.get('path').split("/");
+        let isInTheProjectFolder = splittedPath.length === 3 && splittedPath[1] === props.project.get('slug');
+        return isFile && isInTheProjectFolder;
+    });
+
     return (
       <section className="ProjectDetail panel">
         <h2 className="header-title">Project</h2>
@@ -31,8 +38,16 @@ export default function ProjectDetail(props) {
           </div>
           <div className="block block-documents">
             <h3 className="title mdi mdi-attachment mdi-16px">Documents</h3>
-            <a className="ellipsis" href="" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
-            <a className="ellipsis" href="" alt="">https://drive.google.com/drive/u/0/folders/0BwVWP_fda2O1fnRDWGNVcFd2N0RfUnBNVENrVnZRTGdTNGNwSExabHFnQmdtVzVPR3VKRU0</a>
+            {projectDocuments && projectDocuments.map((doc) => (
+                <a className="ellipsis"
+                   href={props.project.get('documents_url')}
+                   target="_blank"
+                   key={doc.get('path')}
+                   alt={doc.get('name')}>
+                  {doc.get('name')}
+                </a>
+            ))}
+            <a target="_blank" href={props.project.get('documents_url')}>Open documents folder</a>
           </div>
           <div className="block">
             <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
@@ -45,7 +60,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{camps.size}</span>
                 </div>
                 <ul>
-                  {camps.map((camp) => <li>{camp.get('name')}</li>)}
+                  {camps.map((camp) => <li key={camp.get('id')}>{camp.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -56,7 +71,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{hospitals.size}</span>
                 </div>
                 <ul>
-                  {hospitals.map((hospital) => <li>{hospital.get('name')}</li>)}
+                  {hospitals.map((hospital) => <li key={hospital.get('id')}>{hospital.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -67,7 +82,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{warnings.size}</span>
                 </div>
                 <ul>
-                  {warnings.map((warning) => <li>{warning.get('name')}</li>)}
+                  {warnings.map((warning) => <li key={warning.get('id')}>{warning.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -78,7 +93,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{idps.size}</span>
                 </div>
                 <ul>
-                  {idps.map((idp) => <li>{idp.get('name')}</li>)}
+                  {idps.map((idp) => <li key={idp.get('id')}>{idp.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -89,7 +104,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{checkpoints.size}</span>
                 </div>
                 <ul>
-                  {checkpoints.map((checkpoint) => <li>{checkpoint.get('name')}</li>)}
+                  {checkpoints.map((checkpoint) => <li key={checkpoint.get('id')}>{checkpoint.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -100,7 +115,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{mobileClinics.size}</span>
                 </div>
                 <ul>
-                  {mobileClinics.map((mobileClinic) => <li>{mobileClinic.get('name')}</li>)}
+                  {mobileClinics.map((mobileClinic) => <li key={mobileClinic.get('id')}>{mobileClinic.get('name')}</li>)}
                 </ul>
               </li>
               <li>
@@ -111,7 +126,7 @@ export default function ProjectDetail(props) {
                   <span className="tag">{others.size}</span>
                 </div>
                 <ul>
-                  {others.map((other) => <li>{other.get('name')}</li>)}
+                  {others.map((other) => <li key={other.get('id')}>{other.get('name')}</li>)}
                 </ul>
               </li>
             </ul>
@@ -129,5 +144,6 @@ export default function ProjectDetail(props) {
 }
 
 ProjectDetail.propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
+    documents: PropTypes.object
 }

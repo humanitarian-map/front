@@ -78,3 +78,14 @@ export function updatePoint(projectSlug, pointId, point) {
                 console.log(error);
               });
 }
+
+export function getProjectDocuments(slug) {
+  return axios.get(config.API_HOST + '/api/projects/'+slug+'/documents')
+              .then(function (response) {
+                return response.data;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+}
+
