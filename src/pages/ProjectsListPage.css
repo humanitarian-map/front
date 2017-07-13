@@ -1,5 +1,21 @@
-.ProjectsListPage .content {
-  padding: 5rem 1rem 0;
+html {
+  background-color: var(--color-grey-light);
+}
+
+.ProjectsListPage {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.ProjectsListPage h2 {
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  font-weight: lighter;
+  color: var(--color-grey-medium);
+}
+
+.ProjectsListPage .projects-content {
+  padding: 1rem;
   max-width: 65rem;
   margin: auto;
   text-align: left;
@@ -18,4 +34,44 @@
   padding: 0;
   font-size: 1.4rem;
   text-transform: uppercase;
+}
+
+.ProjectsListPage .grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ProjectsListPage .project {
+  flex: 1 0 25%;
+  box-sizing: border-box;
+  margin: 0.5rem;
+  padding: 1rem;
+  background-color: var(--color-white);;
+}
+.ProjectsListPage .project a {
+  text-decoration: none;
+}
+.ProjectsListPage .project:hover {
+  background-color: var(--color-blue);
+}
+.ProjectsListPage .project:hover p {
+  color: var(--color-white);
+}
+.ProjectsListPage .project .project-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-grey-dark);
+}
+.ProjectsListPage .project p {
+  color: var(--color-grey-medium);
+}
+.ProjectsListPage .project img {
+  max-height: 36px;
+  max-width: 36px;
+}
+.ProjectsListPage .project .organization {
+  font-size: 0.9rem;
+  color: var(--color-grey-medium);
+}
+.ProjectsListPage .project:hover .organization {
+  color: var(--color-white);
 }

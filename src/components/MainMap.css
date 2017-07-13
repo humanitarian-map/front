@@ -69,6 +69,7 @@
   flex-direction: column;
   text-align: left;
   height: 100%;
+  background: var(--color-white);
 }
 .content {
   height: 100%;
@@ -195,6 +196,6 @@ button.delete {
     height: 32px;
     align-self: center;
 }
-.MarkerIcon .marker-icon:before {
+.MarkerIcon .marker-icon.mdi:before {
     margin-top: 6px;
 }

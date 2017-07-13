@@ -14,14 +14,22 @@ class ProjectsListPageImpl extends React.Component {
           <header className="header-menu">
             <h1>The Humanitarian Map</h1>
           </header>
-          <div className="content">
-          <h2>Projects</h2>
-          {this.props.projects && this.props.projects.map((project) => (
-            <div key={project.get('id')}>
-              <Link to={"/map/"+ project.get('slug')} >{project.get('name')}</Link>
-              <p>{project.get('description')}</p>
-            </div>
-          ))}
+          <div className="projects-content">
+            <h2>Projects</h2>
+            <ul className="grid">
+            {this.props.projects && this.props.projects.map((project) => (
+              <li className="project" key={project.get('id')}>
+                  <Link to={"/map/"+ project.get('slug')} >
+                    <div className="project-name">{project.get('name')}</div>
+                    <p>{project.get('description')}</p>
+                    <div className="organization">
+                      <img src={project.get('organization').get('image')} />
+                      {project.get('organization').get('name')}
+                    </div>
+                  </Link>
+              </li>
+            ))}
+            </ul>
           </div>
         </div>
       );
