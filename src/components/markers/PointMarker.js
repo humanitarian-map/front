@@ -35,7 +35,7 @@ export default function PointMarker(props) {
     return (
         <Marker
             className="PointMarker"
-            draggable={true}
+            draggable={props.draggable}
             onDragEnd={(e) => props.onMoveMarker(props.point, e.target.getLatLng())}
             position={props.point.data.position}
             icon={props.selected? icons[(props.point.data.icon || "other") + "-active"] : icons[props.point.data.icon || "other"]}
@@ -54,4 +54,6 @@ PointMarker.propTypes = {
     point: PropTypes.object.isRequired,
     selected: PropTypes.bool,
     onMove: PropTypes.func,
+    onClickItem: PropTypes.func,
+    draggable: PropTypes.bool
 }

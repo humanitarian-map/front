@@ -3,6 +3,7 @@ import {fromJS} from "immutable";
 export const initialState = fromJS({
     "map": {
         "cursor": [0, 0],
+        "moving": false,
         "drawing": {
             type: null
         }
@@ -27,6 +28,7 @@ export function reducer(state, action) {
                     .setIn(['map', 'drawing', "ready-to-edit"], true);
     } else if (action.type === "SELECT_TOOL") {
         return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
+                    .setIn(["map", "moving"], null)
                     .setIn(["map", "viewing"], null);
     } else if (action.type === "SET_DRAWING_COLOR") {
         return state.setIn(['map', 'drawing', 'color'], action.payload);
@@ -54,8 +56,10 @@ export function reducer(state, action) {
         return state.setIn(["map", "drawing", "icon"], action.payload);
     } else if (action.type === "VISUALIZE_MARKER") {
         return state.updateIn(["map", "viewing"], (viewing) => {
-                        if (viewing && viewing.get('id') === action.payload.id) {
-                            return null
+                        if (!action.payload) {
+                            return null;
+                        } else if (viewing && viewing.get('id') === action.payload.id) {
+                            return null;
                         }
                         return fromJS(action.payload)
                     })
@@ -72,6 +76,9 @@ export function reducer(state, action) {
         return state.setIn(['map', 'drawing', "points", action.payload.idx], fromJS(action.payload.position));
     } else if (action.type === "CHANGE_CROSS_SIZE") {
         return state.setIn(['map', 'drawing', "size"], action.payload);
+    } else if (action.type === "TOGGLE_MOVE") {
+        return state.updateIn(['map', 'moving'], (m) => !m)
+                    .setIn(["map", "drawing"], fromJS({type: null}));
     }
     return state;
 }

@@ -29,8 +29,8 @@ class ToolsMenuImpl extends Component {
                  onClick={() => this.props.selectTool('polygon')}></div>
             <div className={"marker mdi mdi-close mdi-24px " + (active === 'cross' ? 'active' : '')}
                  onClick={() => this.props.selectTool('cross')}></div>
-            <div className={"marker mdi mdi-cursor-move mdi-24px " + (active === 'move' ? 'active' : '')}
-                 onClick={() => this.props.selectTool('move')}></div>
+            <div className={"marker mdi mdi-cursor-move mdi-24px " + (this.props.moving ? 'active' : '')}
+                 onClick={() => this.props.toggleMove()}></div>
             <CursorBox lat={this.props.cursor.get(0)} lng={this.props.cursor.get(1)}></CursorBox>
           </div>
         );
@@ -44,11 +44,15 @@ ToolsMenuImpl.propTypes = {
 const ToolsMenu = connect(
     (state) => ({
         drawing: state.getIn(['map', 'drawing']),
-        cursor: state.getIn(['map', 'cursor'])
+        cursor: state.getIn(['map', 'cursor']),
+        moving: state.getIn(['map', 'moving']),
     }),
     (dispatch) => ({
         selectTool: (tool) => {
             dispatch({type: "SELECT_TOOL", "payload": tool});
+        },
+        toggleMove: () => {
+            dispatch({type: "TOGGLE_MOVE", "payload": null});
         }
     })
 )(ToolsMenuImpl);
