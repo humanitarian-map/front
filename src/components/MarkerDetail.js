@@ -7,7 +7,7 @@ function MarkerIcon(props) {
     let types = {
         "warning": {name: "Warning", icon: "fire"},
         "camp": {name: "Camp", icon: "tent"},
-        "checkpoint": {name: "Checkpoint", icon: "marker-check"},
+        "checkpoint": {name: "Check point", icon: "marker-check"},
         "hospital": {name: "Hospital", icon: "hospital"},
         "idps": {name: "IDPs", icon: "walk"},
         "mobile-clinic": {name: "Mobile clinic", icon: "truck"},
