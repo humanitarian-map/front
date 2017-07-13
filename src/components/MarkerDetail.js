@@ -89,6 +89,7 @@ class MarkerDetailImpl extends React.Component {
                       <a className="ellipsis"
                          key={doc.get('path')}
                          href={props.marker.documents_url}
+                         target="_blank"
                          alt={doc.get('name')}>
                         {doc.get('name')}
                       </a>
