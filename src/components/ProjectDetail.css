@@ -56,3 +56,11 @@
   float: right;
   margin-top: 4px;
 }
+
+.ProjectDetail .timeframe .date {
+  display: inline-block;
+  width: 50%;
+}
+.ProjectDetail .timeframe .label {
+  font-weight: bold;
+}
