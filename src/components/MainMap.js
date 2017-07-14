@@ -124,7 +124,7 @@ class MainMapImpl extends React.Component {
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
           <TileLayer
-            url='https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+            url='http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
             attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
             subdomains='abcd'
             maxZoom='19'
