@@ -106,8 +106,26 @@ export default class ProjectDetail extends React.Component {
             <div className="block">
               <h3 className="title mdi mdi-calendar mdi-16px">Timeframe</h3>
               <div  className="timeframe">
-                <span className="label">Start:</span> <span className="value">{moment(this.props.project.get('start_date')).calendar()}</span>
-                <span className="label">End:</span> <span className="value">{moment(this.props.project.get('end_date')).calendar()}</span>
+                <div className="date">
+                  <span className="label">Start:</span> <span className="value">{moment(this.props.project.get('start_date')).calendar()}</span>
+                </div>
+                <div className="date">
+                  <span className="label">End:</span> <span className="value">{moment(this.props.project.get('end_date')).calendar()}</span>
+                </div>
+              </div>
+            </div>
+            <div className="block">
+              <h3 className="title mdi mdi-map mdi-16px">Map options</h3>
+              <p>
+                <button className=""
+                        onClick={() => this.props.onSetCenterClick(this.props.project.toJS(), this.map.getCenter(), this.map.getZoom())}>
+                  Set current view as map center
+                </button>
+              </p>
+              <div>
+                <button className="">
+                  Zoom to map center
+                </button>
               </div>
             </div>
           </div>
