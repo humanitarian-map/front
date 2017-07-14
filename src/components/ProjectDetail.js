@@ -77,111 +77,118 @@ export default class ProjectDetail extends React.Component {
             <div className="block">
               <h3 className="title mdi mdi-map-marker mdi-16px">Markers</h3>
               <ul className="markers-list">
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("camps")}>
-                    <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
-                    <span className="name">Camps</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{camps.size}</span>
-                  </div>
-                  {this.state.openMarker === "camps" &&
-                    <ul>
-                      {camps.map((camp) => (
-                          <li onClick={() => this.centerMap(camp.toJS())}
-                              key={camp.get('id')}>{camp.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("hospitals")}>
-                    <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
-                    <span className="name">Hospitals</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{hospitals.size}</span>
-                  </div>
-                  {this.state.openMarker === "hospitals" &&
-                    <ul>
-                      {hospitals.map((hospital) => (
-                          <li onClick={() => this.centerMap(hospital.toJS())}
-                              key={hospital.get('id')}>{hospital.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("warnings")}>
-                    <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
-                    <span className="name">Warnings</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{warnings.size}</span>
-                  </div>
-                  {this.state.openMarker === "warnings" &&
-                    <ul>
-                      {warnings.map((warning) => (
-                          <li onClick={() => this.centerMap(warning.toJS())}
-                              key={warning.get('id')}>{warning.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("idps")}>
-                    <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
-                    <span className="name">IDPs</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{idps.size}</span>
-                  </div>
-                  {this.state.openMarker === "idps" &&
-                    <ul>
-                      {idps.map((idp) => (
-                          <li onClick={() => this.centerMap(idp.toJS())}
-                              key={idp.get('id')}>{idp.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("checkpoints")}>
-                    <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
-                    <span className="name">Check points</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{checkpoints.size}</span>
-                  </div>
-                  {this.state.openMarker === "checkpoints" &&
-                    <ul>
-                      {checkpoints.map((checkpoint) => (
-                          <li onClick={() => this.centerMap(checkpoint.toJS())}
-                              key={checkpoint.get('id')}>{checkpoint.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("mobile-clinics")}>
-                    <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
-                    <span className="name">Mobile clinics</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{mobileClinics.size}</span>
-                  </div>
-                  {this.state.openMarker === "mobile-clinics" &&
-                    <ul>
-                      {mobileClinics.map((mobileClinic) => (
-                          <li onClick={() => this.centerMap(mobileClinic.toJS())}
-                              key={mobileClinic.get('id')}>{mobileClinic.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
-                <li>
-                  <div className="header" onClick={() => this.toggleMarkerList("other")}>
-                    <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
-                    <span className="name">Other</span>
-                    <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
-                    <span className="tag">{others.size}</span>
-                  </div>
-                  {this.state.openMarker === "other" &&
-                    <ul>
-                      {others.map((other) => (
-                          <li onClick={() => this.centerMap(other.toJS())}
-                              key={other.get('id')}>{other.get('name')}</li>
-                      ))}
-                    </ul>}
-                </li>
+                {camps.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("camps")}>
+                      <span className="marker-icon camp-icon mdi mdi-tent mdi-18px"></span>
+                      <span className="name">Camps</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{camps.size}</span>
+                    </div>
+                    {this.state.openMarker === "camps" &&
+                      <ul>
+                        {camps.map((camp) => (
+                            <li onClick={() => this.centerMap(camp.toJS())}
+                                key={camp.get('id')}>{camp.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {hospitals.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("hospitals")}>
+                      <span className="marker-icon hospital-icon mdi mdi-hospital mdi-18px"></span>
+                      <span className="name">Hospitals</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{hospitals.size}</span>
+                    </div>
+                    {this.state.openMarker === "hospitals" &&
+                      <ul>
+                        {hospitals.map((hospital) => (
+                            <li onClick={() => this.centerMap(hospital.toJS())}
+                                key={hospital.get('id')}>{hospital.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {warnings.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("warnings")}>
+                      <span className="marker-icon warning-icon mdi mdi-fire mdi-18px"></span>
+                      <span className="name">Warnings</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{warnings.size}</span>
+                    </div>
+                    {this.state.openMarker === "warnings" &&
+                      <ul>
+                        {warnings.map((warning) => (
+                            <li onClick={() => this.centerMap(warning.toJS())}
+                                key={warning.get('id')}>{warning.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {idps.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("idps")}>
+                      <span className="marker-icon idps-icon mdi mdi-walk mdi-18px"></span>
+                      <span className="name">IDPs</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{idps.size}</span>
+                    </div>
+                    {this.state.openMarker === "idps" &&
+                      <ul>
+                        {idps.map((idp) => (
+                            <li onClick={() => this.centerMap(idp.toJS())}
+                                key={idp.get('id')}>{idp.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {checkpoints.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("checkpoints")}>
+                      <span className="marker-icon checkpoint-icon mdi mdi-marker-check mdi-18px"></span>
+                      <span className="name">Check points</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{checkpoints.size}</span>
+                    </div>
+                    {this.state.openMarker === "checkpoints" &&
+                      <ul>
+                        {checkpoints.map((checkpoint) => (
+                            <li onClick={() => this.centerMap(checkpoint.toJS())}
+                                key={checkpoint.get('id')}>{checkpoint.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {mobileClinics.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("mobile-clinics")}>
+                      <span className="marker-icon mobile-clinic-icon mdi mdi-truck mdi-18px"></span>
+                      <span className="name">Mobile clinics</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{mobileClinics.size}</span>
+                    </div>
+                    {this.state.openMarker === "mobile-clinics" &&
+                      <ul>
+                        {mobileClinics.map((mobileClinic) => (
+                            <li onClick={() => this.centerMap(mobileClinic.toJS())}
+                                key={mobileClinic.get('id')}>{mobileClinic.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
+                {others.size > 0 &&
+                  <li>
+                    <div className="header" onClick={() => this.toggleMarkerList("other")}>
+                      <span className="marker-icon other-icon mdi mdi-map-marker mdi-18px"></span>
+                      <span className="name">Other</span>
+                      <span className="arrow mdi mdi-chevron-right mdi-18px"></span>
+                      <span className="tag">{others.size}</span>
+                    </div>
+                    {this.state.openMarker === "other" &&
+                      <ul>
+                        {others.map((other) => (
+                            <li onClick={() => this.centerMap(other.toJS())}
+                                key={other.get('id')}>{other.get('name')}</li>
+                        ))}
+                      </ul>}
+                  </li>}
               </ul>
             </div>
             <div className="block">
