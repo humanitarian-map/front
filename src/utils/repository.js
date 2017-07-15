@@ -2,7 +2,7 @@ import axios from "axios";
 import config from "../config";
 
 export function listProjects() {
-  let noCache = "?"+((new Date).getTime());
+  let noCache = "?"+((new Date()).getTime());
   return axios.get(config.API_HOST + '/api/projects'+noCache)
               .then(function (response) {
                 return response.data;
@@ -13,7 +13,7 @@ export function listProjects() {
 }
 
 export function getProject(slug) {
-  let noCache = "?"+((new Date).getTime());
+  let noCache = "?"+((new Date()).getTime());
   return axios.get(config.API_HOST + '/api/projects/'+slug+noCache)
               .then(function (response) {
                 return response.data;
@@ -82,7 +82,7 @@ export function updatePoint(projectSlug, pointId, point) {
 }
 
 export function getProjectDocuments(slug) {
-  let noCache = "?"+((new Date).getTime());
+  let noCache = "?"+((new Date()).getTime());
   return axios.get(config.API_HOST + '/api/projects/'+slug+'/documents'+noCache)
               .then(function (response) {
                 return response.data;
