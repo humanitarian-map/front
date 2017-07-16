@@ -34,7 +34,7 @@ export default function ({dispatch, getState}) {
             dispatch({type: "SELECT_TOOL", payload: null});
         })
       case 'DELETE_POINT':
-        return repo.deletePoint(action.payload.projectSlug, action.payload.pointId).then(() => {
+        return repo.deletePoint(action.payload.pointId).then(() => {
             dispatch({type: "GET_CURRENT_PROJECT", payload: action.payload.projectSlug});
             dispatch({type: "SELECT_TOOL", payload: null});
         })

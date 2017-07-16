@@ -55,6 +55,7 @@ class MarkerCreationDetailImpl extends React.Component {
         this.props.onSaveMarker(
             this.props.project.get('slug'),
             {
+                "project": this.props.project.get('id'),
                 "name": this.state.name,
                 "description": this.state.description,
                 "type": this.props.drawing.get('type'),
@@ -87,7 +88,8 @@ class MarkerCreationDetailImpl extends React.Component {
                     {POINT_TYPES.map((pointType) => (
                         <MarkerIcon active={activeMarker === pointType.id || (!activeMarker && pointType.id === "other") }
                                     onClick={() => props.onSelectIcon(pointType.id)}
-                                    type={pointType} />
+                                    type={pointType}
+                                    key={pointType.id} />
                     ))}
                   </div>
                 </div>}
