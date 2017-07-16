@@ -4,21 +4,13 @@ import {PropTypes} from "prop-types";
 import './MarkerCreationDetail.css';
 import {COLORS, DEFAULT_COLOR} from "../utils/colors";
 import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
+import {POINT_TYPES} from "../utils/point_types";
 
 function MarkerIcon(props) {
-    let typesToIcon = {
-        "warning": "fire",
-        "camp": "tent",
-        "checkpoint": "marker-check",
-        "hospital": "hospital",
-        "idps": "walk",
-        "mobile-clinic": "truck",
-        "other": "map-marker",
-    }
     return (
         <div className={"MarkerIcon " + (props.active? "active" : "")} onClick={props.onClick}>
-          <div className={"marker-icon " + props.type + "-icon mdi mdi-" + typesToIcon[props.type || "other"] + " mdi-18px"}  />
-          <span>{props.name}</span>
+          <div className={"marker-icon " + props.type.id + "-icon mdi mdi-" + props.type.icon + " mdi-18px"}  />
+          <span>{props.type.name}</span>
         </div>
     )
 }
@@ -92,13 +84,11 @@ class MarkerCreationDetailImpl extends React.Component {
                 <div className="block">
                   <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
                   <div className="markers">
-                    <MarkerIcon active={activeMarker === "camp"} onClick={() => props.onSelectIcon("camp")} type="camp" name="Camp" />
-                    <MarkerIcon active={activeMarker === "hospital"} onClick={() => props.onSelectIcon("hospital")} type="hospital" name="Hospital" />
-                    <MarkerIcon active={activeMarker === "warning"} onClick={() => props.onSelectIcon("warning")} type="warning" name="Warning" />
-                    <MarkerIcon active={activeMarker === "idps"} onClick={() => props.onSelectIcon("idps")} type="idps" name="IDPs" />
-                    <MarkerIcon active={activeMarker === "checkpoint"} onClick={() => props.onSelectIcon("checkpoint")} type="checkpoint" name="Check point" />
-                    <MarkerIcon active={activeMarker === "mobile-clinic"} onClick={() => props.onSelectIcon("mobile-clinic")} type="mobile-clinic" name="Mobile clinic"/>
-                    <MarkerIcon active={activeMarker === "other" || !activeMarker} onClick={() => props.onSelectIcon("other")} type="other" name="Other" />
+                    {POINT_TYPES.map((pointType) => (
+                        <MarkerIcon active={activeMarker === pointType.id || (!activeMarker && pointType.id === "other") }
+                                    onClick={() => props.onSelectIcon(pointType.id)}
+                                    type={pointType} />
+                    ))}
                   </div>
                 </div>}
               {(type === "polygon" || type === "arrow" || type === "cross") &&

@@ -3,10 +3,12 @@ import { Marker, Popup} from 'react-leaflet';
 import * as L from "leaflet";
 import {PropTypes} from "prop-types";
 import "./PointMarker.css";
+import {POINT_TYPES_OBJ} from "../../utils/point_types";
 
-function createIcon(markerId, iconName, active) {
+function createIcon(markerId, active) {
+    let iconName = POINT_TYPES_OBJ[markerId].icon;
     return L.divIcon({
-        className: "marker-icon " + markerId + "-icon mdi mdi-" + iconName + " mdi-24px" + (active? " active": ""),
+        className: "marker-icon "+ markerId + "-icon mdi mdi-" + iconName + " mdi-24px" + (active? " active": ""),
         iconSize: [40, 40],
         html: "<div class='arrow'></div>",
         iconAnchor: [20, 44],
@@ -15,20 +17,20 @@ function createIcon(markerId, iconName, active) {
 }
 
 const icons = {
-    "warning": createIcon("warning", "fire", false),
-    "camp": createIcon("camp", "tent", false),
-    "checkpoint": createIcon("checkpoint", "marker-check", false),
-    "hospital": createIcon("hospital", "hospital", false),
-    "idps": createIcon("idps", "walk", false),
-    "mobile-clinic": createIcon("mobile-clinic", "truck", false),
-    "other": createIcon("other", "map-marker", false),
-    "warning-active": createIcon("warning", "fire", true),
-    "camp-active": createIcon("camp", "tent", true),
-    "checkpoint-active": createIcon("checkpoint", "marker-check", true),
-    "hospital-active": createIcon("hospital", "hospital", true),
-    "idps-active": createIcon("idps", "walk", true),
-    "mobile-clinic-active": createIcon("mobile-clinic", "truck", true),
-    "other-active": createIcon("other", "map-marker", true),
+    "warning": createIcon("warning", false),
+    "camp": createIcon("camp", false),
+    "checkpoint": createIcon("checkpoint", false),
+    "hospital": createIcon("hospital", false),
+    "idps": createIcon("idps", false),
+    "mobile-clinic": createIcon("mobile-clinic", false),
+    "other": createIcon("other", false),
+    "warning-active": createIcon("warning", true),
+    "camp-active": createIcon("camp", true),
+    "checkpoint-active": createIcon("checkpoint", true),
+    "hospital-active": createIcon("hospital", true),
+    "idps-active": createIcon("idps", true),
+    "mobile-clinic-active": createIcon("mobile-clinic", true),
+    "other-active": createIcon("other", true),
 }
 
 export default function PointMarker(props) {

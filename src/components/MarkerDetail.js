@@ -2,19 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './MarkerDetail.css';
+import {POINT_TYPES_OBJ} from "../utils/point_types";
 
 function MarkerIcon(props) {
-    let types = {
-        "warning": {name: "Warning", icon: "fire"},
-        "camp": {name: "Camp", icon: "tent"},
-        "checkpoint": {name: "Check point", icon: "marker-check"},
-        "hospital": {name: "Hospital", icon: "hospital"},
-        "idps": {name: "IDPs", icon: "walk"},
-        "mobile-clinic": {name: "Mobile clinic", icon: "truck"},
-        "other": {name: "Other", icon: "map-marker"},
-    }
-    let icon = types[props.type || "other"].icon;
-    let name = types[props.type || "other"].name;
+    let icon = POINT_TYPES_OBJ[props.type || "other"].icon;
+    let name = POINT_TYPES_OBJ[props.type || "other"].name;
     return (
         <div className={"MarkerIcon " + (props.active? "active" : "")} onClick={props.onClick}>
           <div className={"marker-icon " + props.type + "-icon mdi mdi-" + icon + " mdi-24px"}  />
