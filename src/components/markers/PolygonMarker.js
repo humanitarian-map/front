@@ -1,5 +1,5 @@
 import React from 'react';
-import { Polygon, Popup } from 'react-leaflet';
+import { Polygon, Tooltip} from 'react-leaflet';
 import {PropTypes} from "prop-types";
 import {DEFAULT_COLOR} from "../../utils/colors";
 
@@ -8,13 +8,11 @@ export default function PolygonMarker(props) {
         <Polygon positions={[props.point.data.positions]}
                  color={props.point.data.color || DEFAULT_COLOR}
                  fillColor={props.point.data.color || DEFAULT_COLOR}
-                 onMouseOver={(e) => e.target.openPopup()}
-                 onMouseOut={(e) => e.target.closePopup()}
                  onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
           {props.point.name &&
-            <Popup>
+            <Tooltip direction="top" sticky={true} offset={[-13, -20]}>
               <span className="title">{props.point.name}</span>
-            </Popup>}
+            </Tooltip>}
         </Polygon>
     )
 }

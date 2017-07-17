@@ -1,5 +1,5 @@
 import React from 'react';
-import { Marker, Popup} from 'react-leaflet';
+import { Marker, Tooltip} from 'react-leaflet';
 import * as L from "leaflet";
 import {PropTypes} from "prop-types";
 import "./PointMarker.css";
@@ -41,13 +41,11 @@ export default function PointMarker(props) {
             onDragEnd={(e) => props.onMoveMarker(props.point, e.target.getLatLng())}
             position={props.point.data.position}
             icon={props.selected? icons[(props.point.data.icon || "other") + "-active"] : icons[props.point.data.icon || "other"]}
-            onMouseOver={(e) => e.target.openPopup()}
-            onMouseOut={(e) => e.target.closePopup()}
             onClick={(e) => props.onClickItem && props.onClickItem(props.point)}>
           {props.point.name &&
-            <Popup>
+            <Tooltip direction="top" offset={[-15, -60]}>
               <span className="title">{props.point.name}</span>
-            </Popup>}
+            </Tooltip>}
         </Marker>
     )
 }

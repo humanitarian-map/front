@@ -40,23 +40,10 @@
     cursor: none;
 }
 
-.leaflet-popup .leaflet-popup-content-wrapper{
+.leaflet-tooltip{
     border-radius: 0;
     box-shadow: none;
-}
-
-.leaflet-popup .leaflet-popup-content{
     margin: 8px 14px;
-}
-
-.leaflet-popup .leaflet-popup-tip{
-    width: 10px;
-    height: 10px;
-    box-shadow: none;
-}
-
-.leaflet-popup .leaflet-popup-close-button{
-    display: none;
 }
 
 .panel {
