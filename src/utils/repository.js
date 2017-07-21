@@ -1,93 +1,75 @@
-import axios from "axios";
 import config from "../config";
+import { Observable } from "rxjs";
+import 'rxjs/add/observable/dom/ajax';
+
+function httpGet(url) {
+    return Observable.ajax({
+        url:url,
+        responseType: "json"
+    }).map((response) => response.response);
+}
+
+function httpDelete(url) {
+    return Observable.ajax({
+        method: "DELETE",
+        url:url,
+        responseType: "json"
+    }).map((response) => response.response)
+}
+
+function httpPost(url, data) {
+    return Observable.ajax({
+        method: "POST",
+        url:url,
+        responseType: "json",
+        body: data
+    }).map((response) => response.response)
+}
+
+function httpPut(url, data) {
+    return Observable.ajax({
+        method: "PUT",
+        url:url,
+        responseType: "json",
+        body: data
+    }).map((response) => response.response)
+}
 
 export function listProjects() {
   let noCache = "?"+((new Date()).getTime());
-  return axios.get(config.API_HOST + '/api/projects/'+noCache)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpGet(config.API_HOST + '/api/projects/'+noCache);
 }
 
 export function getProject(slug) {
   let noCache = "?"+((new Date()).getTime());
-  return axios.get(config.API_HOST + '/api/projects/'+slug+"/"+noCache)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpGet(config.API_HOST + '/api/projects/'+slug+"/"+noCache);
 }
 
 export function deleteProject(slug) {
-  return axios.delete(config.API_HOST + '/api/projects/'+slug+"/")
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpDelete(config.API_HOST + '/api/projects/'+slug+"/");
 }
 
 export function updateProject(slug, project) {
-  return axios.put(config.API_HOST + '/api/projects/'+slug+"/", project)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpPut(config.API_HOST + '/api/projects/'+slug+"/", project)
 }
 
 export function createProject(project) {
-  return axios.post(config.API_HOST + '/api/projects/', project)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpPost(config.API_HOST + '/api/projects/', project)
 }
 
 export function createPoint(projectSlug, point) {
-  return axios.post(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/', point)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpPost(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/', point)
 }
 
 export function deletePoint(projectSlug, pointId) {
-  return axios.delete(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/")
-              .then(function (response) {})
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpDelete(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/")
 }
 
 export function updatePoint(projectSlug, pointId, point) {
-  return axios.put(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/", point)
-              .then(function (response) {
-                  return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpPut(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/", point)
 }
 
 export function getProjectDocuments(slug) {
   let noCache = "?"+((new Date()).getTime());
-  return axios.get(config.API_HOST + '/api/projects/'+slug+'/documents/'+noCache)
-              .then(function (response) {
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+  return httpGet(config.API_HOST + '/api/projects/'+slug+'/documents/'+noCache)
 }

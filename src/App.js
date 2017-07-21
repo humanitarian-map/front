@@ -5,13 +5,13 @@ import UserProfilePage from "./pages/UserProfilePage";
 import ProjectsListPage from "./pages/ProjectsListPage";
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import effects from "redux-effects";
-import appEffects from "./App.effects";
 import { reducer, initialState} from './App.store';
 import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { createEpicMiddleware } from 'redux-observable';
+import { rootEpic } from "./App.epics"
 
-let store = createStore(reducer, initialState, applyMiddleware(effects, appEffects));
+let store = createStore(reducer, initialState, applyMiddleware(createEpicMiddleware(rootEpic)));
 
 export default class App extends Component {
   render() {
