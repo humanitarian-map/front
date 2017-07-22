@@ -41,7 +41,7 @@ Point.propTypes = {
     selected: PropTypes.bool
 }
 
-class MainMapImpl extends React.Component {
+class MainMap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {pointer: [0, 0]}
@@ -166,7 +166,7 @@ class MainMapImpl extends React.Component {
     }
 }
 
-MainMapImpl.propTypes = {
+MainMap.propTypes = {
     cursor: ImmutablePropTypes.contains(
                 0: PropTypes.number.isRequired,
                 1: PropTypes.number.isRequired,
@@ -179,7 +179,7 @@ MainMapImpl.propTypes = {
             }),
 }
 
-const MainMap = connect(
+export default connect(
     (state) => ({
         selectedId: state.getIn(['map', 'viewing', 'id']),
         drawing: state.getIn(['map', 'drawing']),
@@ -187,6 +187,4 @@ const MainMap = connect(
         cursor: state.getIn(['map', 'cursor']),
         project: state.get('current-project'),
     })
-)(MainMapImpl);
-
-export default MainMap;
+)(MainMap);

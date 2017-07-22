@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './UserProfilePage.css';
 import Menu from '../components/Menu';
 
-class UserProfilePageImpl extends Component {
+class UserProfilePage extends Component {
   render() {
       return (
         <div className="UserProfilePage">
@@ -14,8 +14,6 @@ class UserProfilePageImpl extends Component {
   }
 }
 
-const UserProfilePage = connect(
+export default connect(
     (state) => ({user: state.get('user')}),
-)(UserProfilePageImpl);
-
-export default UserProfilePage;
+)(UserProfilePage);

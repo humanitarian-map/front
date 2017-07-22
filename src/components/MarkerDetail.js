@@ -17,7 +17,7 @@ function MarkerIcon(props) {
     )
 }
 
-class MarkerDetailImpl extends React.Component {
+class MarkerDetail extends React.Component {
     render() {
         let marker = this.props.marker;
 
@@ -104,18 +104,16 @@ class MarkerDetailImpl extends React.Component {
     }
 }
 
-MarkerDetailImpl.propTypes = {
+MarkerDetail.propTypes = {
     marker: PropTypes.object.isRequired,
     project: PropTypes.object,
     documents: PropTypes.object
 }
 
-const MarkerDetail = connect(
+export default connect(
     (state) => ({
         marker: state.getIn(['map', 'viewing']).toJS(),
         project: state.get("current-project"),
         documents: state.get("documents"),
     })
-)(MarkerDetailImpl);
-
-export default MarkerDetail;
+)(MarkerDetail);

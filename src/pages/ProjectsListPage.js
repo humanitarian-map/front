@@ -5,7 +5,7 @@ import './ProjectsListPage.css';
 import logoSvg from './img/logo-navbar.svg';
 import {emit} from "../App.events";
 
-class ProjectsListPageImpl extends React.Component {
+class ProjectsListPage extends React.Component {
   componentWillMount() {
       emit({type: "LIST_PROJECTS", payload: null});
       emit({type: "RESET_PROJECT", payload: null});
@@ -42,10 +42,8 @@ class ProjectsListPageImpl extends React.Component {
   }
 }
 
-const ProjectsListPage = connect(
+export default connect(
     (state) => ({
         projects: state.get('projects-list'),
     }),
-)(ProjectsListPageImpl);
-
-export default ProjectsListPage;
+)(ProjectsListPage);

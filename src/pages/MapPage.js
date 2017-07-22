@@ -9,7 +9,7 @@ import MarkerDetail from "../components/MarkerDetail";
 import './MapPage.css';
 import {emit} from "../App.events";
 
-class MapPageImpl extends Component {
+class MapPage extends Component {
   componentWillMount() {
       emit({type: "GET_CURRENT_PROJECT", "payload": this.props.match.params.slug});
       emit({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
@@ -46,7 +46,7 @@ class MapPageImpl extends Component {
   }
 }
 
-const MapPage = connect(
+export default connect(
     (state) => ({
         map: state.get('map'),
         user: state.get('user'),
@@ -54,6 +54,4 @@ const MapPage = connect(
         documents: state.get('documents'),
         displayProjectDetail: state.get('display-project-detail')
     }),
-)(MapPageImpl);
-
-export default MapPage;
+)(MapPage);

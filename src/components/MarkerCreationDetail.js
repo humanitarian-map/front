@@ -17,7 +17,7 @@ function MarkerIcon(props) {
     )
 }
 
-class MarkerCreationDetailImpl extends React.Component {
+class MarkerCreationDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -201,15 +201,13 @@ class MarkerCreationDetailImpl extends React.Component {
     }
 }
 
-MarkerCreationDetailImpl.propTypes = {
+MarkerCreationDetail.propTypes = {
     drawing: PropTypes.object.isRequired
 }
 
-const MarkerCreationDetail = connect(
+export default connect(
     (state) => ({
         drawing: state.getIn(['map', 'drawing']),
         project: state.get("current-project"),
     }),
-)(MarkerCreationDetailImpl);
-
-export default MarkerCreationDetail;
+)(MarkerCreationDetail);

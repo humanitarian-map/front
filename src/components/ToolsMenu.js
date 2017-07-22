@@ -18,7 +18,7 @@ CursorBox.propTypes = {
     lng: PropTypes.number.isRequired,
 }
 
-class ToolsMenuImpl extends Component {
+class ToolsMenu extends Component {
     render() {
         let active = this.props.drawing.get('type');
         return (
@@ -39,16 +39,14 @@ class ToolsMenuImpl extends Component {
     }
 }
 
-ToolsMenuImpl.propTypes = {
+ToolsMenu.propTypes = {
     drawing: PropTypes.object.isRequired
 }
 
-const ToolsMenu = connect(
+export default connect(
     (state) => ({
         drawing: state.getIn(['map', 'drawing']),
         cursor: state.getIn(['map', 'cursor']),
         moving: state.getIn(['map', 'moving']),
     }),
-)(ToolsMenuImpl);
-
-export default ToolsMenu;
+)(ToolsMenu);

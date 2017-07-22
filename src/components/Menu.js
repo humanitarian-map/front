@@ -7,7 +7,7 @@ import './Menu.css';
 import {emit} from "../App.events";
 import * as actions from "../App.actions";
 
-class MenuImpl extends Component {
+class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,15 +34,13 @@ class MenuImpl extends Component {
     }
 }
 
-MenuImpl.propTypes = {
+Menu.propTypes = {
     user: PropTypes.object.isRequired
 }
 
-const Menu = connect(
+export default connect(
     (state) => ({
         user: state.get('user'),
         openDetail: state.get('display-project-detail')
     }),
-)(MenuImpl);
-
-export default Menu;
+)(Menu);
