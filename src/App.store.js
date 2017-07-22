@@ -6,7 +6,8 @@ export const initialState = fromJS({
         "moving": false,
         "drawing": {
             type: null
-        }
+        },
+        "current-position": null,
     },
     "current-project": null,
     "projects-list": [],
@@ -100,6 +101,8 @@ export function reducer(state, action) {
                     .setIn(["map", "drawing"], fromJS({type: null}));
     } else if (action.type === "SET_PROJECT_DOCUMENTS") {
         return state.set("documents", fromJS(action.payload));
+    } else if (action.type === "SET_CURRENT_MAP_POSITION") {
+        return state.setIn(['map', 'current-position'], fromJS(action.payload));
     }
     return state;
 }

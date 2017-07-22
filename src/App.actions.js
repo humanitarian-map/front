@@ -22,15 +22,15 @@ export const confirmPolygonDrawing = () => ({type: "CONFIRM_POLYGON_DRAWING", "p
 export const cursorMove = (lat, lng) => ({type: "CURSOR_MOVE", "payload": [lat, lng]});
 export const clickItem = (point) => ({type: "VISUALIZE_MARKER", "payload": point});
 export const deleteItem = (projectSlug, pointId) => ({type: "DELETE_POINT", "payload": {projectSlug, pointId}});
-export const setCenterClick = (project, center, zoom) => {
-    let updatedProject = _.extend({}, project);
-    updatedProject.center_point = [parseFloat(center.lat), parseFloat(center.lng)];
-    updatedProject.zoom = zoom;
-    delete updatedProject.mapitems;
-    delete updatedProject.documents_url;
-    delete updatedProject.slug;
-    delete updatedProject.organization;
-    return {type: "UPDATE_PROJECT", "payload": {projectSlug: project.slug, project: updatedProject}};
+export const setCurrentMapPosition = (center, zoom) => ({type: "SET_CURRENT_MAP_POSITION", "payload": {center, zoom}});
+export const centerMap = (center, zoom) => ({type: "CENTER_MAP", "payload": {center, zoom}});
+export const visualizeMarker = (point) => ({type: "FORCE_VISUALIZE_MARKER", "payload": point});
+export const setProjectCenter = (project, center, zoom) => {
+    let updatedProject =  {
+        center_point: [parseFloat(center.lat), parseFloat(center.lng)],
+        zoom: zoom
+    }
+    return {type: "UPDATE_PROJECT_POSITION", "payload": {projectSlug: project.slug, data: updatedProject}};
 }
 export const moveMarker = (projectSlug, point, newLatLng) => {
     let updatedPoint = _.extend({}, point)

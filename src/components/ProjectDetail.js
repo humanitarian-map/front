@@ -1,11 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './ProjectDetail.css';
 import moment from "moment";
 import {POINT_TYPES} from "../utils/point_types";
 import {emit} from "../App.events";
+import * as actions from "../App.actions";
 
-export default class ProjectDetail extends React.Component {
+class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +18,8 @@ export default class ProjectDetail extends React.Component {
     }
 
     centerMap(point) {
-        emit({type: "CENTER_AND_OPEN_MARKER", "payload": point});
+        emit(actions.centerMap(point.data.position), this.props.currentPosition.get('zoom'));
+        emit(actions.visualizeMarker(point));
     }
 
     toggleMarkerList(marker) {
@@ -118,12 +121,21 @@ export default class ProjectDetail extends React.Component {
               <h3 className="title mdi mdi-map mdi-16px">Map options</h3>
               <p>
                 <button className=""
-                        onClick={() => this.props.onSetCenterClick(this.props.project.toJS(), this.map.getCenter(), this.map.getZoom())}>
+                        onClick={() => emit(actions.setProjectCenter(
+                            this.props.project.toJS(),
+                            this.props.currentPosition.get('center').toJS(),
+                            this.props.currentPosition.get('zoom')
+                        ))}>
                   Set current view as map center
                 </button>
               </p>
               <div>
-                <button className="">
+                <button className=""
+                        onClick={() => emit(actions.centerMap(
+                            {lat: this.props.project.getIn(['center_point', 0]),
+                             lng: this.props.project.getIn(['center_point', 1])},
+                            this.props.project.get('zoom')
+                        ))}>
                   Zoom to map center
                 </button>
               </div>
@@ -137,4 +149,11 @@ export default class ProjectDetail extends React.Component {
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     documents: PropTypes.object,
+    currentPosition: PropTypes.object,
 }
+
+export default connect(
+    (state) => ({
+        currentPosition: state.getIn(['map', 'current-position']),
+    })
+)(ProjectDetail);

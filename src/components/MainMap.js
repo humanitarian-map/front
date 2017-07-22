@@ -38,7 +38,8 @@ function Point(props) {
 }
 Point.propTypes = {
     point: ImmutablePropTypes.mapContains({}).isRequired,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    draggable: PropTypes.bool
 }
 
 class MainMap extends React.Component {
@@ -50,6 +51,7 @@ class MainMap extends React.Component {
         this.keyup = this.keyup.bind(this);
         this.mouseMove = this.mouseMove.bind(this);
         this.centerMap = this.centerMap.bind(this);
+        this.whenReady = this.whenReady.bind(this);
     }
 
     componentWillMount() {
@@ -66,7 +68,7 @@ class MainMap extends React.Component {
 
     centerMap(event) {
         this.map.invalidateSize();
-        setTimeout(() => this.map.flyTo(event.detail, this.map.getZoom()), 100);
+        setTimeout(() => this.map.flyTo(event.detail.center, event.detail.zoom, 100));
     }
 
     getPosition(event) {
@@ -104,6 +106,11 @@ class MainMap extends React.Component {
         this.setState({pointer: [event.clientX - 60, event.clientY - 60]})
     }
 
+    whenReady(event) {
+        this.map = event.target;
+        emit(actions.setCurrentMapPosition(this.map.getCenter(), this.map.getZoom()))
+    }
+
 
     render() {
       let drawingType = this.props.drawing.get('type');
@@ -118,8 +125,9 @@ class MainMap extends React.Component {
         <Map center={this.props.project.get('center_point').toJS()}
              zoom={this.props.project.get('zoom')}
              className="MainMap"
-             whenReady={(e) => this.map = e.target}
-             onMouseMove={this.getPosition}>
+             whenReady={this.whenReady}
+             onMouseMove={this.getPosition}
+             onViewportChange={({center, zoom}) => emit(actions.setCurrentMapPosition({lat: center[0], lng: center[1]}, zoom))}>
           {drawingType && !this.props.drawing.get('ready-to-edit') &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
@@ -157,10 +165,6 @@ class MainMap extends React.Component {
               <div className="close-polygon-tooltip" style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}>Press Enter to complete</div>}
           {drawingType === "polygon" && this.props.drawing.get('ready-to-edit') &&
               <PolygonMarker point={{data: {color: this.props.drawing.get('color') || DEFAULT_COLOR, positions: this.props.drawing.get('points').toJS()}}}></PolygonMarker>}
-          <button className="button-map"
-                  onClick={() => emit(actions.setCenterClick(this.props.project.toJS(), this.map.getCenter(), this.map.getZoom()))}>
-            Set as map center
-          </button>
         </Map>
       );
     }
@@ -173,6 +177,7 @@ MainMap.propTypes = {
             ),
     selectedId: PropTypes.string,
     project: PropTypes.object,
+    moving: PropTypes.bool,
     drawing: ImmutablePropTypes.mapContains({
                 type: PropTypes.string,
                 data: PropTypes.object,
@@ -181,10 +186,10 @@ MainMap.propTypes = {
 
 export default connect(
     (state) => ({
-        selectedId: state.getIn(['map', 'viewing', 'id']),
-        drawing: state.getIn(['map', 'drawing']),
-        moving: state.getIn(['map', 'moving']),
         cursor: state.getIn(['map', 'cursor']),
+        selectedId: state.getIn(['map', 'viewing', 'id']),
         project: state.get('current-project'),
+        moving: state.getIn(['map', 'moving']),
+        drawing: state.getIn(['map', 'drawing']),
     })
 )(MainMap);

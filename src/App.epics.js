@@ -45,10 +45,10 @@ const deleteProjectEpic = action$ =>
       )));
 
 const updateProjectEpic = action$ =>
-  action$.ofType("UPDATE_PROJECT")
+  action$.ofType("UPDATE_PROJECT_POSITION")
     .map((action) => action.payload)
     .switchMap((payload) =>
-      repo.updateProject(payload.projectSlug, payload.project).map(() => (
+      repo.patchProject(payload.projectSlug, payload.data).map(() => (
           {type: "LIST_PROJECTS", payload: payload.projectSlug}
       )));
 
@@ -85,18 +85,14 @@ const updatePointEpic = action$ =>
         ])
       ));
 
-// TODO: verify
-// const centerAndOpenMarkerEpic = action$ =>
-//   action$.ofType("CENTER_AND_OPEN_MARKER")
-//     .toPayload()
-//     .switchMap((payload) =>
-//         return new Promise((accept) => {
-//             dispatch({type: "FORCE_VISUALIZE_MARKER", "payload": fromJS(action.payload)});
-//             setTimeout(() => {
-//                 let event = new CustomEvent("centerMap", {"detail": action.payload.data.position});
-//                 document.dispatchEvent(event);
-//             }, 100);
-//         })
+const centerMapEpic = action$ =>
+  action$.ofType("CENTER_MAP")
+    .map((action) => action.payload)
+    .switchMap((payload) => {
+        let event = new CustomEvent("centerMap", {"detail": payload});
+        document.dispatchEvent(event);
+        return Observable.empty();
+    })
 
 
 export const rootEpic = combineEpics(
@@ -109,4 +105,5 @@ export const rootEpic = combineEpics(
   addPointEpic,
   deletePointEpic,
   updatePointEpic,
+  centerMapEpic,
 )

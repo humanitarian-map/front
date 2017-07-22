@@ -40,6 +40,16 @@ function httpPut(url, data) {
     }).map((response) => response.response)
 }
 
+function httpPatch(url, data) {
+    return Observable.ajax({
+        url:url,
+        method: "PATCH",
+        responseType: "json",
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify(data)
+    }).map((response) => response.response)
+}
+
 export function listProjects() {
   let noCache = "?"+((new Date()).getTime());
   return httpGet(config.API_HOST + '/api/projects/'+noCache);
@@ -56,6 +66,10 @@ export function deleteProject(slug) {
 
 export function updateProject(slug, project) {
   return httpPut(config.API_HOST + '/api/projects/'+slug+"/", project)
+}
+
+export function patchProject(slug, data) {
+  return httpPatch(config.API_HOST + '/api/projects/'+slug+"/", data)
 }
 
 export function createProject(project) {
