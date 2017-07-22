@@ -7,11 +7,12 @@ import ProjectDetail from "../components/ProjectDetail";
 import MarkerCreationDetail from "../components/MarkerCreationDetail";
 import MarkerDetail from "../components/MarkerDetail";
 import './MapPage.css';
+import {emit} from "../App.events";
 
 class MapPageImpl extends Component {
   componentWillMount() {
-      this.props.getProject(this.props.match.params.slug);
-      this.props.getProjectDocuments(this.props.match.params.slug);
+      emit({type: "GET_CURRENT_PROJECT", "payload": this.props.match.params.slug});
+      emit({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
   }
 
   render() {
@@ -22,7 +23,7 @@ class MapPageImpl extends Component {
           </div>
           {this.props.displayProjectDetail && this.props.project &&
             <div className="project-detail-container">
-              <ProjectDetail project={this.props.project} documents={this.props.documents} onMarkerClick={this.props.onMarkerClick} />
+              <ProjectDetail project={this.props.project} documents={this.props.documents} />
             </div>}
           {this.props.map.getIn(["drawing", "ready-to-edit"]) &&
              <div className="point-detail-container">
@@ -53,17 +54,6 @@ const MapPage = connect(
         documents: state.get('documents'),
         displayProjectDetail: state.get('display-project-detail')
     }),
-    (dispatch) => ({
-        getProject: (slug) => {
-            dispatch({type: "GET_CURRENT_PROJECT", "payload": slug});
-        },
-        getProjectDocuments: (slug) => {
-            dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": slug});
-        },
-        onMarkerClick: (point) => {
-            dispatch({type: "CENTER_AND_OPEN_MARKER", "payload": point});
-        }
-    })
 )(MapPageImpl);
 
 export default MapPage;

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './MarkerDetail.css';
 import {POINT_TYPES_OBJ} from "../utils/point_types";
+import {emit} from "../App.events";
+import * as actions from "../App.actions";
 
 function MarkerIcon(props) {
     let icon = POINT_TYPES_OBJ[props.type || "other"].icon;
@@ -95,7 +97,7 @@ class MarkerDetailImpl extends React.Component {
                 </div>}
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => this.props.onDeleteMarker(this.props.project.get('slug'), marker.id)}>Delete</button>
+              <button className="delete" onClick={() => emit(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Delete</button>
             </div>
           </section>
         );
@@ -113,11 +115,6 @@ const MarkerDetail = connect(
         marker: state.getIn(['map', 'viewing']).toJS(),
         project: state.get("current-project"),
         documents: state.get("documents"),
-    }),
-    (dispatch) => ({
-        onDeleteMarker: (projectSlug, pointId) => {
-            dispatch({type: "DELETE_POINT", payload: {projectSlug, pointId}});
-        }
     })
 )(MarkerDetailImpl);
 

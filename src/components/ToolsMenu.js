@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './ToolsMenu.css';
+import {emit} from "../App.events";
+import * as actions from "../App.actions";
 
 function CursorBox(props) {
     return (
@@ -22,15 +24,15 @@ class ToolsMenuImpl extends Component {
         return (
           <div className="ToolsMenu">
             <div className={"marker mdi mdi-map-marker mdi-24px " + (active === 'point' ? 'active' : '')}
-               onClick={() => this.props.selectTool('point')}></div>
+               onClick={() => emit(actions.selectTool('point'))}></div>
             <div className={"marker mdi mdi-arrow-top-right mdi-24px " + (active === 'arrow' ? 'active' : '')}
-                 onClick={() => this.props.selectTool('arrow')}></div>
+                 onClick={() => emit(actions.selectTool('arrow'))}></div>
             <div className={"marker mdi mdi-vector-triangle mdi-24px " + (active === 'polygon' ? 'active' : '')}
-                 onClick={() => this.props.selectTool('polygon')}></div>
+                 onClick={() => emit(actions.selectTool('polygon'))}></div>
             <div className={"marker mdi mdi-close mdi-24px " + (active === 'cross' ? 'active' : '')}
-                 onClick={() => this.props.selectTool('cross')}></div>
+                 onClick={() => emit(actions.selectTool('cross'))}></div>
             <div className={"marker mdi mdi-cursor-move mdi-24px " + (this.props.moving ? 'active' : '')}
-                 onClick={() => this.props.toggleMove()}></div>
+                 onClick={() => emit(actions.toggleMove())}></div>
             <CursorBox lat={this.props.cursor.get(0)} lng={this.props.cursor.get(1)}></CursorBox>
           </div>
         );
@@ -47,14 +49,6 @@ const ToolsMenu = connect(
         cursor: state.getIn(['map', 'cursor']),
         moving: state.getIn(['map', 'moving']),
     }),
-    (dispatch) => ({
-        selectTool: (tool) => {
-            dispatch({type: "SELECT_TOOL", "payload": tool});
-        },
-        toggleMove: () => {
-            dispatch({type: "TOGGLE_MOVE", "payload": null});
-        }
-    })
 )(ToolsMenuImpl);
 
 export default ToolsMenu;

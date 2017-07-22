@@ -5,6 +5,8 @@ import './MarkerCreationDetail.css';
 import {COLORS, DEFAULT_COLOR} from "../utils/colors";
 import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
 import {POINT_TYPES} from "../utils/point_types";
+import {emit} from "../App.events";
+import * as actions from "../App.actions";
 
 function MarkerIcon(props) {
     return (
@@ -52,7 +54,7 @@ class MarkerCreationDetailImpl extends React.Component {
                 size: this.props.drawing.get('size'),
             }
         }
-        this.props.onSaveMarker(
+        emit(actions.saveMarker(
             this.props.project.get('slug'),
             {
                 "project": this.props.project.get('id'),
@@ -61,7 +63,7 @@ class MarkerCreationDetailImpl extends React.Component {
                 "type": this.props.drawing.get('type'),
                 "data": data
             }
-        );
+        ));
     }
 
     render() {
@@ -87,7 +89,7 @@ class MarkerCreationDetailImpl extends React.Component {
                   <div className="markers">
                     {POINT_TYPES.map((pointType) => (
                         <MarkerIcon active={activeMarker === pointType.id || (!activeMarker && pointType.id === "other") }
-                                    onClick={() => props.onSelectIcon(pointType.id)}
+                                    onClick={() => emit(actions.selectIcon(pointType.id))}
                                     type={pointType}
                                     key={pointType.id} />
                     ))}
@@ -101,7 +103,7 @@ class MarkerCreationDetailImpl extends React.Component {
                       <div key={color}
                            style={{background: color}}
                            className={(this.props.drawing.get('color') || DEFAULT_COLOR) === color? "selected": ""}
-                           onClick={() => props.setDrawingColor(color)}>
+                           onClick={() => emit(actions.setDrawingColor(color))}>
                       </div>
                     ))}
                   </div>
@@ -112,7 +114,7 @@ class MarkerCreationDetailImpl extends React.Component {
                   <h3 className="title mdi mdi-comment mdi-16px">Size</h3>
                   <input type="number" placeholder="Size"
                          value={props.drawing.getIn(['size']) || DEFAULT_CROSS_SIZE}
-                         onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
+                         onChange={(e) => emit(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
                 </div>}
 
               {(type === "arrow") &&
@@ -120,7 +122,7 @@ class MarkerCreationDetailImpl extends React.Component {
                   <h3 className="title mdi mdi-comment mdi-16px">Arrowhead Size (%)</h3>
                   <input type="number" placeholder="Size"
                          value={props.drawing.getIn(['size']) || DEFAULT_ARROWHEAD_SIZE}
-                         onChange={(e) => props.onChangeCrossSize(parseFloat(parseFloat(e.target.value)))} />
+                         onChange={(e) => emit(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
                 </div>}
 
               <div className="block">
@@ -137,14 +139,14 @@ class MarkerCreationDetailImpl extends React.Component {
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['position', 0])}
-                             onChange={(e) => props.onChangeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1]))} />
+                             onChange={(e) => emit(actions.changeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1])))} />
                     </div>
                     <div>
                       <span>Longitude</span>
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['position', 1])}
-                             onChange={(e) => props.onChangeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value)))} />
+                             onChange={(e) => emit(actions.changeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                   </div>}
                 {(type === "arrow") &&
@@ -154,22 +156,22 @@ class MarkerCreationDetailImpl extends React.Component {
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['points', 0, 0])}
-                             onChange={(e) => props.onChangeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1]))} />
+                             onChange={(e) => emit(actions.changeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1])))} />
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['points', 0, 1])}
-                             onChange={(e) => props.onChangeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value)))} />
+                             onChange={(e) => emit(actions.changeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                     <span>Destination:</span>
                     <div>
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['points', 1, 0])}
-                             onChange={(e) => props.onChangeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1]))} />
+                             onChange={(e) => emit(actions.changeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1])))} />
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['points', 1, 1])}
-                             onChange={(e) => props.onChangeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value)))} />
+                             onChange={(e) => emit(actions.changeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                   </div>}
                 {(type === "polygon") &&
@@ -180,19 +182,19 @@ class MarkerCreationDetailImpl extends React.Component {
                         <input placeholder="Lat"
                                type="number"
                                value={point.get(0)}
-                               onChange={(e) => props.onChangePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1))} />
+                               onChange={(e) => emit(actions.changePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1)))} />
                         <span>Longitude</span>
                         <input placeholder="Lng"
                                type="number"
                                value={point.get(1)}
-                               onChange={(e) => props.onChangePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value)))} />
+                               onChange={(e) => emit(actions.changePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value))))} />
                       </div>))}
                   </div>}
               </div>
             </div>
             <div className="buttons-set">
               <button className="save" onClick={this.addPoint}>Save</button>
-              <button className="cancel" onClick={props.onCancelDrawing}>Cancel</button>
+              <button className="cancel" onClick={() => emit(actions.cancelDrawing())}>Cancel</button>
             </div>
           </section>
         );
@@ -208,35 +210,6 @@ const MarkerCreationDetail = connect(
         drawing: state.getIn(['map', 'drawing']),
         project: state.get("current-project"),
     }),
-    (dispatch) => ({
-        onChangeLocation: (lat, lng) => {
-            dispatch({type: "ADD_MARKER", "payload": [lat, lng]});
-        },
-        onChangeArrowOrigin: (lat, lng) => {
-            dispatch({type: "CHANGE_ARROW_ORIGIN", "payload": [lat, lng]});
-        },
-        onChangeArrowDest: (lat, lng) => {
-            dispatch({type: "CHANGE_ARROW_DEST", "payload": [lat, lng]});
-        },
-        onChangePolygonPoint: (idx, lat, lng) => {
-            dispatch({type: "CHANGE_POLYGON_POINT", "payload": {idx:idx, position: [lat, lng]}});
-        },
-        onChangeCrossSize: (size) => {
-            dispatch({type: "CHANGE_CROSS_SIZE", "payload": size});
-        },
-        onCancelDrawing: () => {
-            dispatch({type: "CANCEL_DRAWING", "payload": null});
-        },
-        onSelectIcon: (icon) => {
-            dispatch({type: "SELECT_MARKER_ICON", "payload": icon});
-        },
-        onSaveMarker: (projectSlug, point) => {
-            dispatch({type: "ADD_POINT", "payload": {projectSlug: projectSlug, point: point}});
-        },
-        setDrawingColor: (color) => {
-            dispatch({type: "SET_DRAWING_COLOR", "payload": color});
-        },
-    })
 )(MarkerCreationDetailImpl);
 
 export default MarkerCreationDetail;

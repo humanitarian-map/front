@@ -3,11 +3,12 @@ import {Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import './ProjectsListPage.css';
 import logoSvg from './img/logo-navbar.svg';
+import {emit} from "../App.events";
 
 class ProjectsListPageImpl extends React.Component {
   componentWillMount() {
-      this.props.listProjects();
-      this.props.resetProject();
+      emit({type: "LIST_PROJECTS", payload: null});
+      emit({type: "RESET_PROJECT", payload: null});
   }
 
   render() {
@@ -45,10 +46,6 @@ const ProjectsListPage = connect(
     (state) => ({
         projects: state.get('projects-list'),
     }),
-    (dispatch) => ({
-        listProjects: () => dispatch({type: "LIST_PROJECTS", payload: null}),
-        resetProject: () => dispatch({type: "RESET_PROJECT", payload: null})
-    })
 )(ProjectsListPageImpl);
 
 export default ProjectsListPage;

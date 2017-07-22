@@ -10,8 +10,13 @@ import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic } from "./App.epics"
+import { events$ } from "./App.events"
 
 let store = createStore(reducer, initialState, applyMiddleware(createEpicMiddleware(rootEpic)));
+
+events$.subscribe((action) => {
+    store.dispatch(action);
+})
 
 export default class App extends Component {
   render() {

@@ -5,33 +5,38 @@ import 'rxjs/add/observable/dom/ajax';
 function httpGet(url) {
     return Observable.ajax({
         url:url,
-        responseType: "json"
+        method: "GET",
+        responseType: "json",
+        headers: {'Content-Type': "application/json"}
     }).map((response) => response.response);
 }
 
 function httpDelete(url) {
     return Observable.ajax({
-        method: "DELETE",
         url:url,
-        responseType: "json"
+        method: "DELETE",
+        responseType: "json",
+        headers: {'Content-Type': "application/json"}
     }).map((response) => response.response)
 }
 
 function httpPost(url, data) {
     return Observable.ajax({
-        method: "POST",
         url:url,
+        method: "POST",
         responseType: "json",
-        body: data
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify(data)
     }).map((response) => response.response)
 }
 
 function httpPut(url, data) {
     return Observable.ajax({
-        method: "PUT",
         url:url,
+        method: "PUT",
         responseType: "json",
-        body: data
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify(data)
     }).map((response) => response.response)
 }
 

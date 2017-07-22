@@ -3,6 +3,7 @@ import {PropTypes} from "prop-types";
 import './ProjectDetail.css';
 import moment from "moment";
 import {POINT_TYPES} from "../utils/point_types";
+import {emit} from "../App.events";
 
 export default class ProjectDetail extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class ProjectDetail extends React.Component {
     }
 
     centerMap(point) {
-        this.props.onMarkerClick(point);
+        emit({type: "CENTER_AND_OPEN_MARKER", "payload": point});
     }
 
     toggleMarkerList(marker) {
@@ -118,5 +119,4 @@ export default class ProjectDetail extends React.Component {
 ProjectDetail.propTypes = {
     project: PropTypes.object,
     documents: PropTypes.object,
-    onMarkerClick: PropTypes.func
 }

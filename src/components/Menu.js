@@ -4,6 +4,8 @@ import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import logoSvg from './img/logo-navbar.svg';
 import './Menu.css';
+import {emit} from "../App.events";
+import * as actions from "../App.actions";
 
 class MenuImpl extends Component {
     constructor(props) {
@@ -17,7 +19,7 @@ class MenuImpl extends Component {
         return (
           <div className="Menu">
             <div className={"project-info-icon mdi mdi-information-outline mdi-36px " + (this.props.openDetail ? "active" : "")}
-               onClick={() => this.props.toggleDisplayDetail()}></div>
+               onClick={() => emit(actions.toggleDisplayDetail())}></div>
             <div className="empty"></div>
             <div className="end">
                 <Link className="user" to="/profile">
@@ -41,14 +43,6 @@ const Menu = connect(
         user: state.get('user'),
         openDetail: state.get('display-project-detail')
     }),
-    (dispatch) => ({
-        selectTool: (tool) => {
-            dispatch({type: "SELECT_TOOL", "payload": tool});
-        },
-        toggleDisplayDetail: () => {
-            dispatch({type: "TOGGLE_DISPLAY_DETAIL", "payload": null});
-        },
-    })
 )(MenuImpl);
 
 export default Menu;
