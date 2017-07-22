@@ -18,8 +18,8 @@ class ProjectDetail extends React.Component {
     }
 
     centerMap(point) {
-        emit(actions.centerMap(point.data.position), this.props.currentPosition.get('zoom'));
         emit(actions.visualizeMarker(point));
+        setTimeout(() => emit(actions.centerMap(point.data.position), this.props.currentPosition.get('zoom'), 100));
     }
 
     toggleMarkerList(marker) {
