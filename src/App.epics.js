@@ -1,5 +1,4 @@
 import * as repo from "./utils/repository";
-import {fromJS} from "immutable";
 import { combineEpics } from 'redux-observable';
 import { Observable } from "rxjs";
 

@@ -81,9 +81,9 @@ export function reducer(state, action) {
                         return viewing;
                     });
     } else if (action.type === "SET_PROJECTS_LIST") {
-        return state.set("projects-list", fromJS(action.payload));
+        return state.set("projects-list", action.payload);
     } else if (action.type === "SET_CURRENT_PROJECT") {
-        return state.set("current-project", fromJS(action.payload));
+        return state.set("current-project", action.payload);
     } else if (action.type === "RESET_PROJECT") {
         return state.set("map", initialState.get('map'))
                     .set("current-project", null)
@@ -100,7 +100,7 @@ export function reducer(state, action) {
         return state.updateIn(['map', 'moving'], (m) => !m)
                     .setIn(["map", "drawing"], fromJS({type: null}));
     } else if (action.type === "SET_PROJECT_DOCUMENTS") {
-        return state.set("documents", fromJS(action.payload));
+        return state.set("documents", action.payload);
     } else if (action.type === "SET_CURRENT_MAP_POSITION") {
         return state.setIn(['map', 'current-position'], fromJS(action.payload));
     }
