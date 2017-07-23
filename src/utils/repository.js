@@ -1,94 +1,47 @@
 import config from "../config";
-import { Observable } from "rxjs";
-import 'rxjs/add/observable/dom/ajax';
+import { Http } from "./http";
 
-function httpGet(url) {
-    return Observable.ajax({
-        url:url,
-        method: "GET",
-        responseType: "json",
-        headers: {'Content-Type': "application/json"}
-    }).map((response) => response.response);
-}
-
-function httpDelete(url) {
-    return Observable.ajax({
-        url:url,
-        method: "DELETE",
-        responseType: "json",
-        headers: {'Content-Type': "application/json"}
-    }).map((response) => response.response)
-}
-
-function httpPost(url, data) {
-    return Observable.ajax({
-        url:url,
-        method: "POST",
-        responseType: "json",
-        headers: {'Content-Type': "application/json"},
-        body: JSON.stringify(data)
-    }).map((response) => response.response)
-}
-
-function httpPut(url, data) {
-    return Observable.ajax({
-        url:url,
-        method: "PUT",
-        responseType: "json",
-        headers: {'Content-Type': "application/json"},
-        body: JSON.stringify(data)
-    }).map((response) => response.response)
-}
-
-function httpPatch(url, data) {
-    return Observable.ajax({
-        url:url,
-        method: "PATCH",
-        responseType: "json",
-        headers: {'Content-Type': "application/json"},
-        body: JSON.stringify(data)
-    }).map((response) => response.response)
-}
+let http = new Http(config.API_HOST);
 
 export function listProjects() {
   let noCache = "?"+((new Date()).getTime());
-  return httpGet(config.API_HOST + '/api/projects/'+noCache);
+  return http.get('/api/projects/'+noCache);
 }
 
 export function getProject(slug) {
   let noCache = "?"+((new Date()).getTime());
-  return httpGet(config.API_HOST + '/api/projects/'+slug+"/"+noCache);
+  return http.get('/api/projects/'+slug+"/"+noCache);
 }
 
 export function deleteProject(slug) {
-  return httpDelete(config.API_HOST + '/api/projects/'+slug+"/");
+  return http.delete('/api/projects/'+slug+"/");
 }
 
 export function updateProject(slug, project) {
-  return httpPut(config.API_HOST + '/api/projects/'+slug+"/", project)
+  return http.put('/api/projects/'+slug+"/", project)
 }
 
 export function patchProject(slug, data) {
-  return httpPatch(config.API_HOST + '/api/projects/'+slug+"/", data)
+  return http.patch('/api/projects/'+slug+"/", data)
 }
 
 export function createProject(project) {
-  return httpPost(config.API_HOST + '/api/projects/', project)
+  return http.post('/api/projects/', project)
 }
 
 export function createPoint(projectSlug, point) {
-  return httpPost(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/', point)
+  return http.post('/api/projects/' + projectSlug +'/map-items/', point)
 }
 
 export function deletePoint(projectSlug, pointId) {
-  return httpDelete(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/")
+  return http.delete('/api/projects/' + projectSlug +'/map-items/'+pointId+"/")
 }
 
 export function updatePoint(projectSlug, pointId, point) {
-  return httpPut(config.API_HOST + '/api/projects/' + projectSlug +'/map-items/'+pointId+"/", point)
+  return http.put('/api/projects/' + projectSlug +'/map-items/'+pointId+"/", point)
 }
 
 export function getProjectDocuments(slug) {
   let noCache = "?"+((new Date()).getTime());
-  return httpGet(config.API_HOST + '/api/projects/'+slug+'/documents/'+noCache)
+  return http.get('/api/projects/'+slug+'/documents/'+noCache)
 }
