@@ -17,7 +17,11 @@ export class Http {
             responseType: this.responseType,
             headers: this.headers,
             body: body && JSON.stringify(body)
-        }).map((response) => fromJS(response.response));
+        }).map((response) => fromJS(response.response))
+          .catch((error) => {
+              console.log(error)
+              return Observable.empty();
+          });
     }
 
     get(url) {

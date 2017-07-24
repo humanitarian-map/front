@@ -5,6 +5,7 @@ import './MarkerDetail.css';
 import {POINT_TYPES_OBJ} from "../utils/point_types";
 import {emit} from "../App.events";
 import * as actions from "../App.actions";
+import Lightbox from "./Lightbox";
 
 function MarkerIcon(props) {
     let icon = POINT_TYPES_OBJ[props.type || "other"].icon;
@@ -33,6 +34,12 @@ class MarkerDetail extends React.Component {
 
         return (
           <section className="MarkerDetail panel">
+            {this.props.openLightbox === "delete-marker" &&
+              <Lightbox size="small">
+                ¿Are you sure that you want to delete the "{marker.name}" marker?
+                <button onClick={() => emit(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Yes</button>
+                <button onClick={() => emit(actions.closeLightbox())}>No</button>
+              </Lightbox>}
             <h2 className="header-title">
               {marker.type === "point" && "Marker"}
               {marker.type === "arrow" && "Arrow"}
@@ -97,7 +104,7 @@ class MarkerDetail extends React.Component {
                 </div>}
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => emit(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Delete</button>
+              <button className="delete" onClick={() => emit(actions.openLightbox("delete-marker"))}>Delete</button>
             </div>
           </section>
         );
@@ -115,5 +122,6 @@ export default connect(
         marker: state.getIn(['map', 'viewing']).toJS(),
         project: state.get("current-project"),
         documents: state.get("documents"),
+        openLightbox: state.get('open-lightbox'),
     })
 )(MarkerDetail);

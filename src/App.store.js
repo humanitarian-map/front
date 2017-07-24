@@ -9,6 +9,7 @@ export const initialState = fromJS({
         },
         "current-position": null,
     },
+    "open-lightbox": "new-project",
     "current-project": null,
     "projects-list": [],
     "display-project-detail": false,
@@ -103,6 +104,12 @@ export function reducer(state, action) {
         return state.set("documents", action.payload);
     } else if (action.type === "SET_CURRENT_MAP_POSITION") {
         return state.setIn(['map', 'current-position'], fromJS(action.payload));
+    } else if (action.type === "APPEND_POINT_TO_PROJECT") {
+        return state.updateIn(['current-project', "mapitems"], (points) => points.push(action.payload));
+    } else if (action.type === "OPEN_LIGHTBOX") {
+        return state.set("open-lightbox", action.payload);
+    } else if (action.type === "CLOSE_LIGHTBOX") {
+        return state.set("open-lightbox", null);
     }
     return state;
 }

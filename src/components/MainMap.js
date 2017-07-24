@@ -95,6 +95,7 @@ class MainMap extends React.Component {
         if (event.keyCode === 27) {
             emit(actions.cancelDrawing());
             emit(actions.cancelViewing());
+            emit(actions.closeLightbox());
         } else if (event.keyCode === 13 && this.props.drawing.get('type') === "polygon") {
             emit(actions.confirmPolygonDrawing());
         } else if (event.keyCode === 46 && this.props.selectedId) {

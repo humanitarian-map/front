@@ -25,6 +25,10 @@ export const deleteItem = (projectSlug, pointId) => ({type: "DELETE_POINT", "pay
 export const setCurrentMapPosition = (center, zoom) => ({type: "SET_CURRENT_MAP_POSITION", "payload": {center, zoom}});
 export const centerMap = (center, zoom) => ({type: "CENTER_MAP", "payload": {center, zoom}});
 export const visualizeMarker = (point) => ({type: "FORCE_VISUALIZE_MARKER", "payload": point});
+export const openLightbox = (lightbox) => ({type: "OPEN_LIGHTBOX", "payload": lightbox});
+export const closeLightbox = () => ({type: "CLOSE_LIGHTBOX", "payload": null});
+export const listProjects = () => ({type: "LIST_PROJECTS", payload: null});
+export const resetProject = () => ({type: "RESET_PROJECT", payload: null});
 export const setProjectCenter = (project, center, zoom) => {
     let updatedProject =  {
         center_point: [parseFloat(center.lat), parseFloat(center.lng)],
