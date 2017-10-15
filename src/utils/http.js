@@ -3,11 +3,18 @@ import 'rxjs/add/observable/dom/ajax';
 import {fromJS} from "immutable";
 
 export class Http {
-    headers = {"Content-Type": "application/json"};
     responseType = "json";
 
     constructor(apiHost) {
         this.apiHost = apiHost;
+    }
+
+    headers() {
+        let token = localStorage.getItem('auth-token', '');
+        return {
+            "Content-Type": "application/json",
+            "Authorization": `JWT ${token}`
+        };
     }
 
     request(url, method, body) {
@@ -15,7 +22,7 @@ export class Http {
             url: this.apiHost + url,
             method: method,
             responseType: this.responseType,
-            headers: this.headers,
+            headers: this.headers(),
             body: body && JSON.stringify(body)
         }).map((response) => fromJS(response.response));
     }

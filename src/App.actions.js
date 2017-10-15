@@ -40,3 +40,7 @@ export const moveMarker = (projectSlug, point, newLatLng) => {
     delete updatedPoint['documents_url'];
     return {type: "UPDATE_POINT", "payload": {projectSlug, pointId: point.id, point: updatedPoint}};
 }
+
+export const Login = (username, password) => ({type: "LOGIN", "payload": {username, password}});
+export const SetLoginErrors = (errors) => ({type: "SET_LOGIN_ERRORS", "payload": errors});
+export const SetUser = (user) => ({type: "SET_USER", "payload": user});

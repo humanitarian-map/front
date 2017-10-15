@@ -45,3 +45,11 @@ export function getProjectDocuments(slug) {
   let noCache = "?"+((new Date()).getTime());
   return http.get('/api/projects/'+slug+'/documents/'+noCache)
 }
+
+export function login(username, password) {
+  return http.post('/api/auth/login/', {username, password})
+}
+
+export function fetchMe() {
+  return http.get('/api/users/me/')
+}

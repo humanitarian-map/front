@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "immutable": "^3.8.1",
+    "js-cookie": "^2.1.4",
     "leaflet": "^1.1.0",
     "mdi": "^1.9.33",
     "moment": "^2.18.1",
@@ -14,6 +15,7 @@
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
+    "redux-devtools": "^3.4.0",
     "redux-observable": "^0.14.1",
     "rxjs": "^5.4.2",
     "victor": "^1.1.0"

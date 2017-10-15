@@ -12,12 +12,9 @@ export const initialState = fromJS({
     "current-project": null,
     "projects-list": [],
     "display-project-detail": false,
-    "user": {
-        "id": 1,
-        "username": "ali.ahmed",
-        "fullname": "Ali Ahmed",
-        "avatar": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAArVAAAAJDU1ZDYxYTc2LWFjMzUtNGQ0Zi1iZjUxLTNlMzZlMTQ2MWY3Nw.jpg",
-    }
+    "user": null,
+    "login-errors": null,
+    "routing": null
 })
 
 export function reducer(state, action) {
@@ -103,6 +100,10 @@ export function reducer(state, action) {
         return state.set("documents", action.payload);
     } else if (action.type === "SET_CURRENT_MAP_POSITION") {
         return state.setIn(['map', 'current-position'], fromJS(action.payload));
+    } else if (action.type === "SET_LOGIN_ERRORS") {
+        return state.set('login-errors', fromJS(action.payload));
+    } else if (action.type === "SET_USER") {
+        return state.set('user', fromJS(action.payload));
     }
     return state;
 }

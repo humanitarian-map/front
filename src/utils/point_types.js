@@ -49,4 +49,3 @@ export const POINT_TYPES = [
 ]
 
 export const POINT_TYPES_OBJ = _.reduce(POINT_TYPES, (acc, item) => { acc[item.id] = item; return acc}, {});
-console.log(POINT_TYPES_OBJ)

@@ -6,7 +6,6 @@ const listProjectsEpic = action$ =>
   action$.ofType("LIST_PROJECTS")
     .switchMap(() => {
         return repo.listProjects().map((projects) => {
-            console.log(projects);
             return {type: "SET_PROJECTS_LIST", payload: projects}
         })
     });
@@ -93,6 +92,19 @@ const centerMapEpic = action$ =>
         return Observable.empty();
     })
 
+const loginEpic = action$ =>
+  action$.ofType("LOGIN")
+    .map((action) => action.payload)
+    .switchMap((payload) =>
+      repo.login(payload.username, payload.password).flatMap((data) => {
+          localStorage.setItem('auth-token', data.get('token'));
+          return repo.fetchMe().map((response) => {
+              return {type: "SET_USER", payload: response.data};
+          })
+      }).catch((response) => {
+          return Observable.of({type: "SET_LOGIN_ERRORS", payload: response.xhr.response});
+      }));
+
 
 export const rootEpic = combineEpics(
   listProjectsEpic,
@@ -105,4 +117,5 @@ export const rootEpic = combineEpics(
   deletePointEpic,
   updatePointEpic,
   centerMapEpic,
+  loginEpic,
 )
