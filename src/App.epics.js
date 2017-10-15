@@ -1,6 +1,7 @@
 import * as repo from "./utils/repository";
 import { combineEpics } from 'redux-observable';
 import { Observable } from "rxjs";
+import { push } from "react-router-redux";
 
 const listProjectsEpic = action$ =>
   action$.ofType("LIST_PROJECTS")
@@ -98,8 +99,11 @@ const loginEpic = action$ =>
     .switchMap((payload) =>
       repo.login(payload.username, payload.password).flatMap((data) => {
           localStorage.setItem('auth-token', data.get('token'));
-          return repo.fetchMe().map((response) => {
-              return {type: "SET_USER", payload: response.data};
+          return repo.fetchMe().flatMap((user) => {
+              return Observable.from([
+                  {type: "SET_USER", payload: user},
+                  push("/projects")
+              ]);
           })
       }).catch((response) => {
           return Observable.of({type: "SET_LOGIN_ERRORS", payload: response.xhr.response});

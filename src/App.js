@@ -12,12 +12,16 @@ import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic } from "./App.epics"
 import { events$ } from "./App.events"
 
+import { ConnectedRouter, routerMiddleware, push } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const history = createHistory()
 
 let store = createStore(
     reducer,
     initialState,
-    composeEnhancers(applyMiddleware(createEpicMiddleware(rootEpic)))
+    composeEnhancers(applyMiddleware(createEpicMiddleware(rootEpic), routerMiddleware(history)))
 );
 
 events$.subscribe((action) => {
@@ -28,7 +32,7 @@ export default class App extends Component {
   render() {
       return (
         <Provider store={store}>
-		  <BrowserRouter>
+		  <ConnectedRouter history={history}>
             <div className="App">
               <Route exact path="/projects" component={ProjectsListPage}/>
               <Route exact path="/map/:slug" component={MapPage}/>
@@ -36,7 +40,7 @@ export default class App extends Component {
               <Route exact path="/profile" component={UserProfilePage}/>
               <Route exact path="/" render={() => <Redirect to="/login" />}></Route>
             </div>
-		  </BrowserRouter>
+		  </ConnectedRouter>
         </Provider>
       );
   }

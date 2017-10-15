@@ -1,4 +1,5 @@
 import {fromJS} from "immutable";
+import { routerReducer } from 'react-router-redux';
 
 export const initialState = fromJS({
     "map": {
@@ -14,10 +15,11 @@ export const initialState = fromJS({
     "display-project-detail": false,
     "user": null,
     "login-errors": null,
-    "routing": null
+    "router": null
 })
 
 export function reducer(state, action) {
+    state = state.set('router', fromJS(routerReducer(state.toJS().router, action)))
     if (action.type === "ADD_MARKER") {
         return state.setIn(['map', 'drawing', "position"], fromJS(action.payload))
                     .setIn(['map', 'drawing', "ready-to-edit"], true);
