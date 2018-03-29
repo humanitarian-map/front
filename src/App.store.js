@@ -1,4 +1,4 @@
-import {fromJS} from "immutable";
+import {fromJS, Map} from "immutable";
 
 export const initialState = fromJS({
     "map": {
@@ -11,6 +11,7 @@ export const initialState = fromJS({
     },
     "current-project": null,
     "projects-list": [],
+    "organizations": {},
     "display-project-detail": false,
     "user": {
         "id": 1,
@@ -82,6 +83,8 @@ export function reducer(state, action) {
                     });
     } else if (action.type === "SET_PROJECTS_LIST") {
         return state.set("projects-list", action.payload);
+    } else if (action.type === "SET_ORGANIZATIONS_LIST") {
+        return state.set("organizations", action.payload.reduce((result, item) => result.set(item.get('key'), item), Map()));
     } else if (action.type === "SET_CURRENT_PROJECT") {
         return state.set("current-project", action.payload);
     } else if (action.type === "RESET_PROJECT") {

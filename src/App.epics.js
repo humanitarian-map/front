@@ -11,6 +11,15 @@ const listProjectsEpic = action$ =>
         })
     });
 
+const listOrganizationsEpic = action$ =>
+  action$.ofType("LIST_ORGANIZATIONS")
+    .switchMap(() => {
+        return repo.listOrganizations().map((organizations) => {
+            console.log(organizations);
+            return {type: "SET_ORGANIZATIONS_LIST", payload: organizations}
+        })
+    });
+
 const getProjectDocumentsEpic = action$ =>
   action$.ofType("GET_PROJECT_DOCUMENTS")
     .map((action) => action.payload)
@@ -96,6 +105,7 @@ const centerMapEpic = action$ =>
 
 export const rootEpic = combineEpics(
   listProjectsEpic,
+  listOrganizationsEpic,
   getProjectDocumentsEpic,
   getCurrentProjectEpic,
   addProjectEpic,
