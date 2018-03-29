@@ -7,12 +7,12 @@ import ProjectDetail from "../components/ProjectDetail";
 import MarkerCreationDetail from "../components/MarkerCreationDetail";
 import MarkerDetail from "../components/MarkerDetail";
 import './MapPage.css';
-import {emit} from "../App.events";
+import {store} from "../App.store";
 
 class MapPage extends Component {
   componentWillMount() {
-      emit({type: "GET_CURRENT_PROJECT", "payload": this.props.match.params.slug});
-      emit({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
+      store.dispatch({type: "GET_CURRENT_PROJECT", "payload": this.props.match.params.slug});
+      store.dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
   }
 
   render() {

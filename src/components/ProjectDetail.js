@@ -4,7 +4,7 @@ import {PropTypes} from "prop-types";
 import './ProjectDetail.css';
 import moment from "moment";
 import {POINT_TYPES} from "../utils/point_types";
-import {emit} from "../App.events";
+import {store} from "../App.store";
 import * as actions from "../App.actions";
 
 class ProjectDetail extends React.Component {
@@ -18,8 +18,8 @@ class ProjectDetail extends React.Component {
     }
 
     centerMap(point) {
-        emit(actions.visualizeMarker(point));
-        setTimeout(() => emit(actions.centerMap(point.data.position), this.props.currentPosition.get('zoom'), 500));
+        store.dispatch(actions.visualizeMarker(point));
+        setTimeout(() => store.dispatch(actions.centerMap(point.data.position), this.props.currentPosition.get('zoom'), 500));
     }
 
     toggleMarkerList(marker) {
@@ -121,7 +121,7 @@ class ProjectDetail extends React.Component {
               <h3 className="title mdi mdi-map mdi-16px">Map options</h3>
               <p>
                 <button className=""
-                        onClick={() => emit(actions.setProjectCenter(
+                        onClick={() => store.dispatch(actions.setProjectCenter(
                             this.props.project.toJS(),
                             this.props.currentPosition.get('center').toJS(),
                             this.props.currentPosition.get('zoom')
@@ -131,7 +131,7 @@ class ProjectDetail extends React.Component {
               </p>
               <div>
                 <button className=""
-                        onClick={() => emit(actions.centerMap(
+                        onClick={() => store.dispatch(actions.centerMap(
                             {lat: this.props.project.getIn(['center_point', 0]),
                              lng: this.props.project.getIn(['center_point', 1])},
                             this.props.project.get('zoom')

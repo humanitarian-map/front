@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {PropTypes} from "prop-types";
 import './MarkerDetail.css';
 import {POINT_TYPES_OBJ} from "../utils/point_types";
-import {emit} from "../App.events";
+import {store} from "../App.store";
 import * as actions from "../App.actions";
 
 function MarkerIcon(props) {
@@ -97,7 +97,7 @@ class MarkerDetail extends React.Component {
                 </div>}
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => emit(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Delete</button>
+              <button className="delete" onClick={() => store.dispatch(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Delete</button>
             </div>
           </section>
         );

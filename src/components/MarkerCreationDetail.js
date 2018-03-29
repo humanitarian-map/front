@@ -5,7 +5,7 @@ import './MarkerCreationDetail.css';
 import {COLORS, DEFAULT_COLOR} from "../utils/colors";
 import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
 import {POINT_TYPES} from "../utils/point_types";
-import {emit} from "../App.events";
+import {store} from "../App.store";
 import * as actions from "../App.actions";
 
 function MarkerIcon(props) {
@@ -18,17 +18,21 @@ function MarkerIcon(props) {
 }
 
 class MarkerCreationDetail extends React.Component {
+    static propTypes = {
+        drawing: PropTypes.object.isRequired,
+        project: PropTypes.object.isRequired
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             "name": "",
             "description": ""
         }
-
-        this.addPoint = this.addPoint.bind(this);
     }
 
-    addPoint(event) {
+    addPoint = (event) => {
+        event.preventDefault();
         let data = {};
         if (this.props.drawing.get('type') === "point") {
             data = {
@@ -54,10 +58,10 @@ class MarkerCreationDetail extends React.Component {
                 size: this.props.drawing.get('size'),
             }
         }
-        emit(actions.saveMarker(
-            this.props.project.get('slug'),
+        store.dispatch(actions.saveMarker(
+            this.props.project.get('Slug'),
             {
-                "project": this.props.project.get('id'),
+                "project": this.props.project.get('ID'),
                 "name": this.state.name,
                 "description": this.state.description,
                 "type": this.props.drawing.get('type'),
@@ -89,7 +93,7 @@ class MarkerCreationDetail extends React.Component {
                   <div className="markers">
                     {POINT_TYPES.map((pointType) => (
                         <MarkerIcon active={activeMarker === pointType.id || (!activeMarker && pointType.id === "other") }
-                                    onClick={() => emit(actions.selectIcon(pointType.id))}
+                                    onClick={() => store.dispatch(actions.selectIcon(pointType.id))}
                                     type={pointType}
                                     key={pointType.id} />
                     ))}
@@ -103,7 +107,7 @@ class MarkerCreationDetail extends React.Component {
                       <div key={color}
                            style={{background: color}}
                            className={(this.props.drawing.get('color') || DEFAULT_COLOR) === color? "selected": ""}
-                           onClick={() => emit(actions.setDrawingColor(color))}>
+                           onClick={() => store.dispatch(actions.setDrawingColor(color))}>
                       </div>
                     ))}
                   </div>
@@ -114,7 +118,7 @@ class MarkerCreationDetail extends React.Component {
                   <h3 className="title mdi mdi-comment mdi-16px">Size</h3>
                   <input type="number" placeholder="Size"
                          value={props.drawing.getIn(['size']) || DEFAULT_CROSS_SIZE}
-                         onChange={(e) => emit(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
+                         onChange={(e) => store.dispatch(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
                 </div>}
 
               {(type === "arrow") &&
@@ -122,7 +126,7 @@ class MarkerCreationDetail extends React.Component {
                   <h3 className="title mdi mdi-comment mdi-16px">Arrowhead Size (%)</h3>
                   <input type="number" placeholder="Size"
                          value={props.drawing.getIn(['size']) || DEFAULT_ARROWHEAD_SIZE}
-                         onChange={(e) => emit(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
+                         onChange={(e) => store.dispatch(actions.changeCrossSize(parseFloat(parseFloat(e.target.value))))} />
                 </div>}
 
               <div className="block">
@@ -139,14 +143,14 @@ class MarkerCreationDetail extends React.Component {
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['position', 0])}
-                             onChange={(e) => emit(actions.changeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1])))} />
+                             onChange={(e) => store.dispatch(actions.changeLocation(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['position', 1])))} />
                     </div>
                     <div>
                       <span>Longitude</span>
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['position', 1])}
-                             onChange={(e) => emit(actions.changeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value))))} />
+                             onChange={(e) => store.dispatch(actions.changeLocation(props.drawing.getIn(['position', 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                   </div>}
                 {(type === "arrow") &&
@@ -156,22 +160,22 @@ class MarkerCreationDetail extends React.Component {
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['points', 0, 0])}
-                             onChange={(e) => emit(actions.changeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1])))} />
+                             onChange={(e) => store.dispatch(actions.changeArrowOrigin(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 0, 1])))} />
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['points', 0, 1])}
-                             onChange={(e) => emit(actions.changeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value))))} />
+                             onChange={(e) => store.dispatch(actions.changeArrowOrigin(props.drawing.getIn(['points', 0, 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                     <span>Destination:</span>
                     <div>
                       <input placeholder="Lat"
                              type="number"
                              value={props.drawing.getIn(['points', 1, 0])}
-                             onChange={(e) => emit(actions.changeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1])))} />
+                             onChange={(e) => store.dispatch(actions.changeArrowDest(parseFloat(parseFloat(e.target.value)), props.drawing.getIn(['points', 1, 1])))} />
                       <input placeholder="Lng"
                              type="number"
                              value={props.drawing.getIn(['points', 1, 1])}
-                             onChange={(e) => emit(actions.changeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value))))} />
+                             onChange={(e) => store.dispatch(actions.changeArrowDest(props.drawing.getIn(['points', 1, 0]), parseFloat(parseFloat(e.target.value))))} />
                     </div>
                   </div>}
                 {(type === "polygon") &&
@@ -182,27 +186,23 @@ class MarkerCreationDetail extends React.Component {
                         <input placeholder="Lat"
                                type="number"
                                value={point.get(0)}
-                               onChange={(e) => emit(actions.changePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1)))} />
+                               onChange={(e) => store.dispatch(actions.changePolygonPoint(idx, parseFloat(parseFloat(e.target.value)), point.get(1)))} />
                         <span>Longitude</span>
                         <input placeholder="Lng"
                                type="number"
                                value={point.get(1)}
-                               onChange={(e) => emit(actions.changePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value))))} />
+                               onChange={(e) => store.dispatch(actions.changePolygonPoint(idx, point.get(0), parseFloat(parseFloat(e.target.value))))} />
                       </div>))}
                   </div>}
               </div>
             </div>
             <div className="buttons-set">
               <button className="save" onClick={this.addPoint}>Save</button>
-              <button className="cancel" onClick={() => emit(actions.cancelDrawing())}>Cancel</button>
+              <button className="cancel" onClick={() => store.dispatch(actions.cancelDrawing())}>Cancel</button>
             </div>
           </section>
         );
     }
-}
-
-MarkerCreationDetail.propTypes = {
-    drawing: PropTypes.object.isRequired
 }
 
 export default connect(

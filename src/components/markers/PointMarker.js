@@ -4,7 +4,7 @@ import * as L from "leaflet";
 import {PropTypes} from "prop-types";
 import "./PointMarker.css";
 import {POINT_TYPES_OBJ} from "../../utils/point_types";
-import {emit} from "../../App.events";
+import {store} from "../../App.store";
 import * as actions from "../../App.actions";
 
 function createIcon(markerId, active) {
@@ -43,7 +43,7 @@ export default function PointMarker(props) {
             onDragEnd={(e) => props.onMoveMarker(props.point, e.target.getLatLng())}
             position={props.point.data.position}
             icon={props.selected? icons[(props.point.data.icon || "other") + "-active"] : icons[props.point.data.icon || "other"]}
-            onClick={(e) => emit(actions.clickItem(props.point))}>
+            onClick={(e) => store.dispatch(actions.clickItem(props.point))}>
           {props.point.name &&
             <Tooltip direction="top" offset={[-15, -60]}>
               <span className="title">{props.point.name}</span>

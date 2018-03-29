@@ -10,7 +10,7 @@ import CrossMarker from "./markers/CrossMarker";
 import PolygonMarker from "./markers/PolygonMarker";
 import {DEFAULT_COLOR} from "../utils/colors";
 import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from "../utils/sizes";
-import {emit} from "../App.events";
+import {store} from "../App.store";
 import * as actions from "../App.actions";
 
 function Point(props) {
@@ -72,7 +72,7 @@ class MainMap extends React.Component {
     }
 
     getPosition(event) {
-        emit(actions.cursorMove(event.latlng.lat, event.latlng.lng));
+        store.dispatch(actions.cursorMove(event.latlng.lat, event.latlng.lng));
     }
 
     click(event) {
@@ -81,24 +81,24 @@ class MainMap extends React.Component {
         }
 
         if (this.props.drawing.get('type') === "point") {
-            emit(actions.addMarker(this.props.cursor.get(0), this.props.cursor.get(1)));
+            store.dispatch(actions.addMarker(this.props.cursor.get(0), this.props.cursor.get(1)));
         } else if (this.props.drawing.get('type') === "cross") {
-            emit(actions.addCross(this.props.cursor.get(0), this.props.cursor.get(1)));
+            store.dispatch(actions.addCross(this.props.cursor.get(0), this.props.cursor.get(1)));
         } else if (this.props.drawing.get('type') === "arrow") {
-            emit(actions.addArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1)));
+            store.dispatch(actions.addArrowPoint(this.props.cursor.get(0), this.props.cursor.get(1)));
         } else if (this.props.drawing.get('type') === "polygon") {
-            emit(actions.addPolygonPoint(this.props.cursor.get(0), this.props.cursor.get(1)));
+            store.dispatch(actions.addPolygonPoint(this.props.cursor.get(0), this.props.cursor.get(1)));
         }
     }
 
     keyup(event) {
         if (event.keyCode === 27) {
-            emit(actions.cancelDrawing());
-            emit(actions.cancelViewing());
+            store.dispatch(actions.cancelDrawing());
+            store.dispatch(actions.cancelViewing());
         } else if (event.keyCode === 13 && this.props.drawing.get('type') === "polygon") {
-            emit(actions.confirmPolygonDrawing());
+            store.dispatch(actions.confirmPolygonDrawing());
         } else if (event.keyCode === 46 && this.props.selectedId) {
-            emit(actions.deleteItem(this.props.project.get('slug'), this.props.selectedId));
+            store.dispatch(actions.deleteItem(this.props.project.get('Slug'), this.props.selectedId));
         }
     }
 
@@ -108,7 +108,7 @@ class MainMap extends React.Component {
 
     whenReady(event) {
         this.map = event.target;
-        emit(actions.setCurrentMapPosition(this.map.getCenter(), this.map.getZoom()))
+        store.dispatch(actions.setCurrentMapPosition(this.map.getCenter(), this.map.getZoom()))
     }
 
 
@@ -122,12 +122,12 @@ class MainMap extends React.Component {
       }
 
       return (
-        <Map center={this.props.project.get('center_point').toJS()}
-             zoom={this.props.project.get('zoom')}
+        <Map center={[this.props.project.get('CenterPointX'), this.props.project.get('CenterPointY')]}
+             zoom={this.props.project.get('Zoom')}
              className="MainMap"
              whenReady={this.whenReady}
              onMouseMove={this.getPosition}
-             onViewportChange={({center, zoom}) => emit(actions.setCurrentMapPosition({lat: center[0], lng: center[1]}, zoom))}>
+             onViewportChange={({center, zoom}) => store.dispatch(actions.setCurrentMapPosition({lat: center[0], lng: center[1]}, zoom))}>
           {drawingType && !this.props.drawing.get('ready-to-edit') &&
             <div className={"cover " + (drawingType? "drawing-"+drawingType : "")}
                  onClick={this.click}></div>}
@@ -139,9 +139,9 @@ class MainMap extends React.Component {
             minZoom='3'
           />
 
-          {this.props.project.get('mapitems').map((point) => (
+          {false && this.props.project.get('Mapitems').map((point) => (
               <Point selected={point.get('id') === this.props.selectedId}
-                     onMoveMarker={(point, latlng) => emit(actions.moveMarker(this.props.project.get('slug'), point, latlng))}
+                     onMoveMarker={(point, latlng) => store.dispatch(actions.moveMarker(this.props.project.get('Slug'), point, latlng))}
                      draggable={this.props.moving}
                      point={point}
                      key={point.get('id')}>
@@ -189,6 +189,7 @@ export default connect(
         cursor: state.getIn(['map', 'cursor']),
         selectedId: state.getIn(['map', 'viewing', 'id']),
         project: state.get('current-project'),
+        mapItems: state.get('current-project-items'),
         moving: state.getIn(['map', 'moving']),
         drawing: state.getIn(['map', 'drawing']),
     })

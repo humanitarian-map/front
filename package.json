@@ -5,21 +5,21 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "leaflet": "^1.1.0",
-    "mdi": "^1.9.33",
+    "mdi": "^2.2.43",
     "moment": "^2.18.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-immutable-proptypes": "^2.1.0",
     "react-leaflet": "^1.4.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
-    "redux-observable": "^0.14.1",
+    "redux-observable": "^0.18.0",
     "rxjs": "^5.4.2",
     "victor": "^1.1.0"
   },
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

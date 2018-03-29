@@ -4,61 +4,50 @@ import { Observable } from "rxjs";
 
 const listProjectsEpic = action$ =>
   action$.ofType("LIST_PROJECTS")
-    .switchMap(() => {
-        return repo.listProjects().map((projects) => {
-            console.log(projects);
-            return {type: "SET_PROJECTS_LIST", payload: projects}
-        })
-    });
+    .switchMap(() =>
+        repo.listProjects().map((projects) =>
+            ({type: "SET_PROJECTS_LIST", payload: projects})));
 
 const listOrganizationsEpic = action$ =>
   action$.ofType("LIST_ORGANIZATIONS")
-    .switchMap(() => {
-        return repo.listOrganizations().map((organizations) => {
-            console.log(organizations);
-            return {type: "SET_ORGANIZATIONS_LIST", payload: organizations}
-        })
-    });
+    .switchMap(() =>
+        repo.listOrganizations().map((organizations) =>
+            ({type: "SET_ORGANIZATIONS_LIST", payload: organizations})));
 
 const getProjectDocumentsEpic = action$ =>
   action$.ofType("GET_PROJECT_DOCUMENTS")
     .map((action) => action.payload)
     .switchMap((payload) =>
-        repo.getProjectDocuments(payload).map((documents) => (
-            {type: "SET_PROJECT_DOCUMENTS", payload: documents}
-        )));
+        repo.getProjectDocuments(payload).map((documents) =>
+            ({type: "SET_PROJECT_DOCUMENTS", payload: documents})));
 
 const getCurrentProjectEpic = action$ =>
   action$.ofType("GET_CURRENT_PROJECT")
     .map((action) => action.payload)
     .switchMap((payload) =>
-        repo.getProject(payload).map((project) => (
-            {type: "SET_CURRENT_PROJECT", payload: project}
-        )));
+        repo.getProject(payload).map((project) =>
+            ({type: "SET_CURRENT_PROJECT", payload: project})));
 
 const addProjectEpic = action$ =>
   action$.ofType("ADD_PROJECT")
     .map((action) => action.payload)
     .switchMap((payload) =>
-      repo.createProject(payload.project).map(() => (
-          {type: "LIST_PROJECTS", payload: payload.projectSlug}
-      )));
+      repo.createProject(payload.project).map(() =>
+          ({type: "LIST_PROJECTS", payload: payload.projectSlug})));
 
 const deleteProjectEpic = action$ =>
   action$.ofType("DELETE_PROJECT")
     .map((action) => action.payload)
     .switchMap((payload) =>
-      repo.deleteProject(payload.projectSlug).map(() => (
-          {type: "LIST_PROJECTS", payload: payload.projectSlug}
-      )));
+      repo.deleteProject(payload.projectSlug).map(() =>
+          ({type: "LIST_PROJECTS", payload: payload.projectSlug})));
 
 const updateProjectEpic = action$ =>
   action$.ofType("UPDATE_PROJECT_POSITION")
     .map((action) => action.payload)
     .switchMap((payload) =>
-      repo.patchProject(payload.projectSlug, payload.data).map(() => (
-          {type: "LIST_PROJECTS", payload: payload.projectSlug}
-      )));
+      repo.patchProject(payload.projectSlug, payload.data).map(() =>
+          ({type: "LIST_PROJECTS", payload: payload.projectSlug})));
 
 const addPointEpic = action$ =>
   action$.ofType("ADD_POINT")

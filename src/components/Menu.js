@@ -4,7 +4,7 @@ import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import logoSvg from './img/logo-navbar.svg';
 import './Menu.css';
-import {emit} from "../App.events";
+import {store} from "../App.store";
 import * as actions from "../App.actions";
 
 class Menu extends Component {
@@ -19,7 +19,7 @@ class Menu extends Component {
         return (
           <div className="Menu">
             <div className={"project-info-icon mdi mdi-information-outline mdi-36px " + (this.props.openDetail ? "active" : "")}
-               onClick={() => emit(actions.toggleDisplayDetail())}></div>
+               onClick={() => store.dispatch(actions.toggleDisplayDetail())}></div>
             <div className="empty"></div>
             <div className="end">
                 <Link className="user" to="/profile">

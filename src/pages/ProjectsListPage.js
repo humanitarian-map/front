@@ -3,13 +3,13 @@ import {Link} from "react-router-dom";
 import { connect } from 'react-redux'
 import './ProjectsListPage.css';
 import logoSvg from './img/logo-navbar.svg';
-import {emit} from "../App.events";
+import {store} from "../App.store";
 
 class ProjectsListPage extends React.Component {
   componentWillMount() {
-      emit({type: "LIST_PROJECTS", payload: null});
-      emit({type: "LIST_ORGANIZATIONS", payload: null});
-      emit({type: "RESET_PROJECT", payload: null});
+      store.dispatch({type: "LIST_PROJECTS", payload: null});
+      store.dispatch({type: "LIST_ORGANIZATIONS", payload: null});
+      store.dispatch({type: "RESET_PROJECT", payload: null});
   }
 
   render() {

@@ -1,4 +1,7 @@
 import {fromJS, Map} from "immutable";
+import { createEpicMiddleware } from 'redux-observable';
+import { createStore, applyMiddleware } from 'redux'
+import { rootEpic } from "./App.epics"
 
 export const initialState = fromJS({
     "map": {
@@ -109,3 +112,5 @@ export function reducer(state, action) {
     }
     return state;
 }
+
+export const store = createStore(reducer, initialState, applyMiddleware(createEpicMiddleware(rootEpic)));

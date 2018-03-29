@@ -4,7 +4,7 @@ import * as Victor from "victor";
 import {PropTypes} from "prop-types";
 import {DEFAULT_COLOR} from "../../utils/colors";
 import {DEFAULT_ARROWHEAD_SIZE} from "../../utils/sizes";
-import {emit} from "../../App.events";
+import {store} from "../../App.store";
 import * as actions from "../../App.actions";
 
 export default function ArrowMarker(props) {
@@ -22,7 +22,7 @@ export default function ArrowMarker(props) {
             <Polyline color={props.point.data.color || DEFAULT_COLOR} fillColor={props.point.data.color || DEFAULT_COLOR} positions={[props.point.data.dest, arrow_point2.toArray()]}></Polyline>
 
             <Polygon positions={[props.point.data.dest, arrow_point2.toArray(), props.point.data.origin, arrow_point1.toArray()]}
-                     onClick={(e) => emit(actions.clickItem(props.point))}
+                     onClick={(e) => store.dispatch(actions.clickItem(props.point))}
                      opacity={0}
                      fillOpacity={0}>
               {props.point.name &&
