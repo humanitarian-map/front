@@ -25,6 +25,7 @@ export default connect(
             cancelViewing: actions.cancelViewing,
             deleteItem: actions.deleteItem,
             setCurrentMapPosition: actions.setCurrentMapPosition,
+            confirmPolygonDrawing: actions.confirmPolygonDrawing,
         }, dispatch)
     })
 )(MainMap);

@@ -9,10 +9,10 @@ import * as actions from "../../App.actions";
 
 export default function ArrowMarker(props) {
     let data;
-    if (typeof props.point.Data === 'string') {
-        data = JSON.parse(props.point.Data);
+    if (typeof props.point.data === 'string') {
+        data = JSON.parse(props.point.data);
     } else {
-        data = props.point.Data;
+        data = props.point.data;
     }
     let arrowhead_multiplier = (data.size || DEFAULT_ARROWHEAD_SIZE) / 100
     let origin = Victor.fromArray(data.origin);
@@ -31,9 +31,9 @@ export default function ArrowMarker(props) {
                      onClick={(e) => store.dispatch(actions.clickItem(props.point))}
                      opacity={0}
                      fillOpacity={0}>
-              {props.point.Name &&
+              {props.point.name &&
                 <Tooltip direction="top" sticky={true} offset={[-13, -20]}>
-                  <span className="title">{props.point.Name}</span>
+                  <span className="title">{props.point.name}</span>
                 </Tooltip>}
             </Polygon>
         </LayerGroup>

@@ -19,11 +19,17 @@ function MarkerIcon(props) {
 
 class MarkerDetail extends React.Component {
     render() {
-        let marker = this.props.marker;
+        let {project, marker, documents} = this.props;
+        var data;
+        if (typeof marker.data === 'string') {
+            data = JSON.parse(marker.data)
+        } else {
+            data = marker.data
+        }
 
         let projectDocuments = []
-        if (this.props.documents) {
-          projectDocuments = this.props.documents.filter((doc) => {
+        if (documents) {
+          projectDocuments = documents.filter((doc) => {
               let isFile = doc.get('type') === "file";
               let splittedPath = doc.get('path').split("/");
               let isInThePointFolder = splittedPath.length >= 4 && splittedPath[2] === marker.name;
@@ -47,7 +53,7 @@ class MarkerDetail extends React.Component {
                 <div className="block">
                   <h3 className="title mdi mdi-bookmark mdi-16px">Category</h3>
                   <div className="markers">
-                    <MarkerIcon type={marker.data.icon} />
+                    <MarkerIcon type={data.icon} />
                   </div>
                 </div>}
               <div className="block">
@@ -58,21 +64,21 @@ class MarkerDetail extends React.Component {
                 <h3 className="title mdi mdi-map mdi-16px">Coordinates</h3>
                 {(marker.type === "point" || marker.type === "cross") &&
                   <div className="coordinates-inputs">
-                      <span>Latitude {marker.data.position[0].toFixed(4)}</span>
-                      <span>Longitude {marker.data.position[1].toFixed(4)}</span>
+                      <span>Latitude {data.position[0].toFixed(4)}</span>
+                      <span>Longitude {data.position[1].toFixed(4)}</span>
                   </div>}
                 {marker.type === "arrow" &&
                   <div className="coordinates-inputs">
                       <h4>Origin</h4>
-                      <span>Latitude {marker.data.origin[0].toFixed(4)}</span>,
-                      <span>Longitude {marker.data.origin[1].toFixed(4)}</span>
+                      <span>Latitude {data.origin[0].toFixed(4)}</span>,
+                      <span>Longitude {data.origin[1].toFixed(4)}</span>
                       <h4>Destination</h4>
-                      <span>Latitude {marker.data.dest[0].toFixed(4)}</span>,
-                      <span>Longitude {marker.data.dest[1].toFixed(4)}</span>
+                      <span>Latitude {data.dest[0].toFixed(4)}</span>,
+                      <span>Longitude {data.dest[1].toFixed(4)}</span>
                   </div>}
                 {marker.type === "polygon" &&
                   <div className="coordinates-inputs">
-                      {marker.data.positions.map((point, idx) => (
+                      {data.positions.map((point, idx) => (
                         <p key={idx}>
                           <span>Latitude {point[0].toFixed(4)}</span>,
                           <span>Longitude {point[1].toFixed(4)}</span>
@@ -97,7 +103,7 @@ class MarkerDetail extends React.Component {
                 </div>}
             </div>
             <div className="buttons-set">
-              <button className="delete" onClick={() => store.dispatch(actions.deleteMarker(this.props.project.get('slug'), marker.id))}>Delete</button>
+              <button className="delete" onClick={() => store.dispatch(actions.deleteMarker(project.get('slug'), marker.id))}>Delete</button>
             </div>
           </section>
         );

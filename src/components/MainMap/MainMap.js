@@ -20,7 +20,7 @@ class Point extends React.Component {
     render() {
         const {point, selected, draggable, onMoveMarker} = this.props;
 
-        switch (point.get('Type')) {
+        switch (point.get('type')) {
             case "point":
                 return (
                   <PointMarker selected={selected}
@@ -106,7 +106,7 @@ export default class MainMap extends React.Component {
         } else if (event.keyCode === 13 && drawing.get('type') === "polygon") {
             actions.confirmPolygonDrawing();
         } else if (event.keyCode === 46 && selectedId) {
-            actions.deleteItem(project.get('Slug'), selectedId);
+            actions.deleteItem(project.get('slug'), selectedId);
         }
     }
 
@@ -131,8 +131,8 @@ export default class MainMap extends React.Component {
       }
 
       return (
-        <Map center={[project.get('CenterPointX'), project.get('CenterPointY')]}
-             zoom={project.get('Zoom')}
+        <Map center={[project.get('center_point_x'), project.get('center_point_y')]}
+             zoom={project.get('zoom')}
              className="MainMap"
              whenReady={this.whenReady}
              onMouseMove={this.getPosition}
@@ -149,11 +149,11 @@ export default class MainMap extends React.Component {
           />
 
           {points.map((point) => (
-              <Point selected={point.get('ID') === selectedId}
-                     onMoveMarker={(point, latlng) => actions.moveMarker(project.get('Slug'), point, latlng)}
+              <Point selected={point.get('id') === selectedId}
+                     onMoveMarker={(point, latlng) => actions.moveMarker(project.get('slug'), point, latlng)}
                      draggable={moving}
                      point={point}
-                     key={point.get('ID')}>
+                     key={point.get('id')}>
               </Point>
           ))}
           {drawingType === "point" && drawingPosition &&

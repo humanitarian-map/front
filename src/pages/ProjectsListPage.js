@@ -23,18 +23,18 @@ class ProjectsListPage extends React.Component {
             <h2>Projects</h2>
             <ul className="grid">
             {this.props.projects && this.props.projects.map((project) => {
-              const organization = this.props.organizations.get(project.get('OrganizationId'))
+              const organization = this.props.organizations.get(project.get('organization_id'))
               return (
-              <li className="grid-cell" key={project.get('ID')}>
-                  <Link className="project" to={"/map/"+ project.get('Slug')} >
+              <li className="grid-cell" key={project.get('id')}>
+                  <Link className="project" to={"/map/"+ project.get('slug')} >
                     <div>
-                      <div className="project-name">{project.get('Name')}</div>
+                      <div className="project-name">{project.get('name')}</div>
                       <p>{project.get('description')}</p>
                     </div>
                     {organization &&
                         <div className="organization">
-                          <img src={organization.get('Image')} alt="organization logo"/>
-                          {organization.get('Name')}
+                          <img src={organization.get('image')} alt="organization logo"/>
+                          {organization.get('name')}
                         </div>
                     }
                   </Link>

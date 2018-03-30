@@ -8,10 +8,10 @@ import * as actions from "../../App.actions";
 
 export default function CrossMarker(props) {
     let data;
-    if (typeof props.point.Data === 'string') {
-        data = JSON.parse(props.point.Data);
+    if (typeof props.point.data === 'string') {
+        data = JSON.parse(props.point.data);
     } else {
-        data = props.point.Data;
+        data = props.point.data;
     }
 
     let size = (data.size || DEFAULT_CROSS_SIZE) / 10000;
@@ -38,9 +38,9 @@ export default function CrossMarker(props) {
                      onClick={(e) => store.dispatch(actions.clickItem(props.point))}
                      opacity={0}
                      fillOpacity={0}>
-              {props.point.Name &&
+              {props.point.name &&
                 <Tooltip direction="top" sticky={true} offset={[-13, -20]}>
-                  <span className="title">{props.point.Name}</span>
+                  <span className="title">{props.point.name}</span>
                 </Tooltip>}
             </Polygon>
         </LayerGroup>
