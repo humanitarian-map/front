@@ -7,33 +7,40 @@ import {store} from "../../App.store";
 import * as actions from "../../App.actions";
 
 export default function CrossMarker(props) {
-    let size = (props.point.data.size || DEFAULT_CROSS_SIZE) / 10000;
+    let data;
+    if (typeof props.point.Data === 'string') {
+        data = JSON.parse(props.point.Data);
+    } else {
+        data = props.point.Data;
+    }
+
+    let size = (data.size || DEFAULT_CROSS_SIZE) / 10000;
     let line1 = [[
-        props.point.data.position[0] - size,
-        props.point.data.position[1] - size,
+        data.position[0] - size,
+        data.position[1] - size,
     ], [
-        props.point.data.position[0] + size,
-        props.point.data.position[1] + size,
+        data.position[0] + size,
+        data.position[1] + size,
     ]];
     let line2 = [[
-        props.point.data.position[0] - size,
-        props.point.data.position[1] + size,
+        data.position[0] - size,
+        data.position[1] + size,
     ], [
-        props.point.data.position[0] + size,
-        props.point.data.position[1] - size,
+        data.position[0] + size,
+        data.position[1] - size,
     ]];
     return (
         <LayerGroup>
-            <Polyline color={props.point.data.color || DEFAULT_COLOR} fillColor={props.point.data.color || DEFAULT_COLOR} positions={line1}></Polyline>
-            <Polyline color={props.point.data.color || DEFAULT_COLOR} fillColor={props.point.data.color || DEFAULT_COLOR} positions={line2}></Polyline>
+            <Polyline color={data.color || DEFAULT_COLOR} fillColor={data.color || DEFAULT_COLOR} positions={line1}></Polyline>
+            <Polyline color={data.color || DEFAULT_COLOR} fillColor={data.color || DEFAULT_COLOR} positions={line2}></Polyline>
 
             <Polygon positions={[line1[0], line2[0], line1[1], line2[1]]}
                      onClick={(e) => store.dispatch(actions.clickItem(props.point))}
                      opacity={0}
                      fillOpacity={0}>
-              {props.point.name &&
+              {props.point.Name &&
                 <Tooltip direction="top" sticky={true} offset={[-13, -20]}>
-                  <span className="title">{props.point.name}</span>
+                  <span className="title">{props.point.Name}</span>
                 </Tooltip>}
             </Polygon>
         </LayerGroup>
