@@ -102,7 +102,7 @@ class ProjectDetail extends React.Component {
                     points: mapitems.filter((i) => i.getIn(['data', 'icon']) === pointType.id),
                     pointType,
                 }
-          );
+            );
         }
 
         let projectDocuments = [];
@@ -180,8 +180,8 @@ class ProjectDetail extends React.Component {
                                 onClick={() => store.dispatch(actions.centerMap(
                                     {lat: this.props.project.getIn(['center_point', 0]),
                                         lng: this.props.project.getIn(['center_point', 1])},
-                            this.props.project.get('zoom')
-                        ))}
+                                    this.props.project.get('zoom')
+                                ))}
                             >
                                 {'Zoom to map center'}
                             </button>

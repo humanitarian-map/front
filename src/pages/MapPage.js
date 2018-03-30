@@ -24,7 +24,7 @@ class MapPage extends React.Component {
         store.dispatch({type: 'GET_CURRENT_PROJECT', payload: this.props.match.params.slug});
         store.dispatch({type: 'GET_CURRENT_PROJECT_POINTS', payload: this.props.match.params.slug});
 
-      // store.dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
+        // store.dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
     }
 
     render() {

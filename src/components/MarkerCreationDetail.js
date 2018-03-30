@@ -97,7 +97,7 @@ class MarkerCreationDetail extends React.Component {
                                     type={pointType}
                                     key={pointType.id}
                                 />
-                    ))}
+                            ))}
                         </div>
                     </div>}
                     {(type === 'polygon' || type === 'arrow' || type === 'cross') &&
@@ -111,7 +111,7 @@ class MarkerCreationDetail extends React.Component {
                                     className={(drawing.get('color') || DEFAULT_COLOR) === color ? 'selected' : ''}
                                     onClick={() => store.dispatch(actions.setDrawingColor(color))}
                                 />
-                    ))}
+                            ))}
                         </div>
                     </div>}
 

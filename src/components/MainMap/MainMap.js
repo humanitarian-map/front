@@ -136,7 +136,7 @@ export default class MainMap extends React.Component {
                         point={point}
                         key={point.get('id')}
                     />
-          ))}
+                ))}
                 {drawingType === 'point' && drawingPosition &&
                 <PointMarker point={{data: {position: drawingPosition.toJS(), icon: drawingIcon || 'other'}}}/>}
                 {drawingType === 'point' && !drawingPosition &&
