@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
-import * as actions from "../../App.actions";
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import * as actions from '../../App.actions';
+import {bindActionCreators} from 'redux';
 
-import MainMap from "./MainMap.js";
+import MainMap from './MainMap.js';
 
 export default connect(
     (state) => ({
@@ -26,6 +26,6 @@ export default connect(
             deleteItem: actions.deleteItem,
             setCurrentMapPosition: actions.setCurrentMapPosition,
             confirmPolygonDrawing: actions.confirmPolygonDrawing,
-        }, dispatch)
+        }, dispatch),
     })
 )(MainMap);

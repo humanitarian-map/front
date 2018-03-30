@@ -1,7 +1,7 @@
-import * as actions from "../../App.actions";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import ToolsMenu from "./ToolsMenu.js";
+import * as actions from '../../App.actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import ToolsMenu from './ToolsMenu.js';
 
 export default connect(
     (state) => ({
@@ -13,6 +13,6 @@ export default connect(
         actions: bindActionCreators({
             selectTool: actions.selectTool,
             toggleMove: actions.toggleMove,
-        }, dispatch)
+        }, dispatch),
     })
 )(ToolsMenu);
