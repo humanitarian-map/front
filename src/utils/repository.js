@@ -36,16 +36,16 @@ export function createProject(project) {
     return http.post('/api/projects', project);
 }
 
-export function createPoint(projectSlug, point) {
+export function createPoint(point) {
     return http.post('/api/map-items', point);
 }
 
-export function deletePoint(projectSlug, pointId) {
-    return http.delete('/api/projects/' + projectSlug + '/map-items/' + pointId);
+export function deletePoint(pointId) {
+    return http.delete('/api/map-items/' + pointId);
 }
 
-export function updatePoint(projectSlug, pointId, point) {
-    return http.put('/api/projects/' + projectSlug + '/map-items/' + pointId, point);
+export function updatePoint(pointId, point) {
+    return http.put('/api/map-items/' + pointId, point);
 }
 
 export function getProjectDocuments(slug) {

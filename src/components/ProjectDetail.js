@@ -92,10 +92,10 @@ class ProjectDetail extends React.Component {
     }
 
     render() {
-        const organization = this.props.project.get('organization');
+        const organization = this.props.organization;
 
         const points = [];
-        const mapitems = this.props.project.get('mapitems');
+        const mapitems = this.props.points;
         for (const pointType of POINT_TYPES) {
             points.push(
                 {
@@ -195,12 +195,23 @@ class ProjectDetail extends React.Component {
 
 ProjectDetail.propTypes = {
     project: PropTypes.object,
+    organization: PropTypes.object,
+    points: PropTypes.array,
     documents: PropTypes.object,
     currentPosition: PropTypes.object,
 };
 
 export default connect(
-    (state) => ({
-        currentPosition: state.getIn(['map', 'current-position']),
-    })
+    (state) => {
+        const project = state.get('current-project');
+        console.log(project.toJS());
+        console.log(state.get('organizations').toJS());
+        const organization = state.get('organizations').get(project.get('organization_id'));
+        return {
+            currentPosition: state.getIn(['map', 'current-position']),
+            project,
+            points: state.get('current-project-points'),
+            organization,
+        };
+    }
 )(ProjectDetail);

@@ -65,9 +65,9 @@ const addPointEpic = (action$) =>
     action$.ofType('ADD_POINT')
         .map((action) => action.payload)
         .switchMap((payload) =>
-            repo.createPoint(payload.projectSlug, payload.point).flatMap(() =>
+            repo.createPoint(payload.point).flatMap(() =>
                 Observable.from([
-                    {type: 'GET_CURRENT_PROJECT', payload: payload.projectSlug},
+                    {type: 'GET_CURRENT_PROJECT_POINTS', payload: payload.projectSlug},
                     {type: 'SELECT_TOOL', payload: null},
                 ])
             ));
@@ -76,9 +76,10 @@ const deletePointEpic = (action$) =>
     action$.ofType('DELETE_POINT')
         .map((action) => action.payload)
         .switchMap((payload) =>
-            repo.deletePoint(payload.projectSlug, payload.pointId).flatMap(() =>
+            repo.deletePoint(payload.pointId).flatMap(() =>
                 Observable.from([
                     {type: 'GET_CURRENT_PROJECT', payload: payload.projectSlug},
+                    {type: 'GET_CURRENT_PROJECT_POINTS', payload: payload.projectSlug},
                     {type: 'SELECT_TOOL', payload: null},
                 ])
             ));
