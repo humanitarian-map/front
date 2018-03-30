@@ -167,6 +167,3 @@
 .MarkerIcon .marker-icon.mdi:before {
     margin-top: 6px;
 }
-.marker-icon {
-  background-color: var(--color-grey-medium);
-}

@@ -14,14 +14,16 @@ export default class MarkerIcon extends React.Component {
 
     render() {
         const {type, active, onClick} = this.props;
-        const icon = POINT_TYPES_OBJ[type || 'other'].icon;
-        const name = POINT_TYPES_OBJ[type || 'other'].name;
+        const {icon, name, color} = POINT_TYPES_OBJ[type || 'other'];
         return (
             <div
                 className={'MarkerIcon ' + (active ? 'active' : '')}
                 onClick={onClick}
             >
-                <div className={'marker-icon ' + type + '-icon mdi mdi-' + icon + ' mdi-24px'}/>
+                <div
+                    className={'marker-icon ' + type + '-icon mdi mdi-' + icon + ' mdi-24px'}
+                    style={{'backgroundColor': color}}
+                />
                 <span>{name}</span>
             </div>
         );
