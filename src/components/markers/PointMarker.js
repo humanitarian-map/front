@@ -37,10 +37,10 @@ const icons = {
 
 export default function PointMarker(props) {
     let data;
-    if (typeof props.point.data === 'string') {
-        data = JSON.parse(props.point.data);
+    if (typeof props.point.Data === 'string') {
+        data = JSON.parse(props.point.Data);
     } else {
-        data = props.point.data;
+        data = props.point.Data;
     }
     return (
         <Marker
@@ -50,9 +50,9 @@ export default function PointMarker(props) {
             position={data.position}
             icon={props.selected? icons[(data.icon || "other") + "-active"] : icons[data.icon || "other"]}
             onClick={(e) => store.dispatch(actions.clickItem(props.point))}>
-          {props.point.name &&
+          {props.point.Name &&
             <Tooltip direction="top" offset={[-15, -60]}>
-              <span className="title">{props.point.name}</span>
+              <span className="title">{props.point.Name}</span>
             </Tooltip>}
         </Marker>
     )
