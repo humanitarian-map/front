@@ -10,6 +10,11 @@ import logoSvg from './img/logo-navbar.svg';
 import './Menu.css';
 
 class Menu extends Component {
+    static propTypes = {
+        user: PropTypes.object.isRequired,
+        openDetail: PropTypes.bool.isRequired,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -18,10 +23,11 @@ class Menu extends Component {
     }
 
     render() {
+        const {openDetail, user} = this.props;
         return (
             <div className='Menu'>
                 <div
-                    className={'project-info-icon mdi mdi-information-outline mdi-36px ' + (this.props.openDetail ? 'active' : '')}
+                    className={'project-info-icon mdi mdi-information-outline mdi-36px ' + (openDetail ? 'active' : '')}
                     onClick={() => store.dispatch(actions.toggleDisplayDetail())}
                 />
                 <div className='empty'/>
@@ -33,7 +39,7 @@ class Menu extends Component {
                         <img
                             className='avatar'
                             alt='avatar'
-                            src={this.props.user.get('avatar')}
+                            src={user.get('avatar')}
                         />
                     </Link>
                     <Link
@@ -50,10 +56,6 @@ class Menu extends Component {
         );
     }
 }
-
-Menu.propTypes = {
-    user: PropTypes.object.isRequired,
-};
 
 export default connect(
     (state) => ({

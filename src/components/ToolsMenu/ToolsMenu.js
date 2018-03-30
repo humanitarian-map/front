@@ -1,24 +1,9 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 
+import CursorBox from '../CursorBox.js';
+
 import './ToolsMenu.css';
-
-class CursorBox extends React.PureComponent {
-    static propTypes = {
-        lat: PropTypes.number.isRequired,
-        lng: PropTypes.number.isRequired,
-    }
-
-    render() {
-        const {lat, lng} = this.props;
-        return (
-            <div className='cursor-box'>
-                <span className='lat'>{lat.toFixed(4)}</span>{','}
-                <span className='lng'>{lng.toFixed(4)}</span>
-            </div>
-        );
-    }
-}
 
 export default class ToolsMenu extends Component {
     static propTypes = {

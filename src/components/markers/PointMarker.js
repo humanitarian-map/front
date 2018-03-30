@@ -67,6 +67,6 @@ export default function PointMarker(props) {
 PointMarker.propTypes = {
     point: PropTypes.object.isRequired,
     selected: PropTypes.bool,
-    onMove: PropTypes.func,
+    onMoveMarker: PropTypes.func,
     draggable: PropTypes.bool,
 };

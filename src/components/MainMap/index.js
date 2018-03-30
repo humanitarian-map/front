@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
-import * as actions from '../../App.actions';
 import {bindActionCreators} from 'redux';
+
+import * as actions from '../../App.actions';
 
 import MainMap from './MainMap.js';
 
@@ -13,7 +14,7 @@ export default connect(
         moving: state.getIn(['map', 'moving']),
         drawing: state.getIn(['map', 'drawing']),
     }),
-    (dispatch, getState) => ({
+    (dispatch) => ({
         actions: bindActionCreators({
             cursorMove: actions.cursorMove,
             addMarker: actions.addMarker,

@@ -3,53 +3,15 @@ import {Map, TileLayer, Polyline} from 'react-leaflet';
 import {PropTypes} from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import './MainMap.css';
 import ArrowMarker from '../markers/ArrowMarker';
 import PointMarker from '../markers/PointMarker';
 import CrossMarker from '../markers/CrossMarker';
 import PolygonMarker from '../markers/PolygonMarker';
+import Point from '../Point.js';
 import {DEFAULT_COLOR} from '../../utils/colors';
 import {DEFAULT_CROSS_SIZE, DEFAULT_ARROWHEAD_SIZE} from '../../utils/sizes';
 
-class Point extends React.Component {
-    static propTypes = {
-        point: ImmutablePropTypes.mapContains({}).isRequired,
-        selected: PropTypes.bool,
-        draggable: PropTypes.bool,
-    }
-
-    render() {
-        const {point, selected, draggable, onMoveMarker} = this.props;
-
-        switch (point.get('type')) {
-        case 'point':
-            return (
-                <PointMarker
-                    selected={selected}
-                    point={point.toJS()}
-                    draggable={draggable}
-                    onMoveMarker={onMoveMarker}
-                />
-            );
-        case 'arrow':
-            return (<ArrowMarker
-                selected={selected}
-                point={point.toJS()}
-                    />);
-        case 'cross':
-            return (<CrossMarker
-                selected={selected}
-                point={point.toJS()}
-                    />);
-        case 'polygon':
-            return (<PolygonMarker
-                selected={selected}
-                point={point.toJS()}
-                    />);
-        }
-        return null;
-    }
-}
+import './MainMap.css';
 
 export default class MainMap extends React.Component {
     static propTypes = {
@@ -60,6 +22,7 @@ export default class MainMap extends React.Component {
         selectedId: PropTypes.string,
         project: PropTypes.object,
         moving: PropTypes.bool,
+        points: PropTypes.array,
         drawing: ImmutablePropTypes.mapContains({
             type: PropTypes.string,
             data: PropTypes.object,
@@ -93,7 +56,7 @@ export default class MainMap extends React.Component {
         this.props.actions.cursorMove(event.latlng.lat, event.latlng.lng);
     }
 
-    click = (event) => {
+    click = () => {
         const {drawing, actions, cursor} = this.props;
         if (drawing.get('ready-to-edit')) {
             return false;
@@ -108,6 +71,7 @@ export default class MainMap extends React.Component {
         } else if (drawing.get('type') === 'polygon') {
             actions.addPolygonPoint(cursor.get(0), cursor.get(1));
         }
+        return false;
     }
 
     keyup = (event) => {
@@ -167,7 +131,7 @@ export default class MainMap extends React.Component {
                 {points.map((point) => (
                     <Point
                         selected={point.get('id') === selectedId}
-                        onMoveMarker={(point, latlng) => actions.moveMarker(project.get('slug'), point, latlng)}
+                        onMoveMarker={(p, latlng) => actions.moveMarker(project.get('slug'), p, latlng)}
                         draggable={moving}
                         point={point}
                         key={point.get('id')}
@@ -195,7 +159,7 @@ export default class MainMap extends React.Component {
                 <div
                     className='close-polygon-tooltip'
                     style={{left: this.state.pointer[0] + 20, top: this.state.pointer[1] - 60}}
-                >Press Enter to complete</div>}
+                >{'Press Enter to complete'}</div>}
                 {drawingType === 'polygon' && drawing.get('ready-to-edit') &&
                 <PolygonMarker point={{data: {color: drawing.get('color') || DEFAULT_COLOR, positions: drawing.get('points').toJS()}}}/>}
             </Map>

@@ -9,26 +9,7 @@ import {store} from '../App.store';
 import * as actions from '../App.actions';
 
 import './MarkerCreationDetail.css';
-
-class MarkerIcon extends React.Component {
-    static propTypes = {
-        active: PropTypes.bool.isRequired,
-        type: PropTypes.object.isRequired,
-        onClick: PropTypes.func.isRequired,
-    }
-    render() {
-        const {active, onClick, type} = this.props;
-        return (
-            <div
-                className={'MarkerIcon ' + (active ? 'active' : '')}
-                onClick={onClick}
-            >
-                <div className={'marker-icon ' + type.id + '-icon mdi mdi-' + type.icon + ' mdi-18px'}/>
-                <span>{type.name}</span>
-            </div>
-        );
-    }
-}
+import MarkerIcon from './MarkerIcon.js';
 
 class MarkerCreationDetail extends React.Component {
     static propTypes = {
