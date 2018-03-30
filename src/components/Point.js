@@ -7,7 +7,7 @@ import PointMarker from './markers/PointMarker';
 import CrossMarker from './markers/CrossMarker';
 import PolygonMarker from './markers/PolygonMarker';
 
-export class Point extends React.Component {
+export default class Point extends React.Component {
     static propTypes = {
         point: ImmutablePropTypes.mapContains({}).isRequired,
         selected: PropTypes.bool,
@@ -49,8 +49,9 @@ export class Point extends React.Component {
                     point={point.toJS()}
                 />
             );
+        default:
+            return null;
         }
-        return null;
     }
 }
 

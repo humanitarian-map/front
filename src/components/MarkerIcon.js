@@ -7,20 +7,21 @@ import './MarkerIcon.css';
 
 export default class MarkerIcon extends React.Component {
     static propTypes = {
-        type: PropTypes.string.isRequired,
-        active: PropTypes.bool.isRequired,
-        onClick: PropTypes.func.isRequired,
+        type: PropTypes.string,
+        active: PropTypes.bool,
+        onClick: PropTypes.func,
     };
 
     render() {
-        const icon = POINT_TYPES_OBJ[this.props.type || 'other'].icon;
-        const name = POINT_TYPES_OBJ[this.props.type || 'other'].name;
+        const {type, active, onClick} = this.props;
+        const icon = POINT_TYPES_OBJ[type || 'other'].icon;
+        const name = POINT_TYPES_OBJ[type || 'other'].name;
         return (
             <div
-                className={'MarkerIcon ' + (this.props.active ? 'active' : '')}
-                onClick={this.props.onClick}
+                className={'MarkerIcon ' + (active ? 'active' : '')}
+                onClick={onClick}
             >
-                <div className={'marker-icon ' + this.props.type + '-icon mdi mdi-' + icon + ' mdi-24px'}/>
+                <div className={'marker-icon ' + type + '-icon mdi mdi-' + icon + ' mdi-24px'}/>
                 <span>{name}</span>
             </div>
         );

@@ -16,8 +16,8 @@ class MapPage extends React.Component {
         match: PropTypes.object.isRequired,
         map: PropTypes.object,
         user: PropTypes.object,
-        project: PropTypes.object.isRequired,
-        documents: PropTypes.array.isRequired,
+        project: PropTypes.object,
+        documents: PropTypes.array,
         displayProjectDetail: PropTypes.bool,
     }
     componentWillMount() {

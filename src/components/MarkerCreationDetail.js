@@ -94,7 +94,7 @@ class MarkerCreationDetail extends React.Component {
                                 <MarkerIcon
                                     active={activeMarker === pointType.id || (!activeMarker && pointType.id === 'other')}
                                     onClick={() => store.dispatch(actions.selectIcon(pointType.id))}
-                                    type={pointType}
+                                    type={pointType.id}
                                     key={pointType.id}
                                 />
                             ))}

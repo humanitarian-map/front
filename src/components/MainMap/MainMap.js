@@ -22,7 +22,7 @@ export default class MainMap extends React.Component {
         selectedId: PropTypes.string,
         project: PropTypes.object,
         moving: PropTypes.bool,
-        points: PropTypes.array,
+        points: PropTypes.object,
         drawing: ImmutablePropTypes.mapContains({
             type: PropTypes.string,
             data: PropTypes.object,
