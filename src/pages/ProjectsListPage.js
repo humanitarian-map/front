@@ -52,8 +52,8 @@ class ProjectsListPage extends React.Component {
                                         {organization &&
                                         <div className='organization'>
                                             <img
-                                              src={organization.get('image')}
-                                              alt='organization logo'
+                                                src={organization.get('image')}
+                                                alt='organization logo'
                                             />
                                             {organization.get('name')}
                                         </div>

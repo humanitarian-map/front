@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
+
 import './ToolsMenu.css';
 
 class CursorBox extends React.PureComponent {
@@ -13,14 +13,21 @@ class CursorBox extends React.PureComponent {
         const {lat, lng} = this.props;
         return (
             <div className='cursor-box'>
-                <span className='lat'>{lat.toFixed(4)}</span>,
-            <span className='lng'>{lng.toFixed(4)}</span>
+                <span className='lat'>{lat.toFixed(4)}</span>{','}
+                <span className='lng'>{lng.toFixed(4)}</span>
             </div>
         );
     }
 }
 
 export default class ToolsMenu extends Component {
+    static propTypes = {
+        actions: PropTypes.object.isRequired,
+        drawing: PropTypes.object.isRequired,
+        moving: PropTypes.object.isRequired,
+        cursor: PropTypes.object.isRequired,
+    }
+
     render() {
         const {actions, drawing, moving, cursor} = this.props;
         const active = drawing.get('type');

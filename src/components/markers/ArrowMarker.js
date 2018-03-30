@@ -2,6 +2,7 @@ import React from 'react';
 import {LayerGroup, Polyline, Tooltip, Polygon} from 'react-leaflet';
 import * as Victor from 'victor';
 import {PropTypes} from 'prop-types';
+
 import {DEFAULT_COLOR} from '../../utils/colors';
 import {DEFAULT_ARROWHEAD_SIZE} from '../../utils/sizes';
 import {store} from '../../App.store';
@@ -14,12 +15,12 @@ export default function ArrowMarker(props) {
     } else {
         data = props.point.data;
     }
-    const arrowhead_multiplier = (data.size || DEFAULT_ARROWHEAD_SIZE) / 100;
+    const arrowheadMultiplier = (data.size || DEFAULT_ARROWHEAD_SIZE) / 100;
     const origin = Victor.fromArray(data.origin);
     const dest = Victor.fromArray(data.dest);
     const canonical = dest.clone().subtract(origin.clone());
-    const arrow_point1 = canonical.clone().multiply(Victor.fromArray([-arrowhead_multiplier, -arrowhead_multiplier])).rotateDeg(25).add(dest.clone());
-    const arrow_point2 = canonical.clone().multiply(Victor.fromArray([-arrowhead_multiplier, -arrowhead_multiplier])).rotateDeg(-25).add(dest.clone());
+    const arrowPoint1 = canonical.clone().multiply(Victor.fromArray([-arrowheadMultiplier, -arrowheadMultiplier])).rotateDeg(25).add(dest.clone());
+    const arrowPoint2 = canonical.clone().multiply(Victor.fromArray([-arrowheadMultiplier, -arrowheadMultiplier])).rotateDeg(-25).add(dest.clone());
 
     return (
         <LayerGroup>
@@ -31,17 +32,17 @@ export default function ArrowMarker(props) {
             <Polyline
                 color={data.color || DEFAULT_COLOR}
                 fillColor={data.color || DEFAULT_COLOR}
-                positions={[data.dest, arrow_point1.toArray()]}
+                positions={[data.dest, arrowPoint1.toArray()]}
             />
             <Polyline
                 color={data.color || DEFAULT_COLOR}
                 fillColor={data.color || DEFAULT_COLOR}
-                positions={[data.dest, arrow_point2.toArray()]}
+                positions={[data.dest, arrowPoint2.toArray()]}
             />
 
             <Polygon
-                positions={[data.dest, arrow_point2.toArray(), data.origin, arrow_point1.toArray()]}
-                onClick={(e) => store.dispatch(actions.clickItem(props.point))}
+                positions={[data.dest, arrowPoint2.toArray(), data.origin, arrowPoint1.toArray()]}
+                onClick={() => store.dispatch(actions.clickItem(props.point))}
                 opacity={0}
                 fillOpacity={0}
             >

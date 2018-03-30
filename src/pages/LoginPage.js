@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+
 import './LoginPage.css';
 import logoSvg from './img/logo-navbar.svg';
 
@@ -12,8 +13,8 @@ export default class LoginPage extends Component {
                     alt='logo'
                     src={logoSvg}
                 />
-                <h1>The Humanitarian Map</h1>
-                <h2>Visualize your humanitarian project in a map</h2>
+                <h1>{'The Humanitarian Map'}</h1>
+                <h2>{'Visualize your humanitarian project in a map'}</h2>
                 <form>
                     <fieldset>
                         <input
@@ -26,7 +27,7 @@ export default class LoginPage extends Component {
                         />
                     </fieldset>
                     <Link to='/projects'>
-                        <button>Login</button>
+                        <button>{'Login'}</button>
                     </Link>
                 </form>
             </div>

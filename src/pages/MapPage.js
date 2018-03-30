@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
+import {PropTypes} from 'prop-types';
+
 import MainMap from '../components/MainMap';
 import Menu from '../components/Menu';
 import ToolsMenu from '../components/ToolsMenu';
@@ -9,7 +11,15 @@ import MarkerDetail from '../components/MarkerDetail';
 import './MapPage.css';
 import {store} from '../App.store';
 
-class MapPage extends Component {
+class MapPage extends React.Component {
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        map: PropTypes.object,
+        user: PropTypes.object,
+        project: PropTypes.object.isRequired,
+        documents: PropTypes.array.isRequired,
+        displayProjectDetail: PropTypes.bool,
+    }
     componentWillMount() {
         store.dispatch({type: 'GET_CURRENT_PROJECT', payload: this.props.match.params.slug});
         store.dispatch({type: 'GET_CURRENT_PROJECT_POINTS', payload: this.props.match.params.slug});

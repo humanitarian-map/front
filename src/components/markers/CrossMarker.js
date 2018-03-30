@@ -1,6 +1,7 @@
 import React from 'react';
 import {LayerGroup, Polyline, Tooltip, Polygon} from 'react-leaflet';
 import {PropTypes} from 'prop-types';
+
 import {DEFAULT_COLOR} from '../../utils/colors';
 import {DEFAULT_CROSS_SIZE} from '../../utils/sizes';
 import {store} from '../../App.store';
@@ -44,7 +45,7 @@ export default function CrossMarker(props) {
 
             <Polygon
                 positions={[line1[0], line2[0], line1[1], line2[1]]}
-                onClick={(e) => store.dispatch(actions.clickItem(props.point))}
+                onClick={() => store.dispatch(actions.clickItem(props.point))}
                 opacity={0}
                 fillOpacity={0}
             >

@@ -1,26 +1,42 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
-import './MarkerDetail.css';
+
 import {POINT_TYPES_OBJ} from '../utils/point_types';
 import {store} from '../App.store';
 import * as actions from '../App.actions';
 
-function MarkerIcon(props) {
-    const icon = POINT_TYPES_OBJ[props.type || 'other'].icon;
-    const name = POINT_TYPES_OBJ[props.type || 'other'].name;
-    return (
-        <div
-            className={'MarkerIcon ' + (props.active ? 'active' : '')}
-            onClick={props.onClick}
-        >
-            <div className={'marker-icon ' + props.type + '-icon mdi mdi-' + icon + ' mdi-24px'}/>
-            <span>{name}</span>
-        </div>
-    );
+import './MarkerDetail.css';
+
+class MarkerIcon extends React.Component {
+    static propTypes = {
+        type: PropTypes.string.isRequired,
+        active: PropTypes.bool.isRequired,
+        onClick: PropTypes.func.isRequired,
+    };
+
+    render() {
+        const icon = POINT_TYPES_OBJ[this.props.type || 'other'].icon;
+        const name = POINT_TYPES_OBJ[this.props.type || 'other'].name;
+        return (
+            <div
+                className={'MarkerIcon ' + (this.props.active ? 'active' : '')}
+                onClick={this.props.onClick}
+            >
+                <div className={'marker-icon ' + this.props.type + '-icon mdi mdi-' + icon + ' mdi-24px'}/>
+                <span>{name}</span>
+            </div>
+        );
+    }
 }
 
 class MarkerDetail extends React.Component {
+    static propTypes = {
+        marker: PropTypes.object.isRequired,
+        project: PropTypes.object,
+        documents: PropTypes.object,
+    };
+
     render() {
         const {project, marker, documents} = this.props;
         var data;
@@ -54,43 +70,46 @@ class MarkerDetail extends React.Component {
                     </div>
                     {marker.type === 'point' &&
                     <div className='block'>
-                        <h3 className='title mdi mdi-bookmark mdi-16px'>Category</h3>
+                        <h3 className='title mdi mdi-bookmark mdi-16px'>{'Category'}</h3>
                         <div className='markers'>
                             <MarkerIcon type={data.icon}/>
                         </div>
                     </div>}
                     <div className='block'>
-                        <h3 className='title mdi mdi-comment mdi-16px'>Comment</h3>
+                        <h3 className='title mdi mdi-comment mdi-16px'>{'Comment'}</h3>
                         <p>{marker.description}</p>
                     </div>
                     <div className='block'>
-                        <h3 className='title mdi mdi-map mdi-16px'>Coordinates</h3>
+                        <h3 className='title mdi mdi-map mdi-16px'>{'Coordinates'}</h3>
                         {(marker.type === 'point' || marker.type === 'cross') &&
                         <div className='coordinates-inputs'>
-                            <span>Latitude {data.position[0].toFixed(4)}</span>
-                            <span>Longitude {data.position[1].toFixed(4)}</span>
+                            <span>{'Latitude '}{data.position[0].toFixed(4)}</span>
+                            <span>{'Longitude '}{data.position[1].toFixed(4)}</span>
                         </div>}
                         {marker.type === 'arrow' &&
                         <div className='coordinates-inputs'>
                             <h4>{'Origin'}</h4>
-                            <span>Latitude {data.origin[0].toFixed(4)}</span>,
-                      <span>Longitude {data.origin[1].toFixed(4)}</span>
-                            <h4>Destination</h4>
-                            <span>Latitude {data.dest[0].toFixed(4)}</span>,
-                      <span>Longitude {data.dest[1].toFixed(4)}</span>
+                            <span>{'Latitude ' + data.origin[0].toFixed(4)}</span>
+                            {','}
+                            <span>{'Longitude ' + data.origin[1].toFixed(4)}</span>
+                            <h4>{'Destination'}</h4>
+                            <span>{'Latitude ' + data.dest[0].toFixed(4)}</span>
+                            {','}
+                            <span>{'Longitude ' + data.dest[1].toFixed(4)}</span>
                         </div>}
                         {marker.type === 'polygon' &&
                         <div className='coordinates-inputs'>
                             {data.positions.map((point, idx) => (
                                 <p key={idx}>
-                                    <span>Latitude {point[0].toFixed(4)}</span>,
-                          <span>Longitude {point[1].toFixed(4)}</span>
+                                    <span>{'Latitude' + point[0].toFixed(4)}</span>
+                                    {','}
+                                    <span>{'Longitude ' + point[1].toFixed(4)}</span>
                                 </p>))}
                         </div>}
                     </div>
                     {marker.type === 'point' &&
                     <div className='block block-documents'>
-                        <h3 className='title mdi mdi-attachment mdi-16px'>Documents</h3>
+                        <h3 className='title mdi mdi-attachment mdi-16px'>{'Documents'}</h3>
                         <div className='docs'>
                             {(projectDocuments || []).map((doc) => (
                                 <a
@@ -120,12 +139,6 @@ class MarkerDetail extends React.Component {
         );
     }
 }
-
-MarkerDetail.propTypes = {
-    marker: PropTypes.object.isRequired,
-    project: PropTypes.object,
-    documents: PropTypes.object,
-};
 
 export default connect(
     (state) => ({

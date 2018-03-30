@@ -1,6 +1,7 @@
 import {fromJS, Map} from 'immutable';
 import {createEpicMiddleware} from 'redux-observable';
 import {createStore, applyMiddleware} from 'redux';
+
 import {rootEpic} from './App.epics';
 
 export const initialState = fromJS({
@@ -27,21 +28,21 @@ export const initialState = fromJS({
 
 export function reducer(state, action) {
     if (action.type === 'ADD_MARKER') {
-        return state.setIn(['map', 'drawing', 'position'], fromJS(action.payload)).
-                    setIn(['map', 'drawing', 'ready-to-edit'], true);
+        return state.setIn(['map', 'drawing', 'position'], fromJS(action.payload))
+                    .setIn(['map', 'drawing', 'ready-to-edit'], true);
     } else if (action.type === 'ADD_CROSS') {
-        return state.setIn(['map', 'drawing', 'position'], fromJS(action.payload)).
-                    setIn(['map', 'drawing', 'ready-to-edit'], true);
+        return state.setIn(['map', 'drawing', 'position'], fromJS(action.payload))
+                    .setIn(['map', 'drawing', 'ready-to-edit'], true);
     } else if (action.type === 'SELECT_TOOL') {
-        return state.setIn(['map', 'drawing'], fromJS({type: action.payload})).
-                    setIn(['map', 'moving'], null).
-                    setIn(['map', 'viewing'], null);
+        return state.setIn(['map', 'drawing'], fromJS({type: action.payload}))
+                    .setIn(['map', 'moving'], null)
+                    .setIn(['map', 'viewing'], null);
     } else if (action.type === 'SET_DRAWING_COLOR') {
         return state.setIn(['map', 'drawing', 'color'], action.payload);
     } else if (action.type === 'ADD_ARROW_POINT') {
         if (state.getIn(['map', 'drawing', 'points']) && state.getIn(['map', 'drawing', 'points']).size === 1) {
-            return state.updateIn(['map', 'drawing', 'points'], (points) => points.push(fromJS(action.payload))).
-                        setIn(['map', 'drawing', 'ready-to-edit'], true);
+            return state.updateIn(['map', 'drawing', 'points'], (points) => points.push(fromJS(action.payload)))
+                        .setIn(['map', 'drawing', 'ready-to-edit'], true);
         }
 
         return state.setIn(['map', 'drawing', 'points'], fromJS([action.payload]));
@@ -66,8 +67,8 @@ export function reducer(state, action) {
                 return null;
             }
             return fromJS(action.payload);
-        }).
-                    setIn(['map', 'drawing'], fromJS({type: null}));
+        })
+                    .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === 'VISUALIZE_MARKER') {
         return state.updateIn(['map', 'viewing'], (viewing) => {
             if (!action.payload) {
@@ -76,8 +77,8 @@ export function reducer(state, action) {
                 return null;
             }
             return fromJS(action.payload);
-        }).
-                    setIn(['map', 'drawing'], fromJS({type: null}));
+        })
+                    .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === 'UPDATE_VISUALIZED_MARKER') {
         return state.updateIn(['map', 'viewing'], (viewing) => {
             if (viewing && action.payload.id === viewing.get('id')) {
@@ -94,9 +95,9 @@ export function reducer(state, action) {
     } else if (action.type === 'SET_CURRENT_PROJECT_POINTS') {
         return state.set('current-project-points', action.payload);
     } else if (action.type === 'RESET_PROJECT') {
-        return state.set('map', initialState.get('map')).
-                    set('current-project', null).
-                    set('display-project-detail', false);
+        return state.set('map', initialState.get('map'))
+                    .set('current-project', null)
+                    .set('display-project-detail', false);
     } else if (action.type === 'CHANGE_ARROW_ORIGIN') {
         return state.setIn(['map', 'drawing', 'points', 0], fromJS(action.payload));
     } else if (action.type === 'CHANGE_ARROW_DEST') {
@@ -106,8 +107,8 @@ export function reducer(state, action) {
     } else if (action.type === 'CHANGE_CROSS_SIZE') {
         return state.setIn(['map', 'drawing', 'size'], action.payload);
     } else if (action.type === 'TOGGLE_MOVE') {
-        return state.updateIn(['map', 'moving'], (m) => !m).
-                    setIn(['map', 'drawing'], fromJS({type: null}));
+        return state.updateIn(['map', 'moving'], (m) => !m)
+                    .setIn(['map', 'drawing'], fromJS({type: null}));
     } else if (action.type === 'SET_PROJECT_DOCUMENTS') {
         return state.set('documents', action.payload);
     } else if (action.type === 'SET_CURRENT_MAP_POSITION') {

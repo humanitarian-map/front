@@ -2,10 +2,12 @@ import React from 'react';
 import {Marker, Tooltip} from 'react-leaflet';
 import * as L from 'leaflet';
 import {PropTypes} from 'prop-types';
-import './PointMarker.css';
+
 import {POINT_TYPES_OBJ} from '../../utils/point_types';
 import {store} from '../../App.store';
 import * as actions from '../../App.actions';
+
+import './PointMarker.css';
 
 function createIcon(markerId, active) {
     const iconName = POINT_TYPES_OBJ[markerId].icon;
@@ -49,7 +51,7 @@ export default function PointMarker(props) {
             onDragEnd={(e) => props.onMoveMarker(props.point, e.target.getLatLng())}
             position={data.position}
             icon={props.selected ? icons[(data.icon || 'other') + '-active'] : icons[data.icon || 'other']}
-            onClick={(e) => store.dispatch(actions.clickItem(props.point))}
+            onClick={() => store.dispatch(actions.clickItem(props.point))}
         >
             {props.point.name &&
             <Tooltip

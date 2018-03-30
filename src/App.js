@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import {BrowserRouter, Route, Redirect} from 'react-router-dom';
+
 import MapPage from './pages/MapPage';
 import LoginPage from './pages/LoginPage';
 import UserProfilePage from './pages/UserProfilePage';
 import ProjectsListPage from './pages/ProjectsListPage';
-import {Provider} from 'react-redux';
 import {store} from './App.store';
 import './App.css';
-import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 
 export default class App extends Component {
     render() {

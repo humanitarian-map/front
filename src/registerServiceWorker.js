@@ -46,9 +46,9 @@ export default function register() {
 }
 
 function registerValidSW(swUrl) {
-    navigator.serviceWorker.
-    register(swUrl).
-    then((registration) => {
+    navigator.serviceWorker
+    .register(swUrl)
+    .then((registration) => {
         registration.onupdatefound = () => {
             const installingWorker = registration.installing;
             installingWorker.onstatechange = () => {
@@ -68,16 +68,16 @@ function registerValidSW(swUrl) {
                 }
             };
         };
-    }).
-    catch((error) => {
+    })
+    .catch((error) => {
         console.error('Error during service worker registration:', error);
     });
 }
 
 function checkValidServiceWorker(swUrl) {
   // Check if the service worker can be found. If it can't reload the page.
-    fetch(swUrl).
-    then((response) => {
+    fetch(swUrl)
+    .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
         if (
         response.status === 404 ||
@@ -93,8 +93,8 @@ function checkValidServiceWorker(swUrl) {
         // Service worker found. Proceed as normal.
             registerValidSW(swUrl);
         }
-    }).
-    catch(() => {
+    })
+    .catch(() => {
         console.log(
         'No internet connection found. App is running in offline mode.'
       );

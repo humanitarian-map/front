@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
-import logoSvg from './img/logo-navbar.svg';
-import './Menu.css';
+
 import {store} from '../App.store';
 import * as actions from '../App.actions';
+
+import logoSvg from './img/logo-navbar.svg';
+import './Menu.css';
 
 class Menu extends Component {
     constructor(props) {
