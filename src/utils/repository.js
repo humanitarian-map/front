@@ -1,4 +1,5 @@
 import config from '../config';
+
 import {Http} from './http';
 
 const http = new Http(config.API_HOST);
@@ -48,6 +49,5 @@ export function updatePoint(projectSlug, pointId, point) {
 }
 
 export function getProjectDocuments(slug) {
-    const noCache = '?' + ((new Date()).getTime());
     return http.get('/api/projects/' + slug + '/documents');
 }

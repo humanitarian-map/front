@@ -56,7 +56,7 @@ class ProjectDetail extends React.Component {
 
         return (
             <section className='ProjectDetail panel'>
-                <h2 className='header-title'>Project</h2>
+                <h2 className='header-title'>{'Project'}</h2>
                 <div className='content'>
                     <div className='block'>
                         <h3 className='title panel-name'>{this.props.project.get('name')}</h3>

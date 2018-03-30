@@ -1,7 +1,5 @@
 import React from 'react';
 import {Map, TileLayer, Polyline} from 'react-leaflet';
-import {PropTypes} from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import './MainMap.css';
 import ArrowMarker from '../markers/ArrowMarker';
 import PointMarker from '../markers/PointMarker';

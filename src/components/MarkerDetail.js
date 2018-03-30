@@ -72,7 +72,7 @@ class MarkerDetail extends React.Component {
                         </div>}
                         {marker.type === 'arrow' &&
                         <div className='coordinates-inputs'>
-                            <h4>Origin</h4>
+                            <h4>{'Origin'}</h4>
                             <span>Latitude {data.origin[0].toFixed(4)}</span>,
                       <span>Longitude {data.origin[1].toFixed(4)}</span>
                             <h4>Destination</h4>
@@ -102,11 +102,11 @@ class MarkerDetail extends React.Component {
                                 >
                                     {doc.get('name')}
                                 </a>
-                    ))}
+                            ))}
                             <a
                                 target='_blank'
                                 href={marker.documents_url}
-                            >Open documents folder</a>
+                            >{'Open documents folder'}</a>
                         </div>
                     </div>}
                 </div>
@@ -114,7 +114,7 @@ class MarkerDetail extends React.Component {
                     <button
                         className='delete'
                         onClick={() => store.dispatch(actions.deleteMarker(project.get('slug'), marker.id))}
-                    >Delete</button>
+                    >{'Delete'}</button>
                 </div>
             </section>
         );

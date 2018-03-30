@@ -3,11 +3,10 @@ import 'rxjs/add/observable/dom/ajax';
 import {fromJS} from 'immutable';
 
 export class Http {
-    headers = {'Content-Type': 'application/json'};
-    responseType = 'json';
-
     constructor(apiHost) {
         this.apiHost = apiHost;
+        this.headers = {'Content-Type': 'application/json'};
+        this.responseType = 'json';
     }
 
     request(url, method, body) {

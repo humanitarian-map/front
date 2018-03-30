@@ -17,7 +17,7 @@ export const addMarker = (lat, lng) => ({type: 'ADD_MARKER', payload: [lat, lng]
 export const addCross = (lat, lng) => ({type: 'ADD_CROSS', payload: [lat, lng]});
 export const addArrowPoint = (lat, lng) => ({type: 'ADD_ARROW_POINT', payload: [lat, lng]});
 export const addPolygonPoint = (lat, lng) => ({type: 'ADD_POLYGON_POINT', payload: [lat, lng]});
-export const cancelViewing = (point) => ({type: 'VISUALIZE_MARKER', payload: null});
+export const cancelViewing = () => ({type: 'VISUALIZE_MARKER', payload: null});
 export const confirmPolygonDrawing = () => ({type: 'CONFIRM_POLYGON_DRAWING', payload: null});
 export const cursorMove = (lat, lng) => ({type: 'CURSOR_MOVE', payload: [lat, lng]});
 export const clickItem = (point) => ({type: 'VISUALIZE_MARKER', payload: point});
