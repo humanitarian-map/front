@@ -1,0 +1,13 @@
+.CursorBox {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    width: 140px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.CursorBox span {
+    width: 60px;
+}
