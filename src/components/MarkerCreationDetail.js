@@ -61,11 +61,11 @@ class MarkerCreationDetail extends React.Component {
         store.dispatch(actions.saveMarker(
             this.props.project.get('Slug'),
             {
-                "project": this.props.project.get('ID'),
-                "name": this.state.name,
-                "description": this.state.description,
-                "type": this.props.drawing.get('type'),
-                "data": data
+                "Project": this.props.project.get('ID'),
+                "Name": this.state.name,
+                "Description": this.state.description,
+                "Type": this.props.drawing.get('type'),
+                "Data": JSON.stringify(data)
             }
         ));
     }

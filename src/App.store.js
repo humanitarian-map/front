@@ -13,6 +13,7 @@ export const initialState = fromJS({
         "current-position": null,
     },
     "current-project": null,
+    "current-project-points": [],
     "projects-list": [],
     "organizations": {},
     "display-project-detail": false,
@@ -90,6 +91,8 @@ export function reducer(state, action) {
         return state.set("organizations", action.payload.reduce((result, item) => result.set(item.get('key'), item), Map()));
     } else if (action.type === "SET_CURRENT_PROJECT") {
         return state.set("current-project", action.payload);
+    } else if (action.type === "SET_CURRENT_PROJECT_POINTS") {
+        return state.set("current-project-points", action.payload);
     } else if (action.type === "RESET_PROJECT") {
         return state.set("map", initialState.get('map'))
                     .set("current-project", null)

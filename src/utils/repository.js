@@ -15,6 +15,10 @@ export function getProject(slug) {
   return http.get('/api/projects/'+slug);
 }
 
+export function getProjectPoints(slug) {
+  return http.get('/api/map-items?project='+slug);
+}
+
 export function deleteProject(slug) {
   return http.delete('/api/projects/'+slug);
 }
@@ -32,7 +36,7 @@ export function createProject(project) {
 }
 
 export function createPoint(projectSlug, point) {
-  return http.post('/api/projects' + projectSlug +'/map-items', point)
+  return http.post('/api/map-items', point)
 }
 
 export function deletePoint(projectSlug, pointId) {

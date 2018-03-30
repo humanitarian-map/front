@@ -1,6 +1,8 @@
 import * as repo from "./utils/repository";
 import { combineEpics } from 'redux-observable';
 import { Observable } from "rxjs";
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 
 const listProjectsEpic = action$ =>
   action$.ofType("LIST_PROJECTS")
@@ -19,7 +21,11 @@ const getProjectDocumentsEpic = action$ =>
     .map((action) => action.payload)
     .switchMap((payload) =>
         repo.getProjectDocuments(payload).map((documents) =>
-            ({type: "SET_PROJECT_DOCUMENTS", payload: documents})));
+            ({type: "SET_PROJECT_DOCUMENTS", payload: documents}))
+            .catch((err) => {
+                console.log(err);
+                return Observable.empty();
+            }));
 
 const getCurrentProjectEpic = action$ =>
   action$.ofType("GET_CURRENT_PROJECT")
@@ -27,6 +33,13 @@ const getCurrentProjectEpic = action$ =>
     .switchMap((payload) =>
         repo.getProject(payload).map((project) =>
             ({type: "SET_CURRENT_PROJECT", payload: project})));
+
+const getCurrentProjectPointsEpic = action$ =>
+  action$.ofType("GET_CURRENT_PROJECT_POINTS")
+    .map((action) => action.payload)
+    .switchMap((payload) =>
+        repo.getProjectPoints(payload).map((project) =>
+            ({type: "SET_CURRENT_PROJECT_POINTS", payload: project})));
 
 const addProjectEpic = action$ =>
   action$.ofType("ADD_PROJECT")
@@ -97,6 +110,7 @@ export const rootEpic = combineEpics(
   listOrganizationsEpic,
   getProjectDocumentsEpic,
   getCurrentProjectEpic,
+  getCurrentProjectPointsEpic,
   addProjectEpic,
   deleteProjectEpic,
   updateProjectEpic,

@@ -36,13 +36,19 @@ const icons = {
 }
 
 export default function PointMarker(props) {
+    let data;
+    if (typeof props.point.data === 'string') {
+        data = JSON.parse(props.point.data);
+    } else {
+        data = props.point.data;
+    }
     return (
         <Marker
             className="PointMarker"
             draggable={props.draggable}
             onDragEnd={(e) => props.onMoveMarker(props.point, e.target.getLatLng())}
-            position={props.point.data.position}
-            icon={props.selected? icons[(props.point.data.icon || "other") + "-active"] : icons[props.point.data.icon || "other"]}
+            position={data.position}
+            icon={props.selected? icons[(data.icon || "other") + "-active"] : icons[data.icon || "other"]}
             onClick={(e) => store.dispatch(actions.clickItem(props.point))}>
           {props.point.name &&
             <Tooltip direction="top" offset={[-15, -60]}>
