@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
 
 import MainMap from '../components/MainMap';
@@ -9,7 +8,6 @@ import ProjectDetail from '../components/ProjectDetail';
 import MarkerCreationDetail from '../components/MarkerCreationDetail';
 import MarkerDetail from '../components/MarkerDetail';
 import './MapPage.css';
-import {store} from '../App.store';
 
 class MapPage extends React.Component {
     static propTypes = {
@@ -21,10 +19,9 @@ class MapPage extends React.Component {
         displayProjectDetail: PropTypes.bool,
     }
     componentWillMount() {
-        store.dispatch({type: 'GET_CURRENT_PROJECT', payload: this.props.match.params.slug});
-        store.dispatch({type: 'GET_CURRENT_PROJECT_POINTS', payload: this.props.match.params.slug});
-
-        // store.dispatch({type: "GET_PROJECT_DOCUMENTS", "payload": this.props.match.params.slug});
+        this.props.actions.getCurrentProject(this.props.match.params.slug);
+        this.props.actions.getCurrentProjectPoints(this.props.match.params.slug);
+        // this.props.actions.getProjectDocuments(this.props.match.params.slug);
     }
 
     render() {
@@ -60,13 +57,3 @@ class MapPage extends React.Component {
         );
     }
 }
-
-export default connect(
-    (state) => ({
-        map: state.get('map'),
-        user: state.get('user'),
-        project: state.get('current-project'),
-        documents: state.get('documents'),
-        displayProjectDetail: state.get('display-project-detail'),
-    }),
-)(MapPage);

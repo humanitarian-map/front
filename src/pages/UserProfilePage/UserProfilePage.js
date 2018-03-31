@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
 import './UserProfilePage.css';
-import Menu from '../components/Menu';
+import Menu from '../../components/Menu';
 
-class UserProfilePage extends Component {
+export default class UserProfilePage extends Component {
     render() {
         return (
             <div className='UserProfilePage'>
@@ -14,7 +13,3 @@ class UserProfilePage extends Component {
         );
     }
 }
-
-export default connect(
-    (state) => ({user: state.get('user')}),
-)(UserProfilePage);

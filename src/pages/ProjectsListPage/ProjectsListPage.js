@@ -1,23 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import {store} from '../App.store';
-
 import './ProjectsListPage.css';
-import logoSvg from './img/logo-navbar.svg';
+import logoSvg from '../img/logo-navbar.svg';
 
-class ProjectsListPage extends React.Component {
+export default class ProjectsListPage extends React.Component {
     static propTypes = {
         projects: ImmutablePropTypes.mapContains({}).isRequired,
         organizations: ImmutablePropTypes.mapContains({}).isRequired,
     }
 
     componentWillMount() {
-        store.dispatch({type: 'LIST_PROJECTS', payload: null});
-        store.dispatch({type: 'LIST_ORGANIZATIONS', payload: null});
-        store.dispatch({type: 'RESET_PROJECT', payload: null});
+        this.props.actions.listProjects();
+        this.props.actions.listOrganizations();
+        this.props.actions.resetProject();
     }
 
     render() {
@@ -68,10 +65,3 @@ class ProjectsListPage extends React.Component {
         );
     }
 }
-
-export default connect(
-    (state) => ({
-        projects: state.get('projects-list'),
-        organizations: state.get('organizations'),
-    }),
-)(ProjectsListPage);
