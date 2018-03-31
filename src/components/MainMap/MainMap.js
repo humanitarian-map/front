@@ -27,7 +27,13 @@ export default class MainMap extends React.Component {
             type: PropTypes.string,
             data: PropTypes.object,
         }),
-        actions: PropTypes.object,
+        actions: PropTypes.shape({
+            cursorMove: PropTypes.func.isREquired,
+            addMarker: PropTypes.func.isREquired,
+            addCross: PropTypes.func.isREquired,
+            addArrowPoint: PropTypes.func.isREquired,
+            setCurrentMapPosition: PropTypes.func.isRequired,
+        }).isRequired,
     }
 
     constructor(props) {
