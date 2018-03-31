@@ -7,12 +7,12 @@ import ProjectDetail from './ProjectDetail.js';
 
 export default connect(
     (state) => {
-        const project = state.get('current-project');
+        const project = state.get('currentProject');
         const organization = state.get('organizations').get(project.get('organization_id'));
         return {
-            currentPosition: state.getIn(['map', 'current-position']),
+            currentPosition: state.getIn(['map', 'currentPosition']),
             project,
-            points: state.get('current-project-points'),
+            points: state.get('currentProjectPoints'),
             organization,
         };
     },

@@ -11,13 +11,15 @@ export const initialState = fromJS({
         drawing: {
             type: null,
         },
-        'current-position': null,
+        currentPosition: null,
     },
-    'current-project': null,
-    'current-project-points': [],
-    'projects-list': [],
+    currentProject: null,
+    currentProjectPoints: [],
+    projects: [],
     organizations: {},
-    'display-project-detail': false,
+    ui: {
+        displayProjectDetail: false,
+    },
     user: {
         id: 1,
         username: 'ali.ahmed',
@@ -58,7 +60,7 @@ export function reducer(state, action) {
     } else if (action.type === 'CURSOR_MOVE') {
         return state.setIn(['map', 'cursor'], fromJS(action.payload));
     } else if (action.type === 'TOGGLE_DISPLAY_DETAIL') {
-        return state.update('display-project-detail', (v) => !v);
+        return state.updateIn(['ui', 'displayProjectDetail'], (v) => !v);
     } else if (action.type === 'SELECT_MARKER_ICON') {
         return state.setIn(['map', 'drawing', 'icon'], action.payload);
     } else if (action.type === 'FORCE_VISUALIZE_MARKER') {
@@ -82,17 +84,17 @@ export function reducer(state, action) {
             return viewing;
         });
     } else if (action.type === 'SET_PROJECTS_LIST') {
-        return state.set('projects-list', action.payload);
+        return state.set('projects', action.payload);
     } else if (action.type === 'SET_ORGANIZATIONS_LIST') {
         return state.set('organizations', action.payload.reduce((result, item) => result.set(item.get('key'), item), Map()));
     } else if (action.type === 'SET_CURRENT_PROJECT') {
-        return state.set('current-project', action.payload);
+        return state.set('currentProject', action.payload);
     } else if (action.type === 'SET_CURRENT_PROJECT_POINTS') {
-        return state.set('current-project-points', action.payload);
+        return state.set('currentProjectPoints', action.payload);
     } else if (action.type === 'RESET_PROJECT') {
         return state.set('map', initialState.get('map'))
-            .set('current-project', null)
-            .set('display-project-detail', false);
+            .set('currentProject', null)
+            .setIn(['ui', 'displayProjectDetail'], false);
     } else if (action.type === 'CHANGE_ARROW_ORIGIN') {
         return state.setIn(['map', 'drawing', 'points', 0], fromJS(action.payload));
     } else if (action.type === 'CHANGE_ARROW_DEST') {
@@ -107,7 +109,7 @@ export function reducer(state, action) {
     } else if (action.type === 'SET_PROJECT_DOCUMENTS') {
         return state.set('documents', action.payload);
     } else if (action.type === 'SET_CURRENT_MAP_POSITION') {
-        return state.setIn(['map', 'current-position'], fromJS(action.payload));
+        return state.setIn(['map', 'currentPosition'], fromJS(action.payload));
     }
     return state;
 }

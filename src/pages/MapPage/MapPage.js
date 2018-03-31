@@ -18,9 +18,9 @@ export default class MapPage extends React.Component {
         documents: PropTypes.array,
         displayProjectDetail: PropTypes.bool,
         actions: PropTypes.shape({
-            getCurrentProject: PropTypes.funct.isRequired,
-            getCurrentProjectPoints: PropTypes.funct.isRequired,
-            getProjectDocuments: PropTypes.funct.isRequired,
+            getCurrentProject: PropTypes.func.isRequired,
+            getCurrentProjectPoints: PropTypes.func.isRequired,
+            getProjectDocuments: PropTypes.func.isRequired,
         }).isRequired,
     }
     componentWillMount() {

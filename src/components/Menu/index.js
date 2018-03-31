@@ -8,7 +8,7 @@ import Menu from './Menu.js';
 export default connect(
     (state) => ({
         user: state.get('user'),
-        openDetail: state.get('display-project-detail'),
+        openDetail: state.getIn(['ui', 'displayProjectDetail']),
     }),
     (dispatch) => ({
         actions: bindActionCreators({

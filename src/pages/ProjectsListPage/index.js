@@ -7,7 +7,7 @@ import ProjectsListPage from './ProjectsListPage.js';
 
 export default connect(
     (state) => ({
-        projects: state.get('projects-list'),
+        projects: state.get('projects'),
         organizations: state.get('organizations'),
     }),
     (dispatch) => ({

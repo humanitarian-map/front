@@ -8,7 +8,7 @@ import MarkerDetail from './MarkerDetail.js';
 export default connect(
     (state) => ({
         marker: state.getIn(['map', 'viewing']).toJS(),
-        project: state.get('current-project'),
+        project: state.get('currentProject'),
         documents: state.get('documents'),
     }),
     (dispatch) => ({

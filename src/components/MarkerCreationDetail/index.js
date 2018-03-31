@@ -8,7 +8,7 @@ import MarkerCreationDetail from './MarkerCreationDetail.js';
 export default connect(
     (state) => ({
         drawing: state.getIn(['map', 'drawing']),
-        project: state.get('current-project'),
+        project: state.get('currentProject'),
     }),
     (dispatch) => ({
         actions: bindActionCreators({

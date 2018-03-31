@@ -11,9 +11,9 @@ export default class ProjectsListPage extends React.Component {
         projects: ImmutablePropTypes.mapContains({}).isRequired,
         organizations: ImmutablePropTypes.mapContains({}).isRequired,
         actions: PropTypes.shape({
-            listProjects: PropTypes.funct.isRequired,
-            listOrganizations: PropTypes.funct.isRequired,
-            resetProject: PropTypes.funct.isRequired,
+            listProjects: PropTypes.func.isRequired,
+            listOrganizations: PropTypes.func.isRequired,
+            resetProject: PropTypes.func.isRequired,
         }).isRequired,
     }
 
