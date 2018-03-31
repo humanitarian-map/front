@@ -1,5 +1,9 @@
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import actions from '../../App.actions';
+
+import MapPage from './MapPage.js';
 
 export default connect(
     (state) => ({

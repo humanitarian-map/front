@@ -204,8 +204,6 @@ ProjectDetail.propTypes = {
 export default connect(
     (state) => {
         const project = state.get('current-project');
-        console.log(project.toJS());
-        console.log(state.get('organizations').toJS());
         const organization = state.get('organizations').get(project.get('organization_id'));
         return {
             currentPosition: state.getIn(['map', 'current-position']),

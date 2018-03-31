@@ -1,15 +1,15 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import MainMap from '../components/MainMap';
-import Menu from '../components/Menu';
-import ToolsMenu from '../components/ToolsMenu';
-import ProjectDetail from '../components/ProjectDetail';
-import MarkerCreationDetail from '../components/MarkerCreationDetail';
-import MarkerDetail from '../components/MarkerDetail';
+import MainMap from '../../components/MainMap';
+import Menu from '../../components/Menu';
+import ToolsMenu from '../../components/ToolsMenu';
+import ProjectDetail from '../../components/ProjectDetail';
+import MarkerCreationDetail from '../../components/MarkerCreationDetail';
+import MarkerDetail from '../../components/MarkerDetail';
 import './MapPage.css';
 
-class MapPage extends React.Component {
+export default class MapPage extends React.Component {
     static propTypes = {
         match: PropTypes.object.isRequired,
         map: PropTypes.object,
@@ -17,10 +17,16 @@ class MapPage extends React.Component {
         project: PropTypes.object,
         documents: PropTypes.array,
         displayProjectDetail: PropTypes.bool,
+        actions: PropTypes.shape({
+            getCurrentProject: PropTypes.funct.isRequired,
+            getCurrentProjectPoints: PropTypes.funct.isRequired,
+            getProjectDocuments: PropTypes.funct.isRequired,
+        }).isRequired,
     }
     componentWillMount() {
         this.props.actions.getCurrentProject(this.props.match.params.slug);
         this.props.actions.getCurrentProjectPoints(this.props.match.params.slug);
+
         // this.props.actions.getProjectDocuments(this.props.match.params.slug);
     }
 

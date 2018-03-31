@@ -54,4 +54,3 @@ export default class Point extends React.Component {
         }
     }
 }
-

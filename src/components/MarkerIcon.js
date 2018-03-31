@@ -22,7 +22,7 @@ export default class MarkerIcon extends React.Component {
             >
                 <div
                     className={'marker-icon ' + type + '-icon mdi mdi-' + icon + ' mdi-24px'}
-                    style={{'backgroundColor': color}}
+                    style={{backgroundColor: color}}
                 />
                 <span>{name}</span>
             </div>

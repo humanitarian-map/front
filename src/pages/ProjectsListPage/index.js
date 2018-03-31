@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import ProjectsListPage from './ProjectsListPage.js';
-
 import * as actions from '../../App.actions';
+
+import ProjectsListPage from './ProjectsListPage.js';
 
 export default connect(
     (state) => ({

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import {PropTypes} from 'prop-types';
 
 import './ProjectsListPage.css';
 import logoSvg from '../img/logo-navbar.svg';
@@ -9,6 +10,11 @@ export default class ProjectsListPage extends React.Component {
     static propTypes = {
         projects: ImmutablePropTypes.mapContains({}).isRequired,
         organizations: ImmutablePropTypes.mapContains({}).isRequired,
+        actions: PropTypes.shape({
+            listProjects: PropTypes.funct.isRequired,
+            listOrganizations: PropTypes.funct.isRequired,
+            resetProject: PropTypes.funct.isRequired,
+        }).isRequired,
     }
 
     componentWillMount() {

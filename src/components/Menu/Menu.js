@@ -1,34 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import {store} from '../App.store';
-import * as actions from '../App.actions';
-
-import logoSvg from './img/logo-navbar.svg';
+import logoSvg from '../img/logo-navbar.svg';
 import './Menu.css';
 
-class Menu extends Component {
+export default class Menu extends React.Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         openDetail: PropTypes.bool.isRequired,
+        actions: PropTypes.shape({
+            toggleDisplayDetail: PropTypes.func.isRequired,
+        }).isRequired,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayMarkers: false,
-        };
-    }
-
     render() {
-        const {openDetail, user} = this.props;
+        const {openDetail, user, actions} = this.props;
         return (
             <div className='Menu'>
                 <div
                     className={'project-info-icon mdi mdi-information-outline mdi-36px ' + (openDetail ? 'active' : '')}
-                    onClick={() => store.dispatch(actions.toggleDisplayDetail())}
+                    onClick={() => actions.toggleDisplayDetail()}
                 />
                 <div className='empty'/>
                 <div className='end'>
@@ -56,10 +48,3 @@ class Menu extends Component {
         );
     }
 }
-
-export default connect(
-    (state) => ({
-        user: state.get('user'),
-        openDetail: state.get('display-project-detail'),
-    }),
-)(Menu);
