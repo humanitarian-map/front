@@ -4,7 +4,7 @@ export const listProjects = () => ({type: 'LIST_PROJECTS', payload: null});
 export const listOrganizations = () => ({type: 'LIST_ORGANIZATIONS', payload: null});
 export const resetProject = () => ({type: 'RESET_PROJECT', payload: null});
 export const getCurrentProject = (slug) => ({type: 'GET_CURRENT_PROJECT', payload: slug});
-export const getCurrentProjectPoints = (slug) => ({type: 'GET_CURRENT_PROJECT_POINTS', payload: slug});
+export const getCurrentProjectPoints = (projectId) => ({type: 'GET_CURRENT_PROJECT_POINTS', payload: projectId});
 export const getProjectDocuments = (slug) => ({type: 'GET_PROJECT_DOCUMENTS', payload: slug});
 export const changeLocation = (lat, lng) => ({type: 'ADD_MARKER', payload: [lat, lng]});
 export const changeArrowOrigin = (lat, lng) => ({type: 'CHANGE_ARROW_ORIGIN', payload: [lat, lng]});

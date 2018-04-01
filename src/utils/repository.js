@@ -16,8 +16,8 @@ export function getProject(slug) {
     return http.get('/api/projects/' + slug);
 }
 
-export function getProjectPoints(slug) {
-    return http.get('/api/map-items?project=' + slug);
+export function getProjectPoints(projectId) {
+    return http.get('/api/map-items?project=' + projectId);
 }
 
 export function deleteProject(slug) {

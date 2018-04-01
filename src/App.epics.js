@@ -30,8 +30,11 @@ const getCurrentProjectEpic = (action$) =>
     action$.ofType('GET_CURRENT_PROJECT')
         .map((action) => action.payload)
         .switchMap((payload) =>
-            repo.getProject(payload).map((project) =>
-                ({type: 'SET_CURRENT_PROJECT', payload: project})));
+            repo.getProject(payload).flatMap((project) =>
+                Observable.from([
+                    {type: 'GET_CURRENT_PROJECT_POINTS', payload: project.get('id')},
+                    {type: 'SET_CURRENT_PROJECT', payload: project},
+                ])));
 
 const getCurrentProjectPointsEpic = (action$) =>
     action$.ofType('GET_CURRENT_PROJECT_POINTS')
