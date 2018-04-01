@@ -13,7 +13,6 @@ export default connect(
     (dispatch) => ({
         actions: bindActionCreators({
             listProjects: actions.listProjects,
-            listOrganizations: actions.listOrganizations,
             resetProject: actions.resetProject,
         }, dispatch),
     })

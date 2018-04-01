@@ -68,7 +68,7 @@ export default class MarkerCreationDetail extends React.Component {
                 name: this.state.name,
                 description: this.state.description,
                 type: drawing.get('type'),
-                data: data,
+                data,
             }
         );
     }

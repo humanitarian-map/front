@@ -12,14 +12,12 @@ export default class ProjectsListPage extends React.Component {
         organizations: ImmutablePropTypes.map.isRequired,
         actions: PropTypes.shape({
             listProjects: PropTypes.func.isRequired,
-            listOrganizations: PropTypes.func.isRequired,
             resetProject: PropTypes.func.isRequired,
         }).isRequired,
     }
 
     componentWillMount() {
         this.props.actions.listProjects();
-        this.props.actions.listOrganizations();
         this.props.actions.resetProject();
     }
 

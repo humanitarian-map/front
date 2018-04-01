@@ -86,7 +86,7 @@ export function reducer(state, action) {
     } else if (action.type === 'SET_PROJECTS_LIST') {
         return state.set('projects', action.payload);
     } else if (action.type === 'SET_ORGANIZATIONS_LIST') {
-        return state.set('organizations', action.payload.reduce((result, item) => result.set(item.get('key'), item), Map()));
+        return state.set('organizations', action.payload.reduce((result, item) => result.set(item.get('id'), item), Map()));
     } else if (action.type === 'SET_CURRENT_PROJECT') {
         return state.set('currentProject', action.payload);
     } else if (action.type === 'SET_CURRENT_PROJECT_POINTS') {

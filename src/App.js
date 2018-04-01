@@ -7,9 +7,14 @@ import LoginPage from './pages/LoginPage';
 import UserProfilePage from './pages/UserProfilePage';
 import ProjectsListPage from './pages/ProjectsListPage';
 import {store} from './App.store';
+import * as actions from './App.actions';
 import './App.css';
 
 export default class App extends Component {
+    componentWillMount() {
+        store.dispatch(actions.listOrganizations());
+    }
+
     render() {
         return (
             <Provider store={store}>
