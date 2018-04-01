@@ -12,6 +12,7 @@ export default connect(
     }),
     (dispatch) => ({
         actions: bindActionCreators({
+            saveMarker: actions.saveMarker,
             selectIcon: actions.selectIcon,
             setDrawingColor: actions.setDrawingColor,
             changeCrossSize: actions.changeCrossSize,

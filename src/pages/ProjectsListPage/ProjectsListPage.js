@@ -8,8 +8,8 @@ import logoSvg from '../img/logo-navbar.svg';
 
 export default class ProjectsListPage extends React.Component {
     static propTypes = {
-        projects: ImmutablePropTypes.mapContains({}).isRequired,
-        organizations: ImmutablePropTypes.mapContains({}).isRequired,
+        projects: ImmutablePropTypes.list.isRequired,
+        organizations: ImmutablePropTypes.map.isRequired,
         actions: PropTypes.shape({
             listProjects: PropTypes.func.isRequired,
             listOrganizations: PropTypes.func.isRequired,

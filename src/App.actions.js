@@ -41,8 +41,5 @@ export const setProjectCenter = (project, center, zoom) => {
 export const moveMarker = (projectSlug, point, newLatLng) => {
     const updatedPoint = _.extend({}, point);
     updatedPoint.data.position = [newLatLng.lat, newLatLng.lng];
-    delete updatedPoint.id;
-    delete updatedPoint.is_active;
-    delete updatedPoint.documents_url;
     return {type: 'UPDATE_POINT', payload: {projectSlug, pointId: point.id, point: updatedPoint}};
 };

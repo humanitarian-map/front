@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import CursorBox from '../CursorBox.js';
 
 import './ToolsMenu.css';
 
-export default class ToolsMenu extends Component {
+export default class ToolsMenu extends React.Component {
     static propTypes = {
         actions: PropTypes.object.isRequired,
         drawing: PropTypes.object.isRequired,

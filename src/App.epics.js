@@ -88,9 +88,10 @@ const updatePointEpic = (action$) =>
     action$.ofType('UPDATE_POINT')
         .map((action) => action.payload)
         .switchMap((payload) =>
-            repo.updatePoint(payload.projectSlug, payload.pointId, payload.point).flatMap((point) =>
+            repo.updatePoint(payload.pointId, payload.point).flatMap((point) =>
                 Observable.from([
                     {type: 'GET_CURRENT_PROJECT', payload: payload.projectSlug},
+                    {type: 'GET_CURRENT_PROJECT_POINTS', payload: payload.projectSlug},
                     {type: 'UPDATE_VISUALIZED_MARKER', payload: point},
                 ])
             ));
