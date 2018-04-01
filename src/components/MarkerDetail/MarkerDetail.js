@@ -78,8 +78,7 @@ export default class MarkerDetail extends React.Component {
                         <div className='coordinates-inputs'>
                             {data.positions.map((point, idx) => (
                                 <p key={idx}>
-                                    <span>{'Latitude' + point[0].toFixed(4)}</span>
-                                    {','}
+                                    <span>{'Latitude ' + point[0].toFixed(4)}</span>{','}
                                     <span>{'Longitude ' + point[1].toFixed(4)}</span>
                                 </p>))}
                         </div>}
